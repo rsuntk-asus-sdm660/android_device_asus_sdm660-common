@@ -38,6 +38,7 @@
 #include <linux/media.h>
 #include <media/msm_cam_sensor.h>
 #include <dlfcn.h>
+#include <unistd.h>
 #include "fdleak.h"
 #include "memleak.h"
 #define IOCTL_H <SYSTEM_HEADER_PREFIX/ioctl.h>
@@ -48,6 +49,8 @@
 #include "mm_camera_interface.h"
 #include "mm_camera.h"
 #include "mm_camera_muxer.h"
+
+int32_t (*mm_camera_shim_module_init)(mm_camera_shim_ops_t *shim_ops);
 
 static pthread_mutex_t g_intf_lock = PTHREAD_MUTEX_INITIALIZER;
 static mm_camera_ctrl_t g_cam_ctrl;

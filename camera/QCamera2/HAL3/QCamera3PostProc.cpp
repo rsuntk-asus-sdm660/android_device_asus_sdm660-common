@@ -2977,6 +2977,7 @@ void *QCamera3PostProcessor::dataProcessRoutine(void *data)
             pme->m_inputFWKPPQ.init();
             pme->m_inputMultiReprocQ.init();
             pme->m_inputMetaQ.init();
+            pme->m_jpegSettingsQ.init();
             if(sync)
             {
                 cam_sem_post(&cmdThread->sync_sem);
@@ -4022,17 +4023,17 @@ QCamera3Exif *QCamera3PostProcessor::getExifData(metadata_buffer_t *metadata,
     rc = getExifDateTime(dateTime, subsecTime);
     if (rc == NO_ERROR) {
         exif->addEntry(EXIFTAGID_DATE_TIME, EXIF_ASCII,
-                (uint32_t)(dateTime.length() + 1), (void *)dateTime.string());
+                (uint32_t)(dateTime.length() + 1), (void *)dateTime.c_str());
         exif->addEntry(EXIFTAGID_EXIF_DATE_TIME_ORIGINAL, EXIF_ASCII,
-                (uint32_t)(dateTime.length() + 1), (void *)dateTime.string());
+                (uint32_t)(dateTime.length() + 1), (void *)dateTime.c_str());
         exif->addEntry(EXIFTAGID_EXIF_DATE_TIME_DIGITIZED, EXIF_ASCII,
-                (uint32_t)(dateTime.length() + 1), (void *)dateTime.string());
+                (uint32_t)(dateTime.length() + 1), (void *)dateTime.c_str());
         exif->addEntry(EXIFTAGID_SUBSEC_TIME, EXIF_ASCII,
-                (uint32_t)(subsecTime.length() + 1), (void *)subsecTime.string());
+                (uint32_t)(subsecTime.length() + 1), (void *)subsecTime.c_str());
         exif->addEntry(EXIFTAGID_SUBSEC_TIME_ORIGINAL, EXIF_ASCII,
-                (uint32_t)(subsecTime.length() + 1), (void *)subsecTime.string());
+                (uint32_t)(subsecTime.length() + 1), (void *)subsecTime.c_str());
         exif->addEntry(EXIFTAGID_SUBSEC_TIME_DIGITIZED, EXIF_ASCII,
-                (uint32_t)(subsecTime.length() + 1), (void *)subsecTime.string());
+                (uint32_t)(subsecTime.length() + 1), (void *)subsecTime.c_str());
     } else {
         LOGW("getExifDateTime failed");
     }

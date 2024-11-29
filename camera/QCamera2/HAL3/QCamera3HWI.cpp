@@ -297,14 +297,14 @@ const QCamera3HardwareInterface::QCameraMap<
     { ANDROID_LENS_STATE_MOVING,        CAM_AF_LENS_STATE_MOVING}
 };
 
-const int32_t available_thumbnail_sizes[] = {0, 0,
-                                             176, 144,
+const int32_t available_thumbnail_sizes[] = {176, 144,
                                              240, 144,
                                              256, 144,
                                              240, 160,
                                              256, 154,
                                              240, 240,
-                                             320, 240};
+                                             320, 240,
+                                               0, 0  };
 
 const QCamera3HardwareInterface::QCameraMap<
         camera_metadata_enum_android_sensor_test_pattern_mode_t,
@@ -2608,6 +2608,7 @@ int QCamera3HardwareInterface::configureStreamsPerfLocked(
                 "stream size : %d x %d, stream rotation = %d",
                  newStream->stream_type, newStream->format,
                 newStream->width, newStream->height, newStream->rotation);
+
         //if the stream is in the mStreamList validate it
         bool stream_exists = false;
         for (List<stream_info_t*>::iterator it=mStreamInfo.begin();
@@ -7335,7 +7336,7 @@ int QCamera3HardwareInterface::processCaptureRequest(
             // mode, sensor HDR should be disabled here
             if (!didSetSensorHdr)
                 setSensorHDR(params, false, false);
-                mShouldSetSensorHdr = false;
+            mShouldSetSensorHdr = false;
 
             //TODO: validate the arguments, HSV scenemode should have only the
             //advertised fps ranges
@@ -11147,7 +11148,7 @@ void QCamera3HardwareInterface::dumpMetadataToFile(tuning_params_t &meta,
                 type,
                 frameNumber);
         filePath.append(buf);
-        int file_fd = open(filePath.string(), O_RDWR | O_CREAT, 0777);
+        int file_fd = open(filePath.c_str(), O_RDWR | O_CREAT, 0777);
         if (file_fd >= 0) {
             ssize_t written_len = 0;
             meta.tuning_data_version = TUNING_DATA_VERSION;
@@ -12397,6 +12398,22 @@ int QCamera3HardwareInterface::initStaticMetadata(uint32_t cameraId)
     static const uint8_t hotPixelMapMode = ANDROID_STATISTICS_HOT_PIXEL_MAP_MODE_OFF;
     staticInfo.update(ANDROID_STATISTICS_HOT_PIXEL_MAP_MODE, &hotPixelMapMode, 1);
 
+#if 1
+    const int64_t kRequiredMinDur = 33333333;
+    for (size_t i = 0; i < MIN(MAX_SIZES_CNT,
+            gCamCapability[cameraId]->picture_sizes_tbl_cnt); i++) {
+        if (gCamCapability[cameraId]->picture_min_duration[i] > kRequiredMinDur) {
+            LOGW("Detected unsupported picture min dur %" PRId64 " for size %" PRId32 " x %" PRId32 "!!"
+                    "Sending hardcoded %" PRId64 " to avoid runtime crashes",
+                    gCamCapability[cameraId]->picture_min_duration[i],
+                    gCamCapability[cameraId]->picture_sizes_tbl[i].width,
+                    gCamCapability[cameraId]->picture_sizes_tbl[i].height,
+                    kRequiredMinDur);
+            gCamCapability[cameraId]->picture_min_duration[i] = kRequiredMinDur;
+        }
+    }
+#endif
+
     /* android.scaler.availableMinFrameDurations */
     Vector<int64_t> available_min_durations;
     for (size_t j = 0; j < scalar_formats_count; j++) {
@@ -12748,8 +12765,10 @@ int QCamera3HardwareInterface::initStaticMetadata(uint32_t cameraId)
     if (supportBurst) {
         available_capabilities.add(ANDROID_REQUEST_AVAILABLE_CAPABILITIES_BURST_CAPTURE);
     }
+#if 0
     available_capabilities.add(ANDROID_REQUEST_AVAILABLE_CAPABILITIES_PRIVATE_REPROCESSING);
     available_capabilities.add(ANDROID_REQUEST_AVAILABLE_CAPABILITIES_YUV_REPROCESSING);
+#endif
     if (hfrEnable && available_hfr_configs.array()) {
         available_capabilities.add(
                 ANDROID_REQUEST_AVAILABLE_CAPABILITIES_CONSTRAINED_HIGH_SPEED_VIDEO);

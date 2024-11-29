@@ -16,11 +16,6 @@ ro.config.alarm_vol_steps=25
 # Bluetooth
 vendor.bluetooth.soc=cherokee
 
-# Camera
-persist.vendor.camera.privapp.list=org.codeaurora.snapcam
-persist.camera.privapp.list=org.codeaurora.snapcam
-vendor.camera.aux.packagelist=org.codeaurora.snapcam
-
 # CNE
 persist.vendor.cne.feature=1
 persist.vendor.mwqem.enable=1
@@ -29,13 +24,6 @@ persist.vendor.mwqem.enable=1
 persist.data.df.dev_name=rmnet_usb0
 persist.vendor.data.mode=concurrent
 ro.vendor.use_data_netmgrd=true
-
-# Dirac
-ro.audio.soundfx.dirac=true
-persist.audio.dirac.speaker=true
-persist.dirac.acs.controller=qem
-persist.dirac.acs.ignore_error=1
-persist.dirac.acs.storeSettings=1
 
 # Display
 vendor.display.enable_default_color_mode=1

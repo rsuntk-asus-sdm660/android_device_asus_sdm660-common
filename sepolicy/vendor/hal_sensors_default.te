@@ -2,5 +2,4 @@
 set_prop(hal_sensors_default, nfc_sensors_prop)
 
 allow hal_sensors_default diag_device:chr_file { read };
-
-get_prop(hal_sensors_default, default_prop)
+dontaudit hal_sensors_default default_prop:file { open read getattr map };

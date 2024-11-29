@@ -1,4 +1,5 @@
-# Copyright (c) 2012-2015, 2017-2021, The Linux Foundation. All rights reserved.
+# Copyright (c) 2012-2015, 2017-2020, The Linux Foundation. All rights reserved.
+# Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -28,15 +29,7 @@
 # Firmware directory Path
 # Below macro will be read by uevent and path will
 # be added to search path for firmware loading
-firmware_directories /vendor/firmware_mnt/image/
-
-subsystem dma_heap
-    devname uevent_devpath
-    dirname /dev/dma_heap
-
-subsystem mem_buf_vm
-    devname uevent_devpath
-    dirname /dev/mem_buf_vm
+firmware_directories /vendor/firmware/ /vendor/firmware_mnt/image/
 
 # the DIAG device node is not world writable/readable.
 /dev/diag                 0660   system     oem_2901
@@ -71,9 +64,6 @@ subsystem mem_buf_vm
 /dev/hab                  0666   system     system
 /dev/hgsl                 0666   system     system
 /dev/iio:device*          0664   system     system
-
-#permissions for UFS RPMB BSG device node
-/dev/0:0:0:49476          0600   system     system
 
 #permissions for CSVT
 /dev/smd11                0660   radio      radio
@@ -171,7 +161,6 @@ subsystem mem_buf_vm
 /dev/adsprpc-smd-secure   0644   system     system
 /dev/system_health_monitor 0644  radio      system
 /dev/mdss_rotator         0664   system     system
-/dev/cpu_dma_latency      0660   system     system
 
 #QDSS
 /dev/byte-cntr            0660   system    oem_2902
@@ -182,9 +171,28 @@ subsystem mem_buf_vm
 /dev/qg                   0660  system     system
 /dev/qg_battery           0660  system     system
 
-#qvr
-/dev/qvr_external_sensor_ioctl      0660  system  system
-/sys/kernel/qvr_external_sensor/fd  0660  system  system
+/dev/bus/usb/001/002      0660   system     system
+/dev/bus/usb/001/003      0660   system     system
+/dev/bus/usb/001/004      0660   system     system
+/dev/bus/usb/001/005      0660   system     system
+/dev/bus/usb/002/002      0660   system     system
+/dev/bus/usb/002/003      0660   system     system
+/dev/bus/usb/002/004      0660   system     system
+/dev/bus/usb/002/005      0660   system     system
+/dev/bus/usb/003/002      0660   system     system
+/dev/bus/usb/003/003      0660   system     system
+/dev/bus/usb/003/004      0660   system     system
+/dev/bus/usb/003/005      0660   system     system
+/dev/hidraw0              0660   system     system
+/dev/hidraw1              0660   system     system
+/dev/hidraw2              0660   system     system
+/dev/hidraw3              0660   system     system
+/dev/hidraw4              0660   system     system
+/dev/hidraw5              0660   system     system
+/dev/hidraw6              0660   system     system
+/dev/hidraw7              0660   system     system
+/dev/hidraw8              0660   system     system
+/dev/hidraw9              0660   system     system
 
 # wlan
 /dev/wcnss_wlan           0660   system     system
@@ -193,7 +201,6 @@ subsystem mem_buf_vm
 /sys/devices/platform/soc/a000000.qcom,wcnss-wlan/net/p2p0/queues/rx-* rps_cpus            0660   system     system
 /sys/devices/platform/soc/*.qcom,icnss/net/wlan*/queues/rx-* rps_cpus             0660   system     system
 /sys/devices/platform/soc/1c00000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/wlan*/queues/rx-* rps_cpus      0660   system     system
-/sys/devices/platform/soc/17a10040.qcom,wcn6750/net/wlan*/queues/rx-* rps_cpus    0660   system     system
 /dev/spidev0.0            0660   system     audio
 /dev/i2c-7                0660   system     audio
 /dev/msm_camera/*         0660   system     camera
@@ -251,8 +258,6 @@ subsystem mem_buf_vm
 /dev/i2c-5                0660   media       media
 /dev/avtimer              0660   system     audio
 /dev/spidev2.0            0660   system     audio
-/dev/spidev7.1            0660   system     system
-/dev/spidev22.0           0660   system     audio
 /dev/msm_adsp_sleepmon    0660   system     audio
 
 # DVB devices
@@ -303,6 +308,9 @@ subsystem mem_buf_vm
 # GNSS Device premissions
 /dev/gnss_sirf             0660   gps     gps
 
+# GNSS PPS Device premissions
+/dev/pps*                  0660   gps     gps
+
 # laser sensor access
 /sys/devices/virtual/input/input*                   enable_ps_sensor 0660  system   input
 /sys/devices/virtual/input/input*                   set_delay_ms     0660  system   input
@@ -317,14 +325,6 @@ subsystem mem_buf_vm
 /dev/wcnss_ctrl           0660   system     system
 /sys/devices/platform/soc/600000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/wlan0/queues/rx-* rps_cpus 0660 system system
 /sys/devices/platform/soc/600000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/p2p0/queues/rx-* rps_cpus 0660 system system
-
-# wigig
-/sys/bus/pci/drivers/wil6210* 0000:01:00.0/wil6210/fst_link_loss 0660 wifi wifi
-/sys/bus/pci/drivers/wil6210* 0000:01:00.0/wil6210/thermal_throttling 0660 system system
-/sys/bus/pci/drivers/wil6210* 0000:01:00.0/wil6210/snr_thresh 0660 wifi wifi
-/sys/bus/pci/drivers/wil6210* 0000:01:00.0/net/wigig0/queues/rx-0/rps_cpus 0660 system system
-/sys/bus/pci/drivers/wil6210* 0000:01:00.0/net/wigig0/gro_flush_timeout 0660 system system
-/sys/devices/virtual/net/bond0 queues/rx-0/rps_cpus 0660 system system
 
 #nfc permissions
 /dev/nfc-nci              0660    nfc         nfc
@@ -356,34 +356,27 @@ subsystem mem_buf_vm
 /sys/class/fts/touch_aoi aoi_set 0660 root system
 /sys/class/fts/touch_aoi power_set 0660 root system
 
-#ImproveTouch device
-/dev/hbtp_input           0660   system     system
-/dev/hbtp_vm              0660   system     system
-
 # Add device block for FRP
-/dev/block/platform/soc/7824900.sdhci/by-name/config    0600   system     system
-/dev/block/platform/soc/7464900.sdhci/by-name/frp       0600   system     system
-/dev/block/platform/soc/624000.ufshc/by-name/frp        0600   system     system
-/dev/block/platform/soc/1da4000.ufshc/by-name/frp       0600   system     system
 /dev/block/platform/soc/c0c4000.sdhci/by-name/frp       0600   system     system
-/dev/block/platform/soc/1d84000.ufshc/by-name/frp       0600   system     system
-/dev/block/platform/soc/7c4000.sdhci/by-name/frp        0600   system     system
-/dev/block/platform/soc/4744000.sdhci/by-name/frp       0600   system     system
-/dev/block/platform/soc/4804000.ufshc/by-name/frp       0600   system     system
-
-# This is temporary while using SD card for initial bring-up
-/dev/block/platform/soc/8804000.sdhci/by-name/frp       0600   system     system
 
 # Kmsg device
 /dev/kmsg                                               0620   root       system
 
 # LED class devices
-/sys/class/leds/red                       breath          0644    system    system
-/sys/class/leds/red                       brightness      0644    system    system
-/sys/class/leds/green                     breath          0644    system    system
-/sys/class/leds/green                     brightness      0644    system    system
-/sys/class/leds/lcd-backlight             brightness      0644    system    system
-/sys/class/backlight/panel0-backlight     brightness      0644    system    system
+/sys/class/leds/red      delay_on     0640    system    system
+/sys/class/leds/red      delay_off    0640    system    system
+/sys/class/leds/red      breath       0640    system    system
+/sys/class/leds/red      trigger      0640    system    system
+/sys/class/leds/green    delay_on     0640    system    system
+/sys/class/leds/green    delay_off    0640    system    system
+/sys/class/leds/green    breath       0640    system    system
+/sys/class/leds/green    trigger      0640    system    system
+/sys/class/leds/blue     delay_on     0640    system    system
+/sys/class/leds/blue     delay_off    0640    system    system
+/sys/class/leds/blue     breath       0640    system    system
+/sys/class/leds/blue     trigger      0640    system    system
+/sys/class/leds/red      blink        0640    system    system
+/sys/class/leds/green    blink        0640    system    system
 
 # NPU device
 /dev/msm_npu             0644   system     system
@@ -397,9 +390,6 @@ subsystem mem_buf_vm
 /sys/devices/system/memory/memory* state    0660 system system
 
 /sys/devices/virtual/hdcp/msm_hdcp  min_level_change 0664    system  graphics
-
-# KGSL
-/sys/class/kgsl/kgsl-3d0    perfcounter              0660    root    shell
 
 # sys-fs display
 /sys/class/graphics/fb*     hpd                      0664    system  graphics
@@ -430,7 +420,6 @@ subsystem mem_buf_vm
 /sys/class/graphics/fb0     modes                    0664    system  graphics
 /sys/class/graphics/fb0     mode                     0664    system  graphics
 /sys/class/graphics/fb0     msm_cmd_autorefresh_en   0664    system  graphics
-*/
 
 /sys/devices/platform/soc/ae00000.qcom,mdss_mdp power/control 0664 system graphics
 

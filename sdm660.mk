@@ -447,10 +447,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     librecovery_updater_asus
 
-# Remove unwanted packages
-PRODUCT_PACKAGES += \
-    RemovePackages
-
 # Ramdisk
 PRODUCT_PACKAGES += \
     init.class_main.sh \

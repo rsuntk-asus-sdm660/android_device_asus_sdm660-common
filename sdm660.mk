@@ -520,7 +520,12 @@ PRODUCT_PACKAGES += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service.basic
+    usb_compositions.conf \
+    android.hardware.usb@1.0-service.basic \
+    android.hardware.usb.gadget@1.2-service-qti
+
+PRODUCT_SOONG_NAMESPACES += \
+    vendor/qcom/opensource/usb/etc
 
 # Vibrator
 PRODUCT_PACKAGES += \

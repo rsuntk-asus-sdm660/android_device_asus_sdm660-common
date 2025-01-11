@@ -36,11 +36,7 @@
 
 #define ALPHABET_LEN 256
 
-#ifdef USES_BOOTDEVICE_PATH
 #define MODEM_PART_PATH "/dev/block/bootdevice/by-name/modem"
-#else
-#define MODEM_PART_PATH "/dev/block/platform/soc/c0c4000.sdhci/by-name/modem"
-#endif
 #define MODEM_VER_STR "Time_Stamp\": \""
 #define MODEM_VER_STR_LEN 14
 #define MODEM_VER_BUF_LEN 20

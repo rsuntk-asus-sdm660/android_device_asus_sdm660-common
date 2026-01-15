@@ -167,6 +167,10 @@ LOC_HIDL_VERSION := 4.0
 # HIDL
 DEVICE_MANIFEST_FILE := $(COMMON_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := $(COMMON_PATH)/compatibility_matrix.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(COMMON_PATH)/framework_compatibility_matrix.xml
+DEVICE_MANIFEST_FILE += \
+    $(COMMON_PATH)/manifest_android.hardware.drm@1.3-service.widevine.xml \
+    $(COMMON_PATH)/vendor.qti.gnss@4.0-service.xml
 
 ODM_MANIFEST_SKUS += NFC
 ODM_MANIFEST_NFC_FILES := $(COMMON_PATH)/manifest_nfc.xml

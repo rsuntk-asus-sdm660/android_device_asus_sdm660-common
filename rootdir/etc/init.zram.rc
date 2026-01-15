@@ -1,0 +1,33 @@
+# ═══════════════════════════════════════════════════════════════
+# ZRAM SERVICES — UNIVERSAL 3/4/6 GB — ANDROID 13/14
+# ═══════════════════════════════════════════════════════════════
+
+service zram_config /vendor/bin/init.zram.sh
+    class main
+    user root
+    group root system
+    oneshot
+    disabled
+
+service zram_vm_tune /vendor/bin/init.zram_vm.sh
+    class main
+    user root
+    group root system
+    oneshot
+    disabled
+
+# ═══════════════════════════════════════════════════════════════
+# ZRAM TRIGGERS — ПРАВИЛЬНЫЙ ПОРЯДОК
+# ═══════════════════════════════════════════════════════════════
+
+on post-fs-data
+    start zram_config
+
+on property:vendor.zram.configured=1
+    start zram_vm_tune
+
+on property:sys.boot_completed=1
+    start zram_vm_tune
+
+on property:lmkd.reinit=1
+    start zram_vm_tune

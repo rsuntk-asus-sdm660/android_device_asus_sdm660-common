@@ -17,10 +17,6 @@ COMMON_PATH := device/asus/sdm660-common
 PRODUCT_PACKAGES += \
     fs_config_files
 
-# AdGuard CA Root Certificate 
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/etc/security/cacerts/0f4ed297.0:$(TARGET_COPY_OUT_SYSTEM)/etc/security/cacerts/0f4ed297.0
-
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@7.1-impl:32 \
@@ -462,13 +458,17 @@ PRODUCT_PACKAGES += \
     init.qti.dcvs.sh \
     init.qcom.sensors.sh \
     init.qcom.sh \
+    init.zram.sh \
+    init.zram_vm.sh \
     init.qcom.usb.sh
 
 PRODUCT_PACKAGES += \
     fstab.qcom \
+    init.zram.rc \
     init.qcom.asus.rc \
     init.qcom.rc \
     init.qcom.usb.rc \
+    init.sysfs_permissions.rc \
     init.asus_parts.rc \
     init.recovery.qcom.rc \
     init.target.rc \

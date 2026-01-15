@@ -31,8 +31,6 @@
 on boot
     chown system system /sys/class/power_supply/battery/charging_enabled
     chmod 0660 /sys/class/power_supply/battery/charging_enabled
-    chown system system /sys/class/power_supply/battery/device/smartchg_stop_charging
-    chmod 0660 /sys/class/power_supply/battery/device/smartchg_stop_charging
 
 # DT2W & Gestures
 on boot

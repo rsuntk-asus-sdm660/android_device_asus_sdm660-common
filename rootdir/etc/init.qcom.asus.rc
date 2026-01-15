@@ -27,20 +27,25 @@
 #
 #
 
+# Smart charging
 on boot
     chown system system /sys/class/power_supply/battery/charging_enabled
     chmod 0660 /sys/class/power_supply/battery/charging_enabled
     chown system system /sys/class/power_supply/battery/device/smartchg_stop_charging
     chmod 0660 /sys/class/power_supply/battery/device/smartchg_stop_charging
 
+# DT2W & Gestures
 on boot
     # Tap to wake node
-    chown system system /sys/kernel/touchpanel/dclicknode
-    chmod 0660 /sys/kernel/touchpanel/dclicknode
-    chown system system /sys/kernel/touchpanel/gesture_node
-    chmod 0660 /sys/kernel/touchpanel/gesture_node
+    chown system system /proc/tpd_gesture
+    chmod 0660 /proc/tpd_gesture
 
-service vendor.nfc_hal_service /vendor/bin/hw/android.hardware.nfc@1.1-service
+# USB
+on property:ro.product.vendor.model=*
+    setprop vendor.usb.product_string ${ro.product.vendor.model}
+
+# NFC
+service vendor.nfc_hal_service /vendor/bin/hw/android.hardware.nfc@1.2-service
     override
     class hal
     user nfc
@@ -49,3 +54,8 @@ service vendor.nfc_hal_service /vendor/bin/hw/android.hardware.nfc@1.1-service
 
 on property:ro.hq.support.nfc=1
     enable vendor.nfc_hal_service
+
+# Disable NFC services if hardware not present
+on property:ro.hq.support.nfc=0
+    stop vendor.nfc_hal_service
+    setprop nfc.initialized 0

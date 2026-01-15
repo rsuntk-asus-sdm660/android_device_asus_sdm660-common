@@ -53,7 +53,7 @@ namespace V1_0 {
 namespace implementation {
 
 static constexpr const char* kGestureNodePath =
-    "/sys/kernel/touchpanel/gesture_node";
+    "/proc/tpd_gesture";
 
 Return<void> TouchscreenGesture::getSupportedGestures(getSupportedGestures_cb resultCb) {
     std::vector<Gesture> gestures;

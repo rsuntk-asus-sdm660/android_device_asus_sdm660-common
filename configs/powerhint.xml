@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HintConfigs>
+    <Powerhint>
+        <!-- VENDOR_HINT_SCROLL_BOOST -->
+        <Type>0x00001080</Type> 
+        <Enable>1</Enable>
+        <Duration>2000</Duration>  <!-- 2 секунды на скролл -->
+        <Resources>
+            <!-- CPU Little Cluster Min Freq: 1113 MHz -->
+            <Resource>0x40800000, 1113600</Resource>
+            <!-- CPU Big Cluster Min Freq: 1113 MHz -->
+            <Resource>0x40800100, 1113600</Resource>
+            <!-- Sched Boost: ON -->
+            <Resource>0x40C00000, 1</Resource>
+            <!-- Sched Busy Hysteresis: включить для плавности -->
+            <Resource>0x40C1C000, 1</Resource>
+        </Resources>
+    </Powerhint>
+
+    <Powerhint>
+        <!-- VENDOR_HINT_FIRST_LAUNCH_BOOST -->
+        <Type>0x00001081</Type>
+        <Enable>1</Enable>
+        <Duration>3000</Duration>  <!-- 3 секунды на запуск -->
+        <Resources>
+            <!-- CPU Little Cluster Min Freq: Max -->
+            <Resource>0x40800000, 1612800</Resource>
+            <!-- CPU Big Cluster Min Freq: Max -->
+            <Resource>0x40800100, 1804800</Resource>
+            <!-- Sched Boost: ON -->
+            <Resource>0x40C00000, 1</Resource>
+            <!-- CPU Freq Priority: Interactive -->
+            <Resource>0x40C00000, 1</Resource>
+            <!-- I/O Prefetch -->
+            <Resource>0x4C400000, 1</Resource>
+        </Resources>
+    </Powerhint>
+
+    <Powerhint>
+        <!-- VENDOR_HINT_SUBSEQUENT_LAUNCH_BOOST -->
+        <Type>0x00001082</Type>
+        <Enable>1</Enable>
+        <Duration>2000</Duration>  <!-- 2 секунды -->
+        <Resources>
+            <!-- CPU Little Cluster Min Freq: 1401 MHz -->
+            <Resource>0x40800000, 1401600</Resource>
+            <!-- CPU Big Cluster Min Freq: 1401 MHz -->
+            <Resource>0x40800100, 1401600</Resource>
+            <!-- Sched Boost: ON -->
+            <Resource>0x40C00000, 1</Resource>
+        </Resources>
+    </Powerhint>
+    
+    <Powerhint>
+        <!-- ANIMATION_BOOST -->
+        <Type>0x00001083</Type>
+        <Enable>1</Enable>
+        <Duration>1000</Duration>  <!-- 1 секунда на анимацию -->
+        <Resources>
+            <!-- CPU Little Cluster Min Freq: 1113 MHz -->
+            <Resource>0x40800000, 1113600</Resource>
+            <!-- CPU Big Cluster Min Freq: 1401 MHz (повышено!) -->
+            <Resource>0x40800100, 1401600</Resource>
+            <!-- Sched Boost: ON -->
+            <Resource>0x40C00000, 1</Resource>
+        </Resources>
+    </Powerhint>
+
+    <!-- ДОБАВИТЬ: Interaction Boost (касание экрана) -->
+    <Powerhint>
+        <Type>0x00001085</Type>
+        <Enable>1</Enable>
+        <Duration>200</Duration>  <!-- Короткий импульс -->
+        <Resources>
+            <Resource>0x40800000, 1017600</Resource>
+            <Resource>0x40800100, 1113600</Resource>
+            <Resource>0x40C00000, 1</Resource>
+        </Resources>
+    </Powerhint>
+
+    <!-- ДОБАВИТЬ: Sustained Performance -->
+    <Powerhint>
+        <Type>0x00001086</Type>
+        <Enable>1</Enable>
+        <Duration>0</Duration>  <!-- 0 = пока активен режим -->
+        <Resources>
+            <Resource>0x40800000, 1401600</Resource>
+            <Resource>0x40800100, 1536000</Resource>
+        </Resources>
+    </Powerhint>
+</HintConfigs>

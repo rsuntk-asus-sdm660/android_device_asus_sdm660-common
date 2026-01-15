@@ -1,36 +1,47 @@
+# Vendor-specific AIDs for Qualcomm SDM660
+
 [AID_VENDOR_QTI_DIAG]
-value:2901
+value: 2901
 
 [AID_VENDOR_QDSS]
-value:2902
+value: 2902
 
 [AID_VENDOR_RFS]
-value:2903
+value: 2903
 
 [AID_VENDOR_RFS_SHARED]
-value:2904
+value: 2904
 
 [AID_VENDOR_ADPL_ODL]
-value:2905
+value: 2905
 
 [AID_VENDOR_QRTR]
-value:2906
+value: 2906
 
 [AID_VENDOR_THERMAL]
-value:2907
+value: 2907
 
 [AID_VENDOR_FASTRPC]
-value:2908
+value: 2908
 
 [AID_VENDOR_QTR]
-value:2909
+value: 2909
 
+[AID_VENDOR_SENSORS]
+value: 2910
+
+# ============================================
+# Bluetooth HAL
+# ============================================
 [vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti]
 mode: 0755
 user: AID_BLUETOOTH
 group: AID_BLUETOOTH
 caps: BLOCK_SUSPEND NET_ADMIN
 
+# ============================================
+# Power & Platform Services
+# ============================================
 [vendor/bin/pm-service]
 mode: 0755
 user: AID_SYSTEM
@@ -43,6 +54,9 @@ user: AID_SYSTEM
 group: AID_SYSTEM
 caps: NET_BIND_SERVICE
 
+# ============================================
+# IMS Services
+# ============================================
 [vendor/bin/imsdatadaemon]
 mode: 0755
 user: AID_RADIO
@@ -67,37 +81,88 @@ user: AID_RADIO
 group: AID_RADIO
 caps: NET_BIND_SERVICE BLOCK_SUSPEND WAKE_ALARM
 
+# ============================================
+# Connectivity Network Daemon
+# ============================================
 [vendor/bin/cnd]
 mode: 0755
 user: AID_SYSTEM
 group: AID_SYSTEM
 caps: NET_BIND_SERVICE BLOCK_SUSPEND NET_ADMIN
 
+# ============================================
+# Location Services
+# ============================================
 [vendor/bin/slim_daemon]
 mode: 0755
-user:  AID_GPS
+user: AID_GPS
 group: AID_GPS
 caps: NET_BIND_SERVICE
 
 [vendor/bin/loc_launcher]
 mode: 0755
-user:  AID_GPS
+user: AID_GPS
 group: AID_GPS
 caps: SETUID SETGID
 
 [vendor/bin/xtwifi-client]
 mode: 0755
-user:  AID_GPS
+user: AID_GPS
 group: AID_GPS
 caps: NET_BIND_SERVICE BLOCK_SUSPEND WAKE_ALARM
 
+# ============================================
+# Sensors
+# ============================================
 [vendor/bin/sensors.qti]
 mode: 0755
 user: AID_SYSTEM
 group: AID_SYSTEM
 caps: NET_BIND_SERVICE
 
-[vendor/firmware_mnt/image/*]
+# ============================================
+# ADSP/DSP FastRPC
+# ============================================
+[vendor/bin/adsprpcd]
+mode: 0755
+user: AID_SYSTEM
+group: AID_SYSTEM
+caps: NET_BIND_SERVICE SYS_NICE
+
+[vendor/bin/cdsprpcd]
+mode: 0755
+user: AID_SYSTEM
+group: AID_SYSTEM
+caps: NET_BIND_SERVICE SYS_NICE
+
+# ============================================
+# RIL / Modem
+# ============================================
+[vendor/bin/netmgrd]
+mode: 0755
+user: AID_RADIO
+group: AID_RADIO
+caps: NET_ADMIN NET_RAW BLOCK_SUSPEND WAKE_ALARM
+
+[vendor/bin/port-bridge]
+mode: 0755
+user: AID_RADIO
+group: AID_RADIO
+caps: NET_BIND_SERVICE
+
+# ============================================
+# Time Services
+# ============================================
+[vendor/bin/time_daemon]
+mode: 0755
+user: AID_SYSTEM
+group: AID_SYSTEM
+caps: SYS_TIME NET_BIND_SERVICE WAKE_ALARM
+
+# ============================================
+# Directories
+# ============================================
+[vendor/firmware_mnt/image/]
 mode: 0771
 user: AID_SYSTEM
 group: AID_SYSTEM

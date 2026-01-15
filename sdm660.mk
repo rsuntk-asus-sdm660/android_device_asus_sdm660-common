@@ -7,6 +7,10 @@
 # Inherit the proprietary files
 $(call inherit-product, vendor/asus/sdm660-common/sdm660-common-vendor.mk)
 
+$(call inherit-product, $(SRC_TARGET_DIR)/product/non_ab_device.mk)
+
+TARGET_EXCLUDES_AUDIOFX := true
+
 # Default is nosdcard, S/W button enabled in resource
 PRODUCT_CHARACTERISTICS := nosdcard
 
@@ -75,9 +79,9 @@ TARGET_BOOTANIMATION_HALF_RES := true
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0 \
+    android.hardware.bluetooth@1.1 \
     android.hardware.bluetooth.audio-impl \
-    android.hardware.bluetooth@1.0.vendor \
+    android.hardware.bluetooth@1.1.vendor \
     vendor.qti.hardware.btconfigstore@1.0.vendor \
     vendor.qti.hardware.bluetooth_audio@2.1.vendor \
     vendor.qti.hardware.btconfigstore@1.0.vendor \
@@ -102,26 +106,25 @@ PRODUCT_PACKAGES += \
     libpng.vendor:32 \
     libxml2
 
-# Cgroup and task_profiles
-PRODUCT_COPY_FILES += \
-    system/core/libprocessgroup/profiles/cgroups_28.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
-    system/core/libprocessgroup/profiles/task_profiles_28.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
-
-# Charger
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.charger.disable_init_blank=true
-
-# Configstore (Disabled)
+# Configstore
 PRODUCT_PACKAGES += \
     disable_configstore
 
+# Cgroup and task_profiles
+PRODUCT_COPY_FILES += \
+    system/core/libprocessgroup/profiles/cgroups.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
+    system/core/libprocessgroup/profiles/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
+
 # Dex/ART optimization
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
-PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := everything
 USE_DEX2OAT_DEBUG := false 
 
-# Display
+# Dexpreopt
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    SystemUI
+
+# Core Display Libraries
 PRODUCT_PACKAGES += \
     gralloc.sdm660 \
     hwcomposer.sdm660 \
@@ -188,7 +191,10 @@ PRODUCT_PACKAGES += \
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.4.vendor \
-    android.hardware.drm-service.clearkey
+    android.hardware.drm-service.clearkey \
+    libunwindstack.vendor \
+    libhidlmemory.vendor:64 \
+    libcrypto
 
 # FM
 PRODUCT_PACKAGES += \
@@ -213,15 +219,14 @@ PRODUCT_PACKAGES += \
 
 # Gatekeeper
 PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0.vendor
+    android.hardware.gatekeeper@1.0.vendor \
+    libion.vendor
 
 # Health
 PRODUCT_PACKAGES += \
-    android.hardware.health-service.qti \
-    android.hardware.health-service.qti_recovery
-    
-PRODUCT_PACKAGES += \
-    android.hardware.health@2.1.vendor    
+    android.hardware.health@2.1-impl:64 \
+    android.hardware.health@2.1-impl.recovery \
+    android.hardware.health@2.1-service    
 
 # GMS Permissions
 PRODUCT_COPY_FILES += \
@@ -232,6 +237,7 @@ $(call inherit-product, $(COMMON_PATH)/gps/gps_vendor_product.mk)
 
 PRODUCT_PACKAGES += \
     libsensorndkbridge \
+    libcurl.vendor \
     libwifi-hal-ctrl
 
 PRODUCT_PACKAGES += \
@@ -252,10 +258,6 @@ PRODUCT_PACKAGES += \
     libhidltransport.vendor \
     libhwbinder \
     libhwbinder.vendor
-
-# Inherit several Android Go Configurations(Beneficial for everyone, even on non-Go devices)
-PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE := true
-PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := frameworks/base/config/boot-image-profile.txt
 
 # Input
 PRODUCT_COPY_FILES += \
@@ -296,7 +298,8 @@ PRODUCT_COPY_FILES += \
 
 # Network
 PRODUCT_PACKAGES += \
-    android.system.net.netd@1.1.vendor
+    android.system.net.netd@1.1.vendor \
+    libnetutils.vendor
 
 # NFC
 PRODUCT_COPY_FILES += \
@@ -334,7 +337,8 @@ PRODUCT_PACKAGES += \
     libOmxQcelp13Enc \
     libOmxVdec \
     libOmxVenc \
-    libstagefrighthw
+    libstagefrighthw \
+    libstagefright_softomx_plugin.vendor
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
@@ -373,7 +377,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
-    frameworks/native/data/etc/android.hardware.vr.high_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vr.high_performance.xml \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml \
     frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.compute.xml \
@@ -406,8 +409,7 @@ PRODUCT_PACKAGES += \
 # Perf
 PRODUCT_PACKAGES += \
    libtflite \
-   libtextclassifier_hash \
-   vendor.qti.hardware.perf@2.2.vendor
+   libtextclassifier_hash
     
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/perf/perf-profile0.conf:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perf-profile0.conf \
@@ -431,6 +433,8 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/qmi/qmi_fw.conf:$(TARGET_COPY_OUT_VENDOR)/etc/qmi_fw.conf
 
 PRODUCT_PACKAGES += \
+    libcrypto_utils.vendor \
+    libjsoncpp.vendor \
     libjson \
     libqti_vndfwk_detect.vendor \
     libvndfwk_detect_jni.qti \
@@ -454,7 +458,9 @@ PRODUCT_PACKAGES += \
     android.hardware.secure_element@1.1.vendor \
     android.hardware.secure_element@1.2.vendor \
     libavservices_minijail.vendor \
-    librmnetctl
+    librmnetctl \
+    libsqlite.vendor:64 \
+    libsysutils.vendor
 
 # Recovery
 PRODUCT_PACKAGES += \
@@ -483,6 +489,10 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     ueventd.qcom.rc
 
+# Screen density
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
+
 # Seccomp
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
@@ -490,16 +500,20 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
+    android.frameworks.sensorservice@1.0.vendor \
     android.hardware.sensors@1.0-impl \
     android.hardware.sensors@1.0-service \
-    android.frameworks.sensorservice@1.0.vendor
+    libpower.vendor
 
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
 
 # Soong namespaces
+QCOM_SOONG_NAMESPACE := \
+    $(COMMON_PATH)/qcom-caf
+
 PRODUCT_SOONG_NAMESPACES += \
-    $(COMMON_PATH)
+    vendor/qcom/opensource/display
 
 # Telephony
 PRODUCT_PACKAGES += \
@@ -517,26 +531,29 @@ PRODUCT_PACKAGES += \
     qti_telephony_utils.xml \
     telephony-ext
 
+PRODUCT_BOOT_JARS += \
+    telephony-ext
+
 # Thermal
 PRODUCT_PACKAGES += \
     android.hardware.thermal@2.0-service.asus_sdm660.qti
 
-# Touch
-PRODUCT_PACKAGES += \
-    vendor.lineage.touch@1.0-service.asus_sdm660
-
-# Shipping API level
-PRODUCT_SHIPPING_API_LEVEL := 27
-
 # Trust HAL
 PRODUCT_PACKAGES += \
     vendor.lineage.trust@1.0-service
+
+# Touch
+PRODUCT_PACKAGES += \
+    vendor.lineage.touch@1.0-service.asus_sdm660
 
 # USB
 PRODUCT_PACKAGES += \
     usb_compositions.conf \
     android.hardware.usb@1.0-service.basic \
     android.hardware.usb.gadget@1.2-service-qti
+
+PRODUCT_VENDOR_PROPERTIES += \
+    vendor.usb.controller=a800000.dwc3
 
 PRODUCT_SOONG_NAMESPACES += \
     vendor/qcom/opensource/usb/etc
@@ -550,17 +567,11 @@ PRODUCT_PACKAGES += \
     libprotobuf-cpp-full-vendorcompat \
     libprotobuf-cpp-lite-vendorcompat
 
-# VR
-PRODUCT_PACKAGES += \
-    android.hardware.vr@1.0-impl \
-    android.hardware.vr@1.0-service \
-    vr.sdm660
-
 # Wifi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi.hostapd@1.0.vendor \
+    android.hardware.wifi.hostapd@1.3.vendor \
     android.hardware.wifi@1.0-service \
-    android.hardware.wifi@1.5.vendor \
+    android.hardware.wifi@1.6.vendor \
     hostapd \
     hostapd_cli \
     libwifi-hal-qcom \
@@ -574,3 +585,52 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(COMMON_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     $(COMMON_PATH)/configs/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
+
+# QTI Perf - build from source
+TARGET_PERF_DIR := sdm660
+
+PRODUCT_PACKAGES += \
+    vendor.qti.hardware.perf@2.2-service \
+    libqti-perfd \
+    libqti-perfd-client \
+    libqti-util \
+    libperfconfig \
+    libperfgluelayer \
+    libperfioctl
+
+# Include perf configs
+-include vendor/qcom/proprietary/android-perf/profiles.mk
+
+# QTI PerfService (Binder service for Framework)
+PRODUCT_PACKAGES += \
+    perfservice
+
+# QTI PerfService (Binder service for Framework)
+PRODUCT_PACKAGES += \
+    perfservice \
+    libqti-perfd-client_system
+
+# QPerformance Java library
+PRODUCT_PACKAGES += \
+    QPerformance \
+    com.qualcomm.qti.Performance.xml
+
+# Boot JAR
+PRODUCT_BOOT_JARS += \
+    QPerformance
+
+# UxPerformance Java library
+PRODUCT_PACKAGES += \
+    UxPerformance \
+    com.qualcomm.qti.UxPerformance.xml
+
+# Activity Trigger
+PRODUCT_PACKAGES += \
+    libqti-at
+
+# QTI Performance
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.extension_library=libqti-perfd-client.so \
+    ro.vendor.perf-hal.ver=2.2 \
+    ro.vendor.perf.scroll_opt=true \
+    vendor.perf.gestureflingboost.enable=true

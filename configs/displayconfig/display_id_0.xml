@@ -21,9 +21,21 @@
             <value>0.0</value>
             <nits>2.0</nits>
         </point>
+        <!-- 
+             FULL POWER UNLOCKED
+             100% Slider (1.0) = 420 Nits = 255 PWM
+        -->
         <point>
             <value>1.0</value>
-            <nits>450.0</nits>
+            <nits>420.0</nits>
         </point>
     </screenBrightnessMap>
+    
+    <screenBrightnessDefault>0.4</screenBrightnessDefault>
+    
+    <!-- Ramp Rate (Stock) -->
+    <screenBrightnessRampFastDecrease>0.7</screenBrightnessRampFastDecrease>
+    <screenBrightnessRampFastIncrease>0.7</screenBrightnessRampFastIncrease>
+    <screenBrightnessRampSlowDecrease>0.23</screenBrightnessRampSlowDecrease>
+    <screenBrightnessRampSlowIncrease>0.23</screenBrightnessRampSlowIncrease>
 </displayConfiguration>

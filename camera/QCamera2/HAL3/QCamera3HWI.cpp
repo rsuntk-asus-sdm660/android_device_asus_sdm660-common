@@ -297,14 +297,14 @@ const QCamera3HardwareInterface::QCameraMap<
     { ANDROID_LENS_STATE_MOVING,        CAM_AF_LENS_STATE_MOVING}
 };
 
-const int32_t available_thumbnail_sizes[] = {176, 144,
+const int32_t available_thumbnail_sizes[] = {0, 0,
+                                             176, 144,
                                              240, 144,
                                              256, 144,
                                              240, 160,
                                              256, 154,
                                              240, 240,
-                                             320, 240,
-                                               0, 0  };
+                                             320, 240};
 
 const QCamera3HardwareInterface::QCameraMap<
         camera_metadata_enum_android_sensor_test_pattern_mode_t,
@@ -12765,10 +12765,8 @@ int QCamera3HardwareInterface::initStaticMetadata(uint32_t cameraId)
     if (supportBurst) {
         available_capabilities.add(ANDROID_REQUEST_AVAILABLE_CAPABILITIES_BURST_CAPTURE);
     }
-#if 0
     available_capabilities.add(ANDROID_REQUEST_AVAILABLE_CAPABILITIES_PRIVATE_REPROCESSING);
     available_capabilities.add(ANDROID_REQUEST_AVAILABLE_CAPABILITIES_YUV_REPROCESSING);
-#endif
     if (hfrEnable && available_hfr_configs.array()) {
         available_capabilities.add(
                 ANDROID_REQUEST_AVAILABLE_CAPABILITIES_CONSTRAINED_HIGH_SPEED_VIDEO);
@@ -14642,6 +14640,18 @@ int32_t QCamera3HardwareInterface::setHalFpsRange(const CameraMetadata &settings
             settings.find(ANDROID_CONTROL_AE_TARGET_FPS_RANGE).data.i32[1];
     fps_range.video_min_fps = fps_range.min_fps;
     fps_range.video_max_fps = fps_range.max_fps;
+    // After reading ANDROID_CONTROL_AE_TARGET_FPS_RANGE into fps_range
+    if (CAMERA3_STREAM_CONFIGURATION_CONSTRAINED_HIGH_SPEED_MODE != mOpMode) {
+    // If framework requests fixed 30, relax it
+    if ((int)fps_range.min_fps == 30 && (int)fps_range.max_fps == 30) {
+        fps_range.min_fps = 15.0f;
+        fps_range.video_min_fps = 15.0f;
+        // keep max fixed
+        fps_range.max_fps = 30.0f;
+        fps_range.video_max_fps = 30.0f;
+        LOGD("FPS PATCH (HAL): request [30,30] -> [15,30]");
+        }
+    }
     if (fps_range.min_fps == 0 && fps_range.max_fps == 0) {
          cam_dual_camera_perf_control_t perf_value[1];
          perf_value[0].perf_mode = CAM_PERF_SENSOR_SUSPEND;

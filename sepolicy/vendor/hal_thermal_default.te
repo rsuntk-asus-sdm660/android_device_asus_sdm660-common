@@ -1,1 +1,49 @@
 allow hal_thermal_default self:capability sys_admin;
+allow hal_thermal_default sysfs_thermal:file { write };
+allow hal_thermal_default hal_thermal_default:netlink_kobject_uevent_socket { read create setopt bind };
+
+# Allow thermal HAL to read /sys/class/thermal files
+allow hal_thermal_default sysfs_thermal:dir r_dir_perms;
+allow hal_thermal_default sysfs_thermal:file r_file_perms;
+allow hal_thermal_default sysfs_thermal:lnk_file r_file_perms;
+
+# Allow thermal HAL to read /sys/class/power_supply files (for battery/bcl)
+allow hal_thermal_default sysfs_batteryinfo:dir r_dir_perms;
+allow hal_thermal_default sysfs_batteryinfo:file r_file_perms;
+
+# Allow thermal HAL to read SoC ID (/sys/devices/soc0/soc_id)
+allow hal_thermal_default sysfs_soc:dir search;
+allow hal_thermal_default sysfs_soc:file r_file_perms;
+
+# Allow thermal HAL to write CPU frequency caps
+allow hal_thermal_default sysfs_devices_system_cpu:file { read write open getattr };
+allow hal_thermal_default sysfs_devices_system_cpu:dir { search open read };
+
+# Allow thermal HAL to write devfreq caps (GPU, DDR BW)
+allow hal_thermal_default sysfs_devfreq:file { read write open getattr };
+allow hal_thermal_default sysfs_devfreq:dir { search open read };
+
+# Доступ к GPU sysfs
+allow hal_thermal_default sysfs_kgsl:dir r_dir_perms;
+allow hal_thermal_default sysfs_kgsl:file rw_file_perms;
+allow hal_thermal_default sysfs_kgsl:lnk_file read;
+
+# Доступ к devfreq
+allow hal_thermal_default sysfs_devfreq:dir r_dir_perms;
+allow hal_thermal_default sysfs_devfreq:file rw_file_perms;
+allow hal_thermal_default sysfs_devfreq:lnk_file read;
+
+# Thermal sysfs
+allow hal_thermal_default sysfs_thermal:dir r_dir_perms;
+allow hal_thermal_default sysfs_thermal:file rw_file_perms;
+allow hal_thermal_default sysfs_thermal:lnk_file read;
+
+# Связываем тип с нашим новым системным атрибутом
+typeattribute hal_thermal_default hal_thermal_override;
+
+# Разрешаем dac_override (теперь легально через исключение)
+allow hal_thermal_default self:capability { dac_override dac_read_search };
+
+# Обычно Thermal HAL тоже требует доступ к файлам настройки
+allow hal_thermal_default sysfs:file w_file_perms;
+allow hal_thermal_default proc:file w_file_perms;

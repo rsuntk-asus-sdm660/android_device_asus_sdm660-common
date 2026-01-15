@@ -106,6 +106,7 @@ TARGET_NO_BOOTLOADER := true
 
 # Build
 BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_DUP_SYSPROP := true
 
 # Camera
 BOARD_QTI_CAMERA_32BIT_ONLY := true
@@ -141,19 +142,19 @@ BOARD_HAVE_QCOM_FM := true
 
 # Kernel
 BOARD_BOOT_HEADER_VERSION := 1
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1 androidboot.configfs=true androidboot.usbcontroller=a800000.dwc3
-BOARD_KERNEL_CMDLINE += loop.max_part=7
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1
 BOARD_KERNEL_CMDLINE += printk.devkmsg=on
 BOARD_KERNEL_CMDLINE += usbcore.autosuspend=7
 BOARD_KERNEL_CMDLINE += kpti=off
-BOARD_KERNEL_CMDLINE += kernelsu.enabled=1
 #BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
-TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_SOURCE := kernel/asus/sdm660
+KERNEL_LD := LD=ld.lld
+KERNEL_CC := CC=clang
+TARGET_KERNEL_CLANG_VERSION := r563880c
+TARGET_KERNEL_SOURCE := kernel/asus/sdm636
 TARGET_KERNEL_VERSION := 4.19
 TARGET_KERNEL_BUILD_HOST := beastmachine
 TARGET_KERNEL_BUILD_USER := "SonicBSV"
@@ -198,6 +199,7 @@ BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_CACHEIMAGE_PARTITION_SIZE := 367001600
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 4294967296
+BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 55490624512
 BOARD_VENDORIMAGE_PARTITION_SIZE := 838860800
 
@@ -210,12 +212,13 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 TARGET_COPY_OUT_VENDOR := vendor
 
+AB_OTA_UPDATER := false
+
 BOARD_ROOT_EXTRA_SYMLINKS := \
     /mnt/vendor/persist:/persist
 
 # Platform
 TARGET_BOARD_PLATFORM := sdm660
-TARGET_ENFORCES_QSSI := true
 
 # Power
 TARGET_USES_INTERACTION_BOOST := true
@@ -254,7 +257,7 @@ TARGET_QTI_USB_SUPPORTS_AUDIO_ACCESSORY := true
 BOARD_VNDK_VERSION := current
 
 # Vendor Security patch level
-VENDOR_SECURITY_PATCH := 2020-12-05
+VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
 # WiFi
 BOARD_HAS_QCOM_WLAN := true
@@ -276,3 +279,9 @@ CONFIG_IEEE80211AC := true
 
 # Inherit the proprietary files
 include vendor/asus/sdm660-common/BoardConfigVendor.mk
+
+# QTI Perf from source
+TARGET_USES_QCOM_PERF := true
+SOONG_CONFIG_NAMESPACES += perf
+SOONG_CONFIG_perf := ioctl
+SOONG_CONFIG_perf_ioctl := false

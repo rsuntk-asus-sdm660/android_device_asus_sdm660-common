@@ -173,6 +173,10 @@ PRODUCT_PACKAGES += \
     qcom.fmradio \
     qcom.fmradio.xml
 
+# Fingerprint
+PRODUCT_PACKAGES += \
+    android.hardware.biometrics.fingerprint@2.1-service-asus
+
 # Fwk detect
 PRODUCT_PACKAGES += \
     libqti_vndfwk_detect \

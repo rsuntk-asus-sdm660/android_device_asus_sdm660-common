@@ -1,4 +1,3 @@
-vendor_internal_prop(nfc_sensors_prop)
 vendor_internal_prop(vendor_camera_prop)
 vendor_internal_prop(vendor_fingerprint_prop)
 vendor_internal_prop(dirac_prop);
@@ -7,5 +6,5 @@ vendor_restricted_prop(vendor_mwqem_prop);
 # Aware
 vendor_restricted_prop(vendor_aware_available_prop);
 
-#properties for nfc
-vendor_restricted_prop(nfc_nq_prop)
+# Properties for NFC
+vendor_public_prop(nfc_nq_prop)

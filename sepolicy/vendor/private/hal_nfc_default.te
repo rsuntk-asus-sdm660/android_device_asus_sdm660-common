@@ -1,0 +1,2 @@
+# Allow the NFC HAL to find the NXP eSE service
+allow hal_nfc_default nxp_ese_hwservice:hwservice_manager find;

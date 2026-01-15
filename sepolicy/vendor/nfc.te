@@ -1,10 +1,13 @@
-allow nfc hal_nxpnfc_hwservice:hwservice_manager find;
-allow nfc hal_nxpese_hwservice:hwservice_manager find;
-
 # Set NFC properties
 get_prop(nfc, nfc_nq_prop)
-#qmux_socket(nfc);
-#allow nfc nfc_data_file:file x_file_perms;
-allow nfc self:socket create_socket_perms_no_ioctl;
-# allow nfc to access perf hal
-hal_client_domain(nfc, hal_perf)
+
+allow nfc nfc_vendor_data_file:dir rw_dir_perms;
+allow nfc nfc_vendor_data_file:file rw_file_perms;
+
+allow nfc vendor_nfc_vendor_data_file:dir search;
+
+# Allow nfc to set the ctl.start property for my_service
+allow nfc ctl_start_prop:property_service set;
+
+allow nfc nfc_vendor_data_file:file { create write open read setattr };
+allow nfc nfc_vendor_data_file:dir { search add_name write };

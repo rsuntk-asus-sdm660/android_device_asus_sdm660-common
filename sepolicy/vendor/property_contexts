@@ -15,7 +15,7 @@ persist.vendor.runin.fp                       u:object_r:vendor_fingerprint_prop
 persist.vendor.mwqem.                  u:object_r:vendor_mwqem_prop:s0
 
 # NFC
-ro.hq.support.nfc                             u:object_r:nfc_sensors_prop:s0
+ro.hq.support.nfc                             u:object_r:nfc_nq_prop:s0
 
 # Perf
 vendor.target.init.complete     u:object_r:vendor_mpctl_prop:s0

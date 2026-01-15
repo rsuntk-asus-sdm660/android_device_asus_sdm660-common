@@ -1,0 +1,2 @@
+# Type for the NXP Embedded Secure Element (eSE) HAL service
+type nxp_ese_hwservice, hwservice_manager_type;

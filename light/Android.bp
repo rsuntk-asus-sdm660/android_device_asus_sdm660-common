@@ -1,0 +1,36 @@
+//
+// Copyright (C) 2021-2024 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_binary {
+    name: "android.hardware.light-service.asus_sdm660",
+    vendor: true,
+    relative_install_path: "hw",
+    init_rc: ["android.hardware.light-service.asus_sdm660.rc"],
+    vintf_fragments: ["android.hardware.light-service.asus_sdm660.xml"],
+    srcs: [
+        "main.cpp",
+        "Lights.cpp",
+        "Devices.cpp",
+        "LedDevice.cpp",
+        "RgbLedDevice.cpp",
+        "BacklightDevice.cpp",
+        "Utils.cpp",
+    ],
+
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "libbinder_ndk",
+        "android.hardware.light-V2-ndk",
+    ],
+
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-unused-parameter",
+    ],
+}

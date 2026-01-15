@@ -62,6 +62,66 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
 <mixer>
+    <!-- Fix for INT4_MI2S_RX Format error -->
+    <ctl name="INT4_MI2S_RX Format" value="S16_LE" />
+    <ctl name="INT4_MI2S_RX SampleRate" value="KHZ_48" />
+    
+    <!-- Missing formats for Primary Codec (Headphones/Speaker) -->
+    <ctl name="INT0_MI2S_RX Format" value="S16_LE" />
+    <ctl name="INT0_MI2S_RX SampleRate" value="KHZ_48" />
+    
+    <!-- Missing formats for Mic recording -->
+    <ctl name="INT3_MI2S_TX Format" value="S16_LE" />
+    <ctl name="INT3_MI2S_TX SampleRate" value="KHZ_48" />
+
+    <!-- Fix for Audio Stream Capture App Type Cfg errors -->
+    <!-- VOIP / Camcorder / Voice Rec fixes -->
+    <ctl name="Audio Stream Capture 0 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 1 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 2 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 3 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 4 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 5 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 6 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 7 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 8 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 9 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 10 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 11 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 12 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 13 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 14 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 15 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 16 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 17 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 18 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 19 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 20 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 21 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 22 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 23 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 24 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 25 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 26 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 27 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 28 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 29 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 30 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 31 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 32 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 33 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 34 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 35 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 36 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 37 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 38 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 39 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 40 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 41 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 42 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 43 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 44 App Type Cfg" value="0" />
+    <ctl name="Audio Stream Capture 45 App Type Cfg" value="0" />	
     <!-- These are the initial mixer settings -->
     <ctl name="Voice Rx Device Mute" id="0" value="0" />
     <ctl name="Voice Rx Device Mute" id="1" value="-1" />
@@ -357,10 +417,17 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <ctl name="SpkrRight WSA PA Mute" value="1" />
     <ctl name="EAR SPKR PA Gain" value="G_DEFAULT" />
 
-    <!-- Volume controls -->
-    <ctl name="HPHL Volume" value="9" />
-    <ctl name="HPHR Volume" value="9" />
-    <ctl name="EAR PA Gain" value="POS_1P5_DB" />
+    <!-- Codec Controls -->
+    <ctl name="RX HPH Mode" value="NORMAL" />
+    <ctl name="COMP0 RX1" value="0" />
+    <ctl name="COMP0 RX2" value="0" />
+    <ctl name="COMP1 Switch" value="1" />
+    <ctl name="COMP2 Switch" value="1" />
+    
+    <!-- Volume Controls -->
+    <ctl name="HPHL Volume" value="20" />
+    <ctl name="HPHR Volume" value="20" />
+    <ctl name="EAR PA Gain" value="POS_6_DB" /> 
     <ctl name="EAR PA Boost" value="ENABLE" />
 
     <ctl name="RX1 Digital Volume" value="84" />
@@ -368,9 +435,10 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <ctl name="RX3 Digital Volume" value="84" />
     <ctl name="RX4 Digital Volume" value="84" />
     <ctl name="RX5 Digital Volume" value="84" />
-    <ctl name="ADC1 Volume" value="4" />
-    <ctl name="ADC2 Volume" value="4" />
-    <ctl name="ADC3 Volume" value="4" />
+    
+    <ctl name="ADC1 Volume" value="6" /> 
+    <ctl name="ADC2 Volume" value="6" />
+    <ctl name="ADC3 Volume" value="6" />
     <ctl name="DEC1 Volume" value="84" />
     <ctl name="DEC2 Volume" value="84" />
     <ctl name="DEC3 Volume" value="84" />
@@ -2543,7 +2611,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </path>
 
     <path name="speaker-stereo-dmic-ef">
-        <path name="speaker-dmic-endfire" />
+        <path name="handset-mic" />
     </path>
 
     <path name="voice-dmic-ef-tmus">

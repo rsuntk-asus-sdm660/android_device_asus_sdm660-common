@@ -132,6 +132,7 @@ PRODUCT_PACKAGES += \
     libdisplayconfig \
     libgralloc.qti \
     libtinyxml \
+    libqdMetaData.system \
     libqdMetaData
 
 PRODUCT_PACKAGES += \
@@ -140,22 +141,48 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.1-service \
     android.hardware.graphics.mapper@3.0-impl-qti-display \
     android.hardware.graphics.mapper@4.0-impl-qti-display \
-    android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service \
     android.frameworks.displayservice@1.0 \
     vendor.qti.hardware.display.allocator-service \
-    vendor.qti.hardware.display.mapper@1.0.vendor \
-    vendor.qti.hardware.display.mapper@1.1.vendor \
     vendor.qti.hardware.display.mapper@2.0.vendor \
+    vendor.qti.hardware.display.mapper@3.0.vendor \
+    vendor.qti.hardware.display.mapper@4.0.vendor \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service \
+    vendor.display.config@1.0.vendor \
     vendor.display.config@2.0
+
+###########################################
+# Display Properties
+###########################################
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.hw=1 \
+    debug.egl.hw=1 \
+    debug.sf.latch_unsignaled=1 \
+    debug.sf.disable_backpressure=1 \
+    debug.renderengine.backend=skiaglthreaded \
+    debug.hwui.renderer=skiagl \
+    ro.hardware.egl=adreno \
+    ro.hardware.vulkan=adreno \
+    ro.opengles.version=196610 \
+    vendor.gralloc.enable_fb_ubwc=1 \
+    vendor.display.enable_default_color_mode=1 \
+    vendor.display.disable_skip_validate=1 \
+    vendor.video.disable.ubwc=1
+
+# SurfaceFlinger properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.surface_flinger.force_hwc_copy_for_virtual_displays=true \
+    ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
+    ro.surface_flinger.max_virtual_display_dimension=4096 \
+    ro.surface_flinger.has_wide_color_display=false \
+    ro.surface_flinger.has_HDR_display=false \
+    ro.surface_flinger.use_color_management=false \
+    ro.surface_flinger.protected_contents=true
 
 # Display Device Config
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/displayconfig/display_id_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_0.xml
-
-# Disable buffer age (b/74534157)
-PRODUCT_PROPERTY_OVERRIDES += \
-    debug.hwui.use_buffer_age=true
 
 # Doze mode
 PRODUCT_PACKAGES += \

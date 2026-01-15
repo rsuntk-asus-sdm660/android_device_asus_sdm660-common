@@ -44,6 +44,41 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
         </carrier_config>-->
 
     <carrier_config>
+		<!-- УВЕЛИЧЕНИЕ ТАЙМАУТОВ -->
+        
+        <!-- Время ожидания гудков (Ringback) для IMS/VoLTE звонков (60 сек) -->
+        <int name="ims.ringback_timer_millis_int" value="60000" />
+        
+        <!-- Время ожидания гудков для обычных звонков (60 сек) -->
+        <int name="ringback_timer_millis_int" value="60000" />
+
+        <!-- Таймаут установления исходящего вызова (30 сек) -->
+        <int name="mo_call_request_timeout_millis_int" value="30000" />
+        
+        <!-- Не сбрасывать звонок при отсутствии RTP пакетов (видео/аудио) слишком быстро -->
+        <int name="call_dead_time_in_millis_int" value="0" />
+        
+            <!-- ═══════════════════════════════════════════════════════════
+         УБИРАЕМ CDMA / EVDO (Американские сети)
+         ═══════════════════════════════════════════════════════════ -->
+        <boolean name="world_phone_bool" value="false" />
+        <boolean name="show_cdma_choices_bool" value="false" />
+        <boolean name="cdma_home_registered_plmn_name_override_bool" value="false" />
+        <boolean name="use_otasp_for_cdma_provisioning_bool" value="false" />
+        <boolean name="carrier_has_csd_capability_bool" value="false" />
+
+        <!-- ═══════════════════════════════════════════════════════════
+         УБИРАЕМ TD-SCDMA (Китайский 3G)
+         ═══════════════════════════════════════════════════════════ -->
+        <boolean name="support_tdscdma_bool" value="false" />
+        <boolean name="support_tdscdma_roaming_networks_bool" value="false" />
+        <string-array name="support_tdscdma_roaming_networks_string_array" num="0" />
+
+        <!-- ═══════════════════════════════════════════════════════════
+         УБИРАЕМ 5G NR (Модем не поддерживает)
+         ═══════════════════════════════════════════════════════════ -->
+        <boolean name="nr_enabled_bool" value="false" />
+        
         <boolean name="apn_expand_bool" value="true" />
         <boolean name="world_phone_bool" value="true" />
         <boolean name="allow_adding_apns_bool" value="true" />

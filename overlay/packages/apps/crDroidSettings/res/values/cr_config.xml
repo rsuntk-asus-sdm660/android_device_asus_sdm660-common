@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  CRDROID SETTINGS — ASUS X00TD / X01BD                       ║
+    ║  Специфичные настройки crDroid ROM                           ║
+    ╚══════════════════════════════════════════════════════════════╝
+-->
+<resources>
+
+    <!-- ╔══════════════════════════════════════════════════════════╗
+         ║  СЕНСОРЫ DOZE                                            ║
+         ╚══════════════════════════════════════════════════════════╝ -->
+
+    <!-- Pickup sensor (автоопределение) -->
+    <string name="pickup_sensor" translatable="false"></string>
+    <item name="pickup_sensor_value" format="float" type="dimen">1.0</item>
+
+    <!-- Volume rocker position -->
+    <integer name="config_volumeRockerVsDisplayOrientation">1</integer>
+
+
+    <!-- ╔══════════════════════════════════════════════════════════╗
+         ║  ТАЙМИНГИ DOZE ЖЕСТОВ                                    ║
+         ╚══════════════════════════════════════════════════════════╝ -->
+
+    <!-- Pickup (Поднятие) -->
+    <integer name="config_dozePulsePickup_MinPulseIntervalMs">2500</integer>
+    <integer name="config_dozePulsePickup_WakelockTimeoutMs">300</integer>
+
+    <!-- Hand Wave (Взмах рукой) -->
+    <integer name="config_dozePulseProximity_HandwaveMaxDeltaNs">1000000000</integer>
+    <integer name="config_dozePulseProximity_WakelockTimeoutMs">300</integer>
+
+    <!-- Pocket (Карман) -->
+    <integer name="config_dozePulseProximity_PocketMinDeltaNs">2000000000</integer>
+
+    <!-- Tilt (Наклон) -->
+    <integer name="config_dozePulseTilt_BatchLatencyInMs">100</integer>
+    <integer name="config_dozePulseTilt_MinPulseIntervalMs">2500</integer>
+    <integer name="config_dozePulseTilt_WakelockTimeoutMs">300</integer>
+
+
+    <!-- ╔══════════════════════════════════════════════════════════╗
+         ║  ЗДОРОВЬЕ БАТАРЕИ                                        ║
+         ╚══════════════════════════════════════════════════════════╝ -->
+
+    <!-- PM660 поддерживает чтение данных о здоровье батареи -->
+    <bool name="config_supportBatteryHealth">true</bool>
+
+    <!-- Пути к sysfs для Qualcomm PMIC -->
+    <string name="config_batteryCalculatedCapacity">/sys/class/power_supply/bms/charge_full</string>
+    <string name="config_batteryDesignCapacity">/sys/class/power_supply/bms/charge_full_design</string>
+    <string name="config_batteryChargeCycles">/sys/class/power_supply/bms/cycle_count</string>
+
+</resources>

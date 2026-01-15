@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2017-2023 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<!-- Reality Display Engine -->
+<string name="display_engine_category">Display Engine</string>
+<string name="display_engine_mode_title">Reality Display Engine</string>
+<string name="x_reality_engine_mode_title">X-Reality Engine</string>
+<string name="triluminous_display_mode_title">Triluminous Display</string>
+<string name="vivid_engine_mode_title">Vivid Display</string>
+<string name="display_engine_default">Default</string>
+<string name="display_engine_mode_footer_text">Вдохновленный движком Sony Bravia/X-Reality, движок Display Engine имеет режим Vivid для улучшения яркости и насыщенности цвета, а также режим X-Reality для улучшения детализации и точности цветопередачи.</string>
+
+<!-- AdBlock -->
+<string name="enable_adblock">Включить AdBlock</string>
+<string name="enable_adblock_summary">Блокирует различные объявления и трекеры по всей системе.</string>
+
+<!-- Частный DNS -->
+<string name="private_dns_mode_adguard" translatable="false">AdGuard (CT)</string>
+<string name="private_dns_hostname_adguard" translatable="false">dns.adguard.com</string>
+
+<string name="private_dns_mode_appliedprivacy" translatable="false">AppliedPrivacy (AT)</string>
+<string name="private_dns_hostname_appliedprivacy" translatable="false">dot1.applied-privacy.net</string>
+
+<string name="private_dns_mode_cira" translatable="false">CIRA (CA)</string>
+<string name="private_dns_hostname_cira" translatable="false">protected.canadianshield.cira.ca</string>
+
+    <string name="private_dns_mode_cleanbrowsing" translatable="false">CleanBrowsing (US)</string>
+    <string name="private_dns_hostname_cleanbrowsing" translatable="false">security-filter-dns.cleanbrowsing.org</string>
+
+    <string name="private_dns_mode_cloudflare" translatable="false">Cloudflare (US)</string>
+    <string name="private_dns_hostname_cloudflare" translatable="false">security.cloudflare-dns.com</string>
+
+<string name="private_dns_mode_controld" translatable="false">Control D (CA)</string>
+<string name="private_dns_hostname_controld" translatable="false">p2.freedns.controld.com</string>
+
+<string name="private_dns_mode_cznic" translatable="false">CZ.NIC (CZ)</string>
+<string name="private_dns_hostname_cznic" translatable="false">odvr.nic.cz</string>
+
+<string name="private_dns_mode_dnszero" translatable="false">DNS0 (FR)</string>
+<string name="private_dns_hostname_dnszero" translatable="false">zero.dns0.eu</string>
+
+<string name="private_dns_mode_dnssb" translatable="false">DNS.SB (DE)</string>
+<string name="private_dns_hostname_dnssb" translatable="false">dot.sb</string>
+
+<string name="private_dns_mode_google" translatable="false">Google (US)</string>
+<string name="private_dns_hostname_google" translatable="false">dns.google</string>
+
+<string name="private_dns_mode_mullvad" translatable="false">Mullvad (SE)</string>
+<string name="private_dns_hostname_mullvad" translatable="false">base.dns.mullvad.net</string>
+
+<string name="private_dns_mode_quadnine" translatable="false">Quad9 (CH)</string>
+<string name="private_dns_hostname_quadnine" translatable="false">dns.quad9.net</string>
+
+    <string name="private_dns_mode_restena" translatable="false">Restena (LU)</string>
+    <string name="private_dns_hostname_restena" translatable="false">kaitain.restena.lu</string>
+
+    <string name="private_dns_mode_switch" translatable="false">SWITCH (CH)</string>
+    <string name="private_dns_hostname_switch" translatable="false">dns.switch.ch</string>
+
+<string name="private_dns_mode_uncensoreddns" translatable="false">UncensoredDNS (DK)</string>
+<string name="private_dns_hostname_uncensoreddns" translatable="false">anycast.censurfridns.dk</string>
+
+<!-- Расширенные настройки клавиатуры -->
+<string name="keyboard_extras_title">Дополнительно</string>
+<string name="advanced_keyboard_settings_title">Расширенные настройки</string>
+
+<!-- Отладка Android как root -->
+<string name="adb_enable_root">Отладка с правами root</string>
+<string name="adb_enable_summary_root">Разрешить запуск отладки Android как root</string>
+
+<!-- Резервное копирование Меню настроек выбора транспорта и название действия -->
+<string name="backup_transport_setting_label">Изменить поставщика резервного копирования</string>
+<string name="backup_transport_title">Выбрать поставщика резервного копирования</string>
+
+<!-- Черная тема для темного режима -->
+<string name="berry_black_theme_title">Чисто черный</string>
+<string name="berry_black_theme_summary">Чисто черный фон для темной темы</string>
+
+<!-- Экран информации об устройстве. LineageOS легален. -->
+<string name="lineagelicense_title">LineageOS легален</string>
+
+<!-- [CHAR LIMIT=NONE] Экран информации об устройстве. Обратный отсчет нажатий пользователя для включения параметров разработки -->
+<string name="show_dev_countdown_cm">{count, plural,
+=1 {Вы в # шаге от включения параметров разработки.}
+other {Вы в # шаге от ena настройки разработки bling.}
+}</string>
+<!-- [CHAR LIMIT=NONE] Экран сведений об устройстве. Подтверждение того, что настройки разработчика включены -->
+<string name="show_dev_on_cm">Вы включили настройки разработки!</string>
+<!-- [CHAR LIMIT=NONE] Экран сведений об устройстве. Хорошо, мы поняли, хватит нажимать, он у вас уже включен -->
+<string name="show_dev_already_cm">Нет необходимости, вы уже включили настройки разработки.</string>
+
+<!-- Дважды коснитесь строки состояния или экрана блокировки, чтобы перейти в режим сна -->
+<string name="status_bar_double_tap_to_sleep_title">Нажмите, чтобы перейти в режим сна</string>
+<string name="status_bar_double_tap_to_sleep_summary">Дважды коснитесь строки состояния или экрана блокировки, чтобы выключить дисплей</string>
+
+<!-- Высокая частота опроса касаний -->
+<string name="high_touch_polling_rate_title">Высокая частота опроса касаний</string>
+<string name="high_touch_polling_rate_summary">Увеличьте частоту опроса сенсорного экрана</string>
+
+<!-- Внимание -->
+<string name="heads_up_notifications_enabled_title">Heads-up</string>
+<string name="heads_up_notifications_enabled_summary">Отображать приоритетные уведомления в небольшом плавающем окне</string>
+
+<!-- Высокая чувствительность к касанию -->
+<string name="high_touch_sensitivity_title">Высокая чувствительность к касанию</string>
+<string name="high_touch_sensitivity_summary">Увеличить чувствительность сенсорного экрана, чтобы можно было пользоваться им в перчатках</string>
+
+<!-- Дополнительные возможности точки доступа -->
+<string name="tethering_allow_vpn_upstreams_title">Разрешить клиентам использовать VPN</string>
+<string name="tethering_allow_vpn_upstreams_summary">Разрешить клиентам точки доступа использовать VPN-подключения этого устройства для восходящего подключения</string>
+
+<!-- Размер шаблона блокировки экрана -->
+<string name="lock_pattern_size_3" translatable="false">3 \u00d7 3</string>
+<string name="lock_pattern_size_4" translatable="false">4 \u00d7 4</string>
+<string name="lock_pattern_size_5" translatable="false">5 \u00d7 5</string>
+<string name="lock_pattern_size_6" translatable="false">6 \u00d7 6</string>
+<string name="lock_settings_picker_pattern_size_message">Выберите размер шаблона</string>
+
+<!-- Будет ли отображаться красная линия после того, как пользователь неправильно нарисовал шаблон разблокировки -->
+<string name="lockpattern_settings_enable_error_path_title">Показать ошибку шаблона</string>
+<!-- Будут ли точки будет отображаться при использовании графического ключа на экране блокировки -->
+<string name="lockpattern_settings_enable_dots_title">Показывать точки графического ключа</string>
+
+<!-- Максимальная частота обновления -->
+<string name="max_refresh_rate_title">Пиковая частота обновления</string>
+
+<!-- Минимальная частота обновления -->
+<string name="min_refresh_rate_title">Минимальная частота обновления</string>
+
+<!-- Сообщение, отображаемое в диалоговом окне регистрации отпечатков пальцев для определения местоположения датчика -->
+<string name="fingerprint_enroll_find_sensor_message_front" product="tablet">Найдите датчик отпечатков пальцев на передней панели планшета.</string>
+<string name="fingerprint_enroll_find_sensor_message_front" product="device">Найдите датчик отпечатков пальцев на передней панели устройства.</string>
+<string name="fingerprint_enroll_find_sensor_message_front" product="default">Расположите датчик отпечатков пальцев на передней панели телефона.</string>
+<string name="fingerprint_enroll_find_sensor_message_rear" product="tablet">Расположите датчик отпечатков пальцев на задней панели планшета.</string>
+<string name="fingerprint_enroll_find_sensor_message_rear" product="device">Расположите датчик отпечатков пальцев на задней панели устройства.</string>
+<string name="fingerprint_enroll_find_sensor_message_rear" product="default">Расположите датчик отпечатков пальцев на задней панели телефона.</string>
+<string name="fingerprint_enroll_find_sensor_message_side" product="tablet">Расположите датчик отпечатков пальцев на боковой панели планшета.</string>
+<string name="fingerprint_enroll_find_sensor_message_side" product="device">Найдите датчик отпечатков пальцев на боковой стороне вашего устройства.</string>
+<string name="fingerprint_enroll_find_sensor_message_side" product="default">Найдите датчик отпечатков пальцев на боковой стороне вашего телефона.</string>
+
+<!-- Сообщение, которое отображается, когда пользователь касается значка на экране вместо настоящего датчика отпечатков пальцев -->
+<string name="fingerprint_enroll_touch_dialog_message_front" product="tablet">Коснитесь датчика на передней панели вашего планшета.</string>
+<string name="fingerprint_enroll_touch_dialog_message_front" product="device">Коснитесь датчика на передней панели вашего устройства.</string>
+<string name="fingerprint_enroll_touch_dialog_message_front" product="default">Коснитесь датчика на передней панели вашего телефона.</string>
+<string name="fingerprint_enroll_touch_dialog_message_rear" product="tablet">Прикоснитесь к датчику на задней панели планшета.</string>
+<string name="fingerprint_enroll_touch_dialog_message_rear" product="device">Прикоснитесь к датчику на задней панели устройства.</string>
+<string name="fingerprint_enroll_touch_dialog_message_rear" product="default">Прикоснитесь к датчику на задней панели вашего телефона.</string>
+<string name="fingerprint_enroll_touch_dialog_message_side" product="tablet">Коснитесь датчика сбоку планшета.</string>
+<string name="fingerprint_enroll_touch_dialog_message_side" product="device">Коснитесь датчика сбоку устройства.</string>
+<string name="fingerprint_enroll_touch_dialog_message_side" product="default">Коснитесь датчика сбоку телефона.</string>
+
+<!-- Описание переключателя «требовать экран для аутентификации», отображаемого в диалоговом окне регистрации отпечатков пальцев после завершения регистрации.
+Только для устройств, поддерживающих проверку близости перед разрешением разблокировки отпечатком пальца. -->
+<string name="security_settings_require_screen_on_to_auth_with_proximity_description">Коснитесь датчика, чтобы разблокировать устройство, даже если экран выключен. Датчик приближения предотвращает случайную разблокировку.</string>
+
+<!-- Подсказка по панели навигации -->
+<string name="show_navbar_hint_title">Подсказка по навигации</string>
+<string name="show_navbar_hint_summary">Показывать панель подсказок по навигации внизу экрана</string>
+
+<!-- Тайм-аут звука уведомления -->
+<string name="app_notification_sound_timeout_title">Минимальное время между звуками уведомления</string>
+<string name="app_notification_sound_timeout_summary_template">Разрешить звуки или вибрацию не чаще одного раза в <xliff:g id="duration">%1$s</xliff:g></string>
+<string name="app_notification_sound_timeout_value_none">Без ограничений</string>
+<string name="app_notification_sound_timeout_value_10_seconds">10 секунд</string>
+<string name="app_notification_sound_timeout_value_30_seconds">30 секунд</string>
+<string name="app_notification_sound_timeout_value_1_minute">1 минута</string>
+<string name="app_notification_sound_timeout_value_5_minutes">5 минут</string>
+<string name="app_notification_sound_timeout_value_15_minutes">15 минут</string>
+<string name="app_notification_sound_timeout_value_30_minutes">30 минут</string>
+
+<!-- Однократная автоматическая яркость -->
+<string name="auto_brightness_one_shot_title">Однократная автоматическая яркость</string>
+<string name="auto_brightness_one_shot_summary">Регулировка яркости будет происходить только в момент включения экрана</string>
+
+<!-- Ограничения данных для каждого приложения -->
+<string name="data_usage_app_restrict_all">Разрешить доступ к сети</string>
+<string name="data_usage_app_restrict_all_summary">Включить использование сети</string>
+<string name="data_usage_app_restrict_mobile">Мобильные данные</string>
+<string name="data_usage_app_restrict_mobile_summary">Включить использование мобильных данных</string>
+<string name="data_usage_app_restrict_vpn">Данные VPN</string>
+<string name="data_usage_app_restrict_vpn_summary">Включить использование данных VPN</string>
+<string name="data_usage_app_restrict_wifi">Данные Wi\u2011Fi</string>
+<string name="data_usage_app_restrict_wifi_summary">Включить использование данных Wi\u2011Fi</string>
+
+<!-- Шифрование PIN-кода -->
+<string name="unlock_scramble_pin_layout_title">Макет шифрования</string>
+<string name="unlock_scramble_pin_layout_summary">Макет шифрования PIN-кода при разблокировке устройства</string>
+
+<!-- Пробуждение от приближения -->
+<string name="proximity_wake_title">Предотвращение случайного пробуждения</string>
+<string name="proximity_wake_summary">Проверка датчика приближения перед пробуждением экрана</string>
+
+<!-- Настройки жестов сенсорного экрана -->
+<string name="touchscreen_gesture_settings_title">Жесты сенсорного экрана</string>
+<string name="touchscreen_gesture_settings_summary">Выполнение различных жестов сенсорного экрана для быстрых действий</string>
+
+<!-- Наведение на сенсорный экран -->
+<string name="touchscreen_hovering_title">Наведение на сенсорный экран</string>
+<string name="touchscreen_hovering_summary">Позволяет наводить на экран, как мышь, в веб-браузерах, удаленных рабочих столах и т. д.</string>
+
+<!-- Пробуждение при подключении -->
+<string name="wake_when_plugged_or_unplugged_title">Пробуждение при подключении</string>
+<string name="wake_when_plugged_or_unplugged_summary">Включение экрана при подключении или отключении источника питания</string>
+
+<!-- Функция FastCharge -->
+<string name="fast_charging_title">Быстрая зарядка</string>
+<string name="fast_charging_summary">Отключите, чтобы уменьшить тепло, выделяемое устройством во время зарядки, или продлить срок службы аккумулятора</string>
+
+<!-- Текст заголовка подсказки настроек и настроек для выключенного экрана UDFPS (телефон) [CHAR LIMIT=60]-->
+<string name="ambient_display_screen_off_udfps_title" product="default">Длительное нажатие на сканер отпечатков пальцев для разблокировки телефона</string>
+<!-- Текст заголовка подсказки настроек и настроек для выключенного экрана UDFPS (планшет) [CHAR LIMIT=60]-->
+<string name="ambient_display_screen_off_udfps_title" product="tablet">Длительное нажатие на сканер отпечатков пальцев для разблокировки планшета</string>
+<!-- Текст заголовка подсказки настроек и настроек для выключенного экрана UDFPS (устройство) [CHAR LIMIT=60]-->
+<string name="ambient_display_screen_off_udfps_title" product="device">
+
+Долгое нажатие на сканер отпечатков пальцев для разблокировки устройства</string>
+<!-- Сводка для выключенного экрана UDFPS [CHAR LIMIT=NONE]-->
+<string name="ambient_display_screen_off_udfps_summary">Чтобы включить экран и разблокировать его, долго нажмите на сканер отпечатков пальцев под дисплеем.</string>
+
+<!-- Предупреждающее сообщение для настройки SD-карты -->
+<string name="storage_warning_internal">Предупреждение: эта опция может работать некорректно или привести к потере данных, поэтому ее использование не рекомендуется!</string>
+
+<!-- Экран настроек местоположения, установка метки флажка, если следует включить Assisted GPS -->
+<string name="assisted_gps">Использовать Assisted GPS</string>
+<!-- Экран настроек местоположения, сводка настроек для включения Assisted GPS -->
+<string name="assisted_gps_summary">Загрузка данных о спутниковой помощи из Интернета, что может значительно повысить производительность запуска GPS. Для экстренных вызовов всегда разрешен вспомогательный GPS.</string>
+
+<!-- Информация об аккумуляторе: Технология -->
+<string name="battery_technology">Технология</string>
+<string name="battery_technology_not_available" translatable="false">@string/battery_cycle_count_not_available</string>
+
+<!-- Информация об аккумуляторе: Состояние -->
+<string name="battery_health">Состояние</string>
+<string name="battery_health_good">Хорошее</string>
+<string name="battery_health_overheat">Перегрев</string>
+<string name="battery_health_dead">Разряжен</string>
+<string name="battery_health_over_voltage">Перенапряжение</string>
+<string name="battery_health_unspecified_failure">Неуказанная неисправность</string>
+<string name="battery_health_cold">Холодный</string>
+<string name="battery_health_unknown">Неизвестно</string>
+
+<!-- Информация о батарее: Температура -->
+<string name="battery_temperature">Температура</string>
+<string name="battery_temperature_not_available" translatable="false">@string/battery_cycle_count_not_available</string>
+
+<!-- Информация о батарее: Напряжение -->
+<string name="battery_voltage">Напряжение</string>
+<string name="battery_voltage_not_available" translatable="false">@string/battery_cycle_count_not_available</string>
+
+<!-- Информация о батарее: Счетчик заряда -->
+<string name="battery_charge_counter_summary">%1$d мАч</string>
+
+<!-- Информация о батарее: Проектная емкость -->
+<string name="battery_design_capacity">Проектная емкость</string>
+<string name="battery_design_capacity_summary">%1$d мАч</string>
+<string name="battery_design_capacity_not_available" translatable="false">@string/battery_cycle_count_not_available</string>
+
+<!-- Информация о батарее: максимальная емкость -->
+<string name="battery_maximum_capacity">Максимальная емкость</string>
+<string name="battery_maximum_capacity_summary">%1$d мАч (%2$d%%)</string>
+<string name="battery_maximum_capacity_not_available" translatable="false">@string/battery_cycle_count_not_available</string>
+
+<!-- Увеличение громкости звонка -->
+<string name="increasing_ring_volume_option_title">Увеличение громкости звонка</string>
+<string name="increasing_ring_min_volume_title">Начальная громкость</string>
+<string name="increasing_ring_ramp_up_time_title">Время нарастания</string>
+
+<!-- Спящий режим при двойном нажатии -->
+<string name="double_tap_title">Двойное нажатие</string>
+<string name="doze_double_tap_title">Двойное нажатие для проверки телефона</string>
+<string name="doze_double_tap_summary">Уведомления о пульсе при двойном нажатии</string>
+</resources>

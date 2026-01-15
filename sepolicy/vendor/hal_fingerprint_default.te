@@ -1,32 +1,81 @@
 typeattribute hal_fingerprint_default data_between_core_and_vendor_violators;
 
 vndbinder_use(hal_fingerprint_default)
-
 binder_call(hal_fingerprint_default, hal_perf_default)
-binder_call(hal_fingerprint_default, goodix_fingerprint_vndservice)
 
+# Device Nodes
+allow hal_fingerprint_default goodix_device:chr_file rw_file_perms;
+allow hal_fingerprint_default focaltech_device:chr_file rw_file_perms;
 allow hal_fingerprint_default cdfinger_device:chr_file rw_file_perms;
 allow hal_fingerprint_default fingerprintd_device:chr_file rw_file_perms;
-allow hal_fingerprint_default focaltech_device:chr_file rw_file_perms;
 allow hal_fingerprint_default tee_device:chr_file rw_file_perms;
+allow hal_fingerprint_default uhid_device:chr_file rw_file_perms;
 
+# Services
 allow hal_fingerprint_default hal_perf_hwservice:hwservice_manager find;
-allow hal_fingerprint_default focaltech_hwservice:hwservice_manager { add find };
-allow hal_fingerprint_default focaltech_vndservice:service_manager { add find };
-allow hal_fingerprint_default goodix_fingerprint_vndservice:service_manager { add find };
 
-# Allow hal_fingerprint_default to read, write and create files in persist
+# Filesystem
 allow hal_fingerprint_default persist_drm_file:file create_file_perms;
 allow hal_fingerprint_default persist_drm_file:dir rw_dir_perms;
-
-allow hal_fingerprint_default self:netlink_kobject_uevent_socket { read create setopt bind };
-allow hal_fingerprint_default self:netlink_socket create_socket_perms_no_ioctl;
-
 allow hal_fingerprint_default fingerprintd_data_file:file create_file_perms;
 allow hal_fingerprint_default fingerprintd_data_file:dir create_dir_perms;
-
 
 r_dir_file(hal_fingerprint_default, firmware_file)
 r_dir_file(hal_fingerprint_default, sysfs_usb_supply)
 
+# Netlink
+allow hal_fingerprint_default self:netlink_kobject_uevent_socket { read create setopt bind };
+allow hal_fingerprint_default self:netlink_socket create_socket_perms_no_ioctl;
+
+# Input
+allow hal_fingerprint_default input_device:dir r_dir_perms;
+allow hal_fingerprint_default input_device:chr_file rw_file_perms;
+
+# Sysfs (включая wakeup для fingerprint wakelock)
+allow hal_fingerprint_default sysfs:dir { open read search getattr };
+allow hal_fingerprint_default sysfs:file rw_file_perms;
+allow hal_fingerprint_default sysfs_wakeup:dir { open read search getattr };
+allow hal_fingerprint_default sysfs_wakeup:file rw_file_perms;
+
+# Properties
 set_prop(hal_fingerprint_default, vendor_fingerprint_prop)
+
+# Ion/dmabuf
+allow hal_fingerprint_default ion_device:chr_file rw_file_perms;
+allow hal_fingerprint_default dmabuf_system_heap_device:chr_file r_file_perms;
+
+dontaudit hal_fingerprint_default default_prop:file { read open getattr map };
+
+# ===========================================
+# Init script domain (vendor_fingerprint_init)
+# ===========================================
+type vendor_fingerprint_init, domain;
+typeattribute vendor_fingerprint_init data_between_core_and_vendor_violators;
+
+domain_auto_trans(init, vendor_fp_init_exec, vendor_fingerprint_init)
+
+allow vendor_fingerprint_init vendor_shell_exec:file rx_file_perms;
+allow vendor_fingerprint_init vendor_toolbox_exec:file rx_file_perms;
+
+# Device nodes access
+allow vendor_fingerprint_init goodix_device:chr_file { setattr getattr };
+allow vendor_fingerprint_init focaltech_device:chr_file { setattr getattr };
+
+# Vendor data access
+allow vendor_fingerprint_init mnt_vendor_file:dir { search read open getattr };
+allow vendor_fingerprint_init vendor_data_file:dir { search read open write remove_name };
+allow vendor_fingerprint_init vendor_data_file:file { unlink getattr read open };
+
+# Persist partition access
+allow vendor_fingerprint_init persist_drm_file:dir { search read open getattr };
+allow vendor_fingerprint_init persist_drm_file:file { unlink getattr read open };
+
+# System data access (fingerprint settings)
+allow vendor_fingerprint_init system_data_file:dir { search read };
+allow vendor_fingerprint_init system_data_file:file { getattr read open };
+
+# Focaltech fingerprint init access
+allow vendor_fingerprint_init fingerprintd_data_file:dir { read search open getattr };
+allow vendor_fingerprint_init fingerprintd_data_file:file { read open getattr };
+allow vendor_fingerprint_init fingerprint_vendor_data_file:dir { read search open getattr };
+allow vendor_fingerprint_init fingerprint_vendor_data_file:file { read open getattr };

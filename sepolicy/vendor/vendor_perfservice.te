@@ -1,0 +1,3 @@
+# Разрешаем PerfService искать Perf HAL
+allow vendor_perfservice hal_perf_hwservice:hwservice_manager find;
+binder_call(vendor_perfservice, hal_perf_default)

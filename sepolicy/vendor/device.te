@@ -1,5 +1,10 @@
-# Biometrics
+type latency_device, dev_type;
+
+# Fingerprint device types
+type goodix_device, dev_type;
+type focaltech_device, dev_type;
 type cdfinger_device, dev_type;
 type fingerprintd_device, dev_type;
-type focaltech_device, dev_type;
-type latency_device, dev_type;
+
+# ZRAM device
+type zram_device, dev_type;

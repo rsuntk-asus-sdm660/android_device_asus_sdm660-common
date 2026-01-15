@@ -16,14 +16,22 @@ type sysfs_fpsinfo, sysfs_type, fs_type;
 # Kcal
 type kcal_dev, sysfs_type, fs_type;
 
+# KMSG
+type proc_last_kmsg, fs_type, proc_type;
+
+# sensors
+type sysfs_input, sysfs_type, fs_type;
+type sysfs_sensor, sysfs_type, fs_type;
+
 # NFC
 type vendor_nfc_vendor_data_file, file_type, data_file_type;
 
 # Type for the NFC HAL service executable
 type nfc_exec, exec_type, file_type, vendor_file_type;
 
-# procfs
-type proc_last_kmsg, fs_type, proc_type;
-
 # Thermal
 type thermal_data_file, file_type, data_file_type;
+
+type proc_sched_boost, fs_type, proc_type;
+
+type vendor_fp_init_exec, exec_type, vendor_file_type, file_type;

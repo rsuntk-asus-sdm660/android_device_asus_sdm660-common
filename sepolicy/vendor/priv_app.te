@@ -1,0 +1,2 @@
+allow priv_app system_data_file:file { open };
+allow priv_app apex_system_server_data_file:dir search;

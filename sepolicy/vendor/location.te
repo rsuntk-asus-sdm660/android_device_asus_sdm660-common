@@ -1,1 +1,2 @@
-allow location sysfs_socinfo_sensitive:file { read };
+# Location service access to serial number
+allow location sysfs_socinfo_sensitive:file r_file_perms;

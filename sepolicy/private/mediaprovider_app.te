@@ -1,3 +1,0 @@
-allow mediaprovider_app rootfs:dir { read  open };
-allow mediaprovider_app rootfs:file { getattr };
-allow mediaprovider_app ota_package_file:file { getattr };

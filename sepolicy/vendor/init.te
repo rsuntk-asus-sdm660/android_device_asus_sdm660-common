@@ -1,15 +1,57 @@
 dontaudit init bt_firmware_file:filesystem getattr;
 dontaudit init firmware_file:filesystem getattr;
+dontaudit init proc_dirty_ratio:file { write open };
 
 # Vibrator
-allow init sysfs_leds: file { rw_file_perms };
+allow init sysfs_vibrator: file { rw_file_perms };
 
 allow init sysfs:file { setattr };
+dontaudit init sysfs:file { read open write};
+
 allow init debugfs_tracing_debug:dir { mounton };
 
 # Smart Charging
 allow init sysfs_battery_supply:file { setattr };
 
+# Allow Vendor_init set Radio Prop
+set_prop(vendor_init, vendor_radio_prop)
+
 # /proc/last_kmsg
 allow init proc_last_kmsg:file r_file_perms;
 allow init proc_last_kmsg:file setattr;
+allow init proc:file { setattr };
+
+# Allow init to read its own netlink uevent socket
+allow init init:netlink_kobject_uevent_socket read;
+
+# Allow init to perform binder calls to system_server
+allow init system_server:binder call;
+
+# Allow init to open battery and USB supply sysfs nodes
+# Note: Usually 'open' is accompanied by 'read' and 'getattr'
+allow init sysfs_battery_supply:file { open read getattr };
+allow init sysfs_usb_supply:file { open read getattr };
+
+# Разрешаем init читать symlinks для vibrator и leds
+allow init sysfs_vibrator:lnk_file read;
+allow init sysfs_leds:lnk_file read;
+
+# Дополнительные права для работы с sysfs
+allow init sysfs_vibrator:dir search;
+allow init sysfs_leds:dir search;
+allow init sysfs_vibrator:file { read write open getattr setattr };
+allow init sysfs_leds:file { read write open getattr setattr };
+
+# Allow init/vendor_init to read ZRAM properties to trigger actions
+get_prop(vendor_init, vendor_zram_prop)
+get_prop(init, vendor_zram_prop)
+
+# Разрешаем init писать в tracing
+allow init debugfs_tracing_debug:file w_file_perms;
+
+# Разрешаем init писать в configfs
+allow init configfs:file w_file_perms;
+allow init configfs:dir w_dir_perms;
+
+allow init cgroup:file w_file_perms;
+allow init proc_sched:file rw_file_perms;

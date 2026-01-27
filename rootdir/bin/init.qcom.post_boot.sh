@@ -2,7 +2,7 @@
 
 # ═══════════════════════════════════════════════════════════════════════════
 # init.qcom.post_boot.sh for SDM660/SDM636 on Kernel 4.19 (EAS)
-# Optimized for stability under load + thermal caps integration
+# Optimized for User Build + BFQ + Schedutil + Thermal Caps
 # ═══════════════════════════════════════════════════════════════════════════
 
 function sdm660_sched_schedutil_dcvs() {
@@ -12,69 +12,86 @@ function sdm660_sched_schedutil_dcvs() {
 
     # Little Cluster (CPU 0-3)
     echo "schedutil" > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
-    echo 500 > /sys/devices/system/cpu/cpufreq/policy0/schedutil/up_rate_limit_us
-    echo 20000 > /sys/devices/system/cpu/cpufreq/policy0/schedutil/down_rate_limit_us
+    # Убираем rate_limit (0), чтобы ядро 4.19 само решало (максимальная отзывчивость)
+    echo 0 > /sys/devices/system/cpu/cpufreq/policy0/schedutil/up_rate_limit_us
+    echo 0 > /sys/devices/system/cpu/cpufreq/policy0/schedutil/down_rate_limit_us
     echo 0 > /sys/devices/system/cpu/cpufreq/policy0/schedutil/iowait_boost_enable
 
-    # ★ ИЗМЕНЕНО: Низкий baseline min_freq для работы thermal caps
+    # ★ THERMAL CAPS: Низкий порог для работы термо-профилей
     echo 576000 > /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq
 
     # Big Cluster (CPU 4-7)
     echo "schedutil" > /sys/devices/system/cpu/cpufreq/policy4/scaling_governor
-    echo 1000 > /sys/devices/system/cpu/cpufreq/policy4/schedutil/up_rate_limit_us
-    echo 20000 > /sys/devices/system/cpu/cpufreq/policy4/schedutil/down_rate_limit_us
+    echo 0 > /sys/devices/system/cpu/cpufreq/policy4/schedutil/up_rate_limit_us
+    echo 0 > /sys/devices/system/cpu/cpufreq/policy4/schedutil/down_rate_limit_us
     echo 0 > /sys/devices/system/cpu/cpufreq/policy4/schedutil/iowait_boost_enable
 
-    # ★ ИЗМЕНЕНО: Низкий baseline min_freq для работы thermal caps
+    # ★ THERMAL CAPS: Низкий порог для работы термо-профилей
     echo 825600 > /sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq
 
     # ═══════════════════════════════════════════════════════════════
     # 2. SCHEDTUNE (EAS BOOST)
-    # ★ ИЗМЕНЕНО: Умеренный boost, thermal caps будет управлять max
     # ═══════════════════════════════════════════════════════════════
 
-    # Top-App: Умеренный буст
-    echo 5 > /dev/stune/top-app/schedtune.boost
+    # Top-App: Легкий буст для плавности UI
+    echo 10 > /dev/stune/top-app/schedtune.boost
     echo 1 > /dev/stune/top-app/schedtune.prefer_idle
 
-    # Foreground: Без буста
+    # Foreground
     echo 0 > /dev/stune/foreground/schedtune.boost
     echo 0 > /dev/stune/foreground/schedtune.prefer_idle
 
-    # Background: Минимизируем
+    # Background
     echo 0 > /dev/stune/background/schedtune.boost
     echo 0 > /dev/stune/background/schedtune.prefer_idle
 
     # ═══════════════════════════════════════════════════════════════
-    # 3. CPUSETS (Изоляция ядер)
+    # 3. CPUSETS
     # ═══════════════════════════════════════════════════════════════
 
-    echo 0-2 > /dev/cpuset/background/cpus
+    # Background: только малые ядра
+    echo 0-3 > /dev/cpuset/background/cpus
     echo 0-3 > /dev/cpuset/system-background/cpus
+    # Top-App: все ядра
     echo 0-7 > /dev/cpuset/top-app/cpus
+    # Restricted
     echo 0-3 > /dev/cpuset/restricted/cpus
 
     # ═══════════════════════════════════════════════════════════════
-    # 4. WALT/SCHEDULER TUNING
+    # 4. WALT TUNING
     # ═══════════════════════════════════════════════════════════════
+    
+    # Разрешить ротацию задач на больших ядрах
+    echo 1 > /proc/sys/kernel/sched_walt_rotate_big_tasks
 
-    echo 1 > /proc/sys/kernel/sched_walt_rotate_big_tasks 2>/dev/null
-
-    # ★ ИЗМЕНЕНО: Более агрессивная миграция на big для отзывчивости
-    echo 80 > /proc/sys/kernel/sched_upmigrate 2>/dev/null
-    echo 60 > /proc/sys/kernel/sched_downmigrate 2>/dev/null
-    echo 85 > /proc/sys/kernel/sched_group_upmigrate 2>/dev/null
-    echo 65 > /proc/sys/kernel/sched_group_downmigrate 2>/dev/null
+    # Пороги миграции (EAS сам управляет, это подсказки)
+    echo 95 > /proc/sys/kernel/sched_upmigrate
+    echo 85 > /proc/sys/kernel/sched_downmigrate
+    echo 95 > /proc/sys/kernel/sched_group_upmigrate
+    echo 85 > /proc/sys/kernel/sched_group_downmigrate
 }
 
 function configure_storage_io() {
     # ═══════════════════════════════════════════════════════════════
-    # I/O настройки (без ZRAM — он в init.qcom.rc)
+    # I/O TUNING: BFQ for eMMC
     # ═══════════════════════════════════════════════════════════════
 
-    echo 128 > /sys/block/mmcblk0/queue/read_ahead_kb 2>/dev/null
-    echo 128 > /sys/block/mmcblk0/bdi/read_ahead_kb 2>/dev/null
-    echo "mq-deadline" > /sys/block/mmcblk0/queue/scheduler 2>/dev/null
+    # Internal Storage
+    if [ -d /sys/block/mmcblk0 ]; then
+        echo "bfq" > /sys/block/mmcblk0/queue/scheduler
+        echo 128 > /sys/block/mmcblk0/queue/read_ahead_kb
+        
+        # Важно для Flash памяти на BFQ: убирает холостой ход, повышает скорость
+        echo 0 > /sys/block/mmcblk0/queue/iosched/slice_idle 2>/dev/null
+        # Включаем low_latency для отзывчивости UI
+        echo 1 > /sys/block/mmcblk0/queue/iosched/low_latency 2>/dev/null
+    fi
+
+    # SD Card (если есть)
+    if [ -d /sys/block/mmcblk1 ]; then
+        echo "bfq" > /sys/block/mmcblk1/queue/scheduler
+        echo 128 > /sys/block/mmcblk1/queue/read_ahead_kb
+    fi
 }
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -85,10 +102,11 @@ target=`getprop ro.board.platform`
 
 case "$target" in
     "sdm660" | "sdm636")
-        # 1. IRQ affinity
+        # 1. IRQ affinity (раз msm_irqbalance удален)
+        # f = разрешить прерывания на всех ядрах (0-3)
         echo f > /proc/irq/default_smp_affinity
 
-        # 2. Core Control
+        # 2. Core Control (Оставляем как было для стабильности)
         if [ -d /sys/devices/system/cpu/cpu4/core_ctl ]; then
             echo 2 > /sys/devices/system/cpu/cpu4/core_ctl/min_cpus
             echo 4 > /sys/devices/system/cpu/cpu4/core_ctl/max_cpus
@@ -98,30 +116,30 @@ case "$target" in
             echo 1 > /sys/devices/system/cpu/cpu4/core_ctl/is_big_cluster
         fi
 
-        # 3. CPU и Scheduler
+        # 3. Apply CPU & Scheduler settings
         sdm660_sched_schedutil_dcvs
 
-        # 4. Storage I/O
+        # 4. Apply I/O settings
         configure_storage_io
 
-        # 5. Bus DCVS (DDR bandwidth)
+        # 5. Bus DCVS (DDR Bandwidth)
         for device in /sys/devices/platform/soc; do
             for cpubw in $device/*cpu-cpu-ddr-bw/devfreq/*cpu-cpu-ddr-bw; do
                 if [ -d "$cpubw" ]; then
-                    echo "bw_hwmon" > $cpubw/governor 2>/dev/null
-                    echo 50 > $cpubw/polling_interval 2>/dev/null
-                    echo 762 > $cpubw/min_freq 2>/dev/null
-                    echo "762 1571 2086 2929 3879 5163 5931 6881" > $cpubw/bw_hwmon/mbps_zones 2>/dev/null
-                    echo 4 > $cpubw/bw_hwmon/sample_ms 2>/dev/null
-                    echo 85 > $cpubw/bw_hwmon/io_percent 2>/dev/null
-                    echo 100 > $cpubw/bw_hwmon/decay_rate 2>/dev/null
-                    echo 50 > $cpubw/bw_hwmon/bw_step 2>/dev/null
-                    echo 20 > $cpubw/bw_hwmon/hist_memory 2>/dev/null
-                    echo 0 > $cpubw/bw_hwmon/hyst_length 2>/dev/null
-                    echo 80 > $cpubw/bw_hwmon/down_thres 2>/dev/null
-                    echo 0 > $cpubw/bw_hwmon/guard_band_mbps 2>/dev/null
-                    echo 250 > $cpubw/bw_hwmon/up_scale 2>/dev/null
-                    echo 1600 > $cpubw/bw_hwmon/idle_mbps 2>/dev/null
+                    echo "bw_hwmon" > $cpubw/governor
+                    echo 50 > $cpubw/polling_interval
+                    echo 762 > $cpubw/min_freq
+                    echo "762 1571 2086 2929 3879 5163 5931 6881" > $cpubw/bw_hwmon/mbps_zones
+                    echo 4 > $cpubw/bw_hwmon/sample_ms
+                    echo 85 > $cpubw/bw_hwmon/io_percent
+                    echo 100 > $cpubw/bw_hwmon/decay_rate
+                    echo 50 > $cpubw/bw_hwmon/bw_step
+                    echo 20 > $cpubw/bw_hwmon/hist_memory
+                    echo 0 > $cpubw/bw_hwmon/hyst_length
+                    echo 80 > $cpubw/bw_hwmon/down_thres
+                    echo 0 > $cpubw/bw_hwmon/guard_band_mbps
+                    echo 250 > $cpubw/bw_hwmon/up_scale
+                    echo 1600 > $cpubw/bw_hwmon/idle_mbps
                 fi
             done
         done
@@ -131,5 +149,4 @@ case "$target" in
     ;;
 esac
 
-# Флаг завершения
 setprop vendor.post_boot.parsed 1

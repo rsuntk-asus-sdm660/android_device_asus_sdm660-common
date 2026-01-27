@@ -224,9 +224,11 @@ PRODUCT_PACKAGES += \
 
 # Health
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.1-impl:64 \
-    android.hardware.health@2.1-impl.recovery \
-    android.hardware.health@2.1-service    
+    android.hardware.health-service.qti \
+    android.hardware.health-service.qti_recovery
+    
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.1.vendor    
 
 # GMS Permissions
 PRODUCT_COPY_FILES += \
@@ -480,7 +482,6 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.qcom.usb.rc \
     init.sysfs_permissions.rc \
-    init.asus_parts.rc \
     init.recovery.qcom.rc \
     init.target.rc \
     ueventd.qcom.rc

@@ -1,6 +1,8 @@
 # Copyright (c) 2013-2018, 2020, 2021 The Linux Foundation. All rights reserved.
 
 on early-init
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 0755 /sys/kernel/debug
     wait /dev/msm-rng 2
     # hw_random создаётся системой, symlink/chmod/chown не нужны
     # symlink /dev/msm-rng /dev/hw_random

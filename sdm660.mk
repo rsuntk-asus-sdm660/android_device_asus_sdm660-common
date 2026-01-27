@@ -38,7 +38,8 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
-    libvolumelistener
+    libvolumelistener \
+    tinymix
 
 PRODUCT_PACKAGES += \
     libhdmiedid \

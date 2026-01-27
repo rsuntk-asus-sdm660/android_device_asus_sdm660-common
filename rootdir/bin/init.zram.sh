@@ -21,30 +21,30 @@ ZRAM_STREAMS=$(getprop vendor.zram.streams)
 ZRAM_ALGO=$(getprop vendor.zram.comp_algorithm)
 
 # ═══════════════════════════════════════════════════════════════
-# FALLBACK ЕСЛИ VENDOR_INIT НЕ УСТАНОВИЛ
+# FALLBACK — СИНХРОНИЗИРОВАНО С VENDOR_INIT.CPP
+# Пороги: 6GB >= 5000MB, 4GB >= 3400MB, 3GB < 3400MB
 # ═══════════════════════════════════════════════════════════════
 if [ -z "$ZRAM_SIZE" ] || [ "$ZRAM_SIZE" = "0" ]; then
-    if [ $RAM_MB -ge 5500 ]; then
+    if [ $RAM_MB -ge 5000 ]; then
         # 6 GB
+        ZRAM_SIZE="2684354560"      # 2.5 GB
+        ZRAM_STREAMS="8"
+        ZRAM_ALGO="lz4"
+    elif [ $RAM_MB -ge 3400 ]; then
+        # 4 GB
         ZRAM_SIZE="2147483648"      # 2 GB
         ZRAM_STREAMS="8"
         ZRAM_ALGO="lz4"
-    elif [ $RAM_MB -ge 3700 ]; then
-        # 4 GB
-        ZRAM_SIZE="1342177280"      # 1.25 GB
-        ZRAM_STREAMS="6"
-        ZRAM_ALGO="lz4"
     else
         # 3 GB
-        ZRAM_SIZE="1073741824"      # 1 GB
-        ZRAM_STREAMS="4"
+        ZRAM_SIZE="1610612736"      # 1.5 GB
+        ZRAM_STREAMS="8"
         ZRAM_ALGO="lz4"
     fi
     echo "ZRAM: Using fallback for ${RAM_MB}MB RAM" > /dev/kmsg
 fi
 
-# Fallback для отдельных значений
-[ -z "$ZRAM_STREAMS" ] && ZRAM_STREAMS="4"
+[ -z "$ZRAM_STREAMS" ] && ZRAM_STREAMS="8"
 [ -z "$ZRAM_ALGO" ] && ZRAM_ALGO="lz4"
 
 # ═══════════════════════════════════════════════════════════════

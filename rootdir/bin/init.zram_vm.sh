@@ -16,35 +16,30 @@ RAM_MB=$((RAM_KB / 1024))
 SWAPPINESS=$(getprop vendor.zram.swappiness)
 
 # ═══════════════════════════════════════════════════════════════
-# FALLBACK ПО ОБЪЁМУ RAM
+# FALLBACK — СИНХРОНИЗИРОВАНО С VENDOR_INIT.CPP
 # ═══════════════════════════════════════════════════════════════
 if [ -z "$SWAPPINESS" ]; then
-    if [ $RAM_MB -ge 5500 ]; then
-        # 6 GB — можно больше swappiness
+    if [ $RAM_MB -ge 5000 ]; then
+        # 6 GB
         SWAPPINESS=100
-    elif [ $RAM_MB -ge 3700 ]; then
+    elif [ $RAM_MB -ge 3400 ]; then
         # 4 GB
-        SWAPPINESS=85
+        SWAPPINESS=90
     else
-        # 3 GB — баланс между бенчмарком и повседневкой
-        SWAPPINESS=70
+        # 3 GB
+        SWAPPINESS=80
     fi
     echo "VM-TUNE: Using fallback swappiness=$SWAPPINESS for ${RAM_MB}MB" > /dev/kmsg
 fi
 
-# ═══════════════════════════════════════════════════════════════
-# VFS_CACHE_PRESSURE ПО ОБЪЁМУ RAM
-# ═══════════════════════════════════════════════════════════════
-if [ $RAM_MB -ge 5500 ]; then
-    # 6 GB — можно держать больше cache
+# VFS_CACHE_PRESSURE
+if [ $RAM_MB -ge 5000 ]; then
     VFS_PRESSURE=80
     EXTRA_FREE=8192
-elif [ $RAM_MB -ge 3700 ]; then
-    # 4 GB
+elif [ $RAM_MB -ge 3400 ]; then
     VFS_PRESSURE=100
     EXTRA_FREE=6144
 else
-    # 3 GB — агрессивнее освобождаем cache
     VFS_PRESSURE=100
     EXTRA_FREE=4096
 fi

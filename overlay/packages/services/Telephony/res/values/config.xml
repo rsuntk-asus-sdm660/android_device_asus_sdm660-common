@@ -21,7 +21,7 @@
 <resources>
 
     <!-- Flag indicating if the phone is a world phone -->
-    <bool name="world_phone">false</bool>
+    <bool name="world_phone">true</bool>
 
     <!-- Flag indicating if dtmf tone type is enabled -->
     <bool name="dtmf_type_enabled">true</bool>
@@ -53,19 +53,6 @@
     <!-- Whether or not to support RCS User Capability Exchange -->
     <bool name="config_rcs_user_capability_exchange_enabled">false</bool>
 
-    <!-- Скрываем настройки CDMA (Verizon/Sprint), они не нужны для GSM версий -->
-    <bool name="show_cdma_choices" value="false" />
-    
-    <!-- Скрываем настройки TD-SCDMA (нужно только в Китае) -->
-    <bool name="support_tdscdma" value="false" />
-    <bool name="support_tdscdma_roaming_networks" value="false" />
-
-    <!-- Убираем 5G (NR), так как модем его не поддерживает -->
-    <bool name="nr_enabled" value="false" />
-
-    <!-- Скрываем пункт "4G only" если он не нужен (обычно лучше оставить) -->
-    <!-- <boolean name="hide_preferred_network_type_bool" value="false" /> -->
-
-    <!-- Принудительно включаем меню выбора сети, если оно скрыто -->
-    <bool name="carrier_settings_enable_quit_lte" value="true" />
+    <!-- Package name for the call-based number verification app -->
+    <string name="platform_number_verification_package" translatable="false">com.google.android.gms</string>
 </resources>

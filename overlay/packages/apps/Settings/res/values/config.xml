@@ -5,14 +5,14 @@
     ║  Настройка приложения "Настройки"                            ║
     ╚══════════════════════════════════════════════════════════════╝
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- ╔══════════════════════════════════════════════════════════╗
          ║  ЭКРАН                                                   ║
          ╚══════════════════════════════════════════════════════════╝ -->
 
-    <!-- Скрываем Smooth Display (экран 60Hz) -->
-    <bool name="config_show_smooth_display">false</bool>
+    <!-- Smooth Display (экран 60Hz) -->
+    <bool name="config_show_smooth_display">true</bool>
     
     <!-- Включаем цветовую температуру -->
     <bool name="config_enableColorTemperature">true</bool>
@@ -32,152 +32,5 @@
 
     <!-- Слайдер силы вибрации (2 уровня) -->
     <integer name="config_vibration_supported_intensity_levels">2</integer>
-
-    <!-- Показывать настройки звуков -->
-    <bool name="config_show_media_volume">true</bool>
-    <bool name="config_show_alarm_volume">true</bool>
-    <bool name="config_show_call_volume">true</bool>
-    <bool name="config_show_notification_volume">true</bool>
-    <bool name="config_show_notification_ringtone">true</bool>
-    <bool name="config_show_touch_sounds">true</bool>
-    <bool name="config_show_charging_sounds">true</bool>
-    <bool name="config_show_screen_locking_sounds">true</bool>
-
-
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  БАТАРЕЯ И ХРАНИЛИЩЕ                                     ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <!-- Батарея -->
-    <bool name="config_show_top_level_battery">true</bool>
-    <bool name="config_show_app_info_settings_battery">true</bool>
-    <bool name="config_show_high_power_apps">true</bool>
-    <bool name="config_use_compact_battery_status">false</bool>
-
-    <!-- Storage Manager -->
-    <bool name="config_storage_manager_settings_enabled">true</bool>
-    <bool name="config_show_smart_storage_toggle">true</bool>
-
-
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  СЕТЬ И СВЯЗЬ                                            ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <bool name="config_show_wifi_settings">true</bool>
-    <bool name="config_show_wifi_hotspot_settings">true</bool>
-    <bool name="config_show_wifi_ip_address">true</bool>
-    <bool name="config_show_wifi_mac_address">true</bool>
-    <bool name="config_show_toggle_airplane">true</bool>
-    <bool name="config_show_private_dns_settings">true</bool>
-    <bool name="config_show_data_saver">true</bool>
-    <bool name="config_show_premium_sms">true</bool>
-    <bool name="config_show_sim_info">true</bool>
-    <bool name="config_show_mobile_plan">true</bool>
-
-
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  СКАНЕР ОТПЕЧАТКОВ (SETTINGS)                            ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <!-- ═══════════ РЕГИСТРАЦИЯ ОТПЕЧАТКОВ ═══════════ -->
-
-    <!-- Приоритет прогресса над help сообщениями -->
-    <bool name="enrollment_progress_priority_over_help">true</bool>
-
-    <!-- Приоритизировать acquired сообщения по порядку -->
-    <bool name="enrollment_prioritize_acquire_messages">false</bool>
-
-    <!-- Контроллер отображения сообщений при регистрации -->
-    <bool name="enrollment_message_display_controller_flag">false</bool>
-
-    <!-- ═══════════ FACE UNLOCK ═══════════ -->
-
-    <!-- Показывать требование "смотреть в камеру" -->
-    <bool name="config_face_intro_show_require_eyes">true</bool>
-
-    <!-- Не показывать предупреждение "менее безопасно" -->
-    <bool name="config_face_intro_show_less_secure">false</bool>
-
-    <!-- Использовать Lottie анимацию для Face enrollment -->
-    <bool name="config_face_education_use_lottie">true</bool>
-
-    <!-- Поддержка Face enrollment в Setup Wizard -->
-    <bool name="config_suw_support_face_enroll">true</bool>
-
-    <!-- Поза устройства для Face Unlock (0 = любая) -->
-    <integer name="config_face_enroll_supported_posture">0</integer>
-
-    <!-- Face Detection для авто-поворота (выкл для экономии CPU) -->
-    <bool name="config_auto_rotate_face_detection_available">false</bool>
-
-
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  УСТРОЙСТВО И СИСТЕМА                                    ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <!-- Device Info -->
-    <bool name="config_show_device_name">true</bool>
-    <bool name="config_show_device_model">true</bool>
-    <bool name="config_show_regulatory_info">true</bool>
-    <bool name="config_show_manual">false</bool>
-
-    <!-- Системные настройки -->
-    <bool name="config_show_system_update_settings">true</bool>
-    <bool name="config_show_reset_dashboard">true</bool>
-    <bool name="config_show_top_level_accessibility">true</bool>
-    <bool name="config_show_top_level_display">true</bool>
-    <bool name="config_show_top_level_connected_devices">true</bool>
-
-    <!-- Accessibility -->
-    <bool name="config_show_phone_language">true</bool>
-    <bool name="config_show_virtual_keyboard_pref">true</bool>
-    <bool name="config_show_physical_keyboard_pref">true</bool>
-    <bool name="config_show_spellcheckers_settings">true</bool>
-    <bool name="config_show_tts_settings_summary">true</bool>
-
-    <!-- Security -->
-    <bool name="config_show_unlock_set_or_change">true</bool>
-    <bool name="config_show_screen_pinning_settings">true</bool>
-    <bool name="config_show_manage_trust_agents">true</bool>
-    <bool name="config_show_manage_device_admin">true</bool>
-    <bool name="config_show_encryption_and_credentials_encryption_status">true</bool>
-
-
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  UI И РАЗНОЕ                                             ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <!-- Dashboard -->
-    <integer name="dashboard_num_columns">1</integer>
-    <bool name="config_display_recent_apps">true</bool>
-    <bool name="config_force_rounded_icon_TopLevelSettings">true</bool>
-
-    <!-- Homepage -->
-    <bool name="config_show_avatar_in_homepage">true</bool>
-    <bool name="config_show_emergency_info_in_device_info">true</bool>
-    <bool name="config_show_emergency_settings">true</bool>
-    <bool name="config_show_emergency_gesture_settings">true</bool>
-
-    <!-- Pattern lock minimal UI -->
-    <bool name="config_lock_pattern_minimal_ui">true</bool>
-
-    <!-- Legacy suggestions (стабильнее на старых чипах) -->
-    <bool name="config_use_legacy_suggestion">true</bool>
-
-    <!-- NFC detection point (нет точки на экране) -->
-    <bool name="config_nfc_detection_point">false</bool>
-
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  НАВИГАЦИЯ                                               ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <!-- Показывать настройки свайп-жестов -->
-    <bool name="config_swipe_up_gesture_setting_available">true</bool>
-
-    <!-- Показывать настройки жестов -->
-    <bool name="config_gesture_settings_enabled">true</bool>
-
-    <!-- Показывать настройки системных навигационных клавиш -->
-    <bool name="config_show_system_navigation_keys">true</bool>
 
 </resources>

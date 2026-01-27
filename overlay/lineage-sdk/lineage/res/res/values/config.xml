@@ -37,9 +37,6 @@
     <integer name="config_minColorTemperature">1000</integer>
     <integer name="config_maxColorTemperature">10000</integer>
     
-    <!-- Режим по умолчанию: 0=off, 2=auto -->
-    <integer name="config_defaultLiveDisplayMode">2</integer>
-    
     <!-- Outdoor mode -->
     <integer name="config_outdoorAmbientLux">12000</integer>
     <integer name="config_outdoorAmbientLuxHysteresis">1500</integer>
@@ -120,6 +117,9 @@
     <!-- Подсветка кнопок (нет физических кнопок навигации) -->
     <integer name="config_deviceSupportsButtonBrightnessControl">0</integer>
     <dimen name="config_buttonBrightnessSettingDefaultFloat">0.0</dimen>
+    
+    <integer name="config_deviceSupportsKeyboardBrightnessControl">0</integer>
+    <dimen name="config_keyboardBrightnessSettingDefaultFloat">0.0</dimen>
 
 
     <!-- ╔══════════════════════════════════════════════════════════╗
@@ -211,18 +211,5 @@
 
     <!-- Устаревшее шифрование (нет) -->
     <bool name="config_trustLegacyEncryption">false</bool>
-
-    <!-- LineageSystemServer services -->
-    <string-array name="config_externalLineageServices">
-        <item>org.lineageos.platform.internal.ProfileManagerService</item>
-        <item>org.lineageos.platform.internal.LineageHardwareService</item>
-        <item>org.lineageos.platform.internal.display.LiveDisplayService</item>
-        <item>org.lineageos.platform.internal.TrustInterfaceService</item>
-        <item>org.lineageos.platform.internal.LineageSettingsService</item>
-        <item>org.lineageos.platform.internal.LineageGlobalActionsService</item>
-        <item>org.lineageos.platform.internal.health.HealthInterfaceService</item>
-    </string-array>
-
-    <string name="config_externalSystemServer" translatable="false">org.lineageos.platform.internal.LineageSystemServer</string>
 
 </resources>

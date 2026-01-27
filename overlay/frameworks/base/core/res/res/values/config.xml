@@ -82,24 +82,35 @@
 
     <bool name="config_enableAutoPowerModes">true</bool>
     <bool name="config_autoPowerModeUseMotionSensor">false</bool>
+    
+    <!-- ★ Wake on plug/unplug -->
     <bool name="config_unplugTurnsOnScreen">true</bool>
     
-    <string name="config_dozeComponent" translatable="false">com.android.systemui/com.android.systemui.doze.DozeService</string>
+    <string name="config_dozeComponent" translatable="false"></string>
+    
+    <!-- ★ Doze/AOD отключены для корректной работы wake on plug -->
     <bool name="config_dozeAfterScreenOffByDefault">false</bool>
-    <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
-    <bool name="config_displayBlanksAfterDoze">true</bool>
+    <bool name="config_dozeAlwaysOnDisplayAvailable">false</bool>
+    <bool name="config_displayBlanksAfterDoze">false</bool>
     <bool name="config_allowAutoBrightnessWhileDozing">false</bool>
-    <integer name="config_dozeWakeLockScreenDebounce">300</integer>
+    
+    <!-- ★ Dreams отключены по умолчанию -->
+    <bool name="config_dreamsSupported">true</bool>
+    <bool name="config_dreamsEnabledByDefaultConfig">false</bool>
+    <bool name="config_dreamsActivatedOnSleepByDefaultConfig">false</bool>
+    <bool name="config_dreamsEnabledOnBatteryConfig">false</bool>
 
     <!-- Suspend Config -->
     <bool name="config_powerDecoupleAutoSuspendModeFromDisplay">true</bool>
     <bool name="config_powerDecoupleInteractiveModeFromDisplay">false</bool> 
-    <bool name="config_suspendWhenScreenOffDueToProximity">false</bool>
+    <bool name="config_suspendWhenScreenOffDueToProximity">true</bool>
 
+    <!-- Database optimizations -->
     <string name="db_default_journal_mode">MEMORY</string>
     <string name="db_default_sync_mode">OFF</string>
     <string name="db_wal_sync_mode">OFF</string>
 
+    <!-- SurfaceFlinger -->
     <bool name="config_sf_slowBlur">true</bool>
     <bool name="config_sf_limitedAlpha">true</bool>
 
@@ -213,7 +224,7 @@
          РАЗДЕЛ 5: ЗВУК, LED, БИОМЕТРИЯ
          ═══════════════════════════════════════════════════════════ -->
 
-    <bool name="config_useDevInputEventForAudioJack">false</bool>
+    <bool name="config_useDevInputEventForAudioJack">true</bool>
     <bool name="config_supportAudioSourceUnprocessed">true</bool>
     <bool name="config_camera_sound_forced">false</bool>
 
@@ -252,7 +263,7 @@
          ║  РАЗДЕЛ 6: ПАМЯТЬ И ПРОИЗВОДИТЕЛЬНОСТЬ (РАСШИРЕННЫЕ)     ║
          ╚══════════════════════════════════════════════════════════╝ -->
 
-    <!-- ★ ИЗМЕНЕНО: Используем системные дефолты - LMKD сам определяет пороги -->
+    <!-- Используем системные дефолты - LMKD сам определяет пороги -->
     <integer name="config_lowMemoryKillerMinFreeKbytesAbsolute">-1</integer>
     <integer name="config_lowMemoryKillerMinFreeKbytesAdjust">0</integer>
     <integer name="config_extraFreeKbytesAdjust">0</integer>

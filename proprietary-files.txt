@@ -943,6 +943,3 @@ vendor/lib64/vendor.qti.power.pasrmanager@1.0.so
 
 # HVDCPOpti
 vendor/bin/hvdcp_opti
-
-# IRQ Balance
-vendor/bin/msm_irqbalance

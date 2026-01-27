@@ -93,7 +93,7 @@ ro.vendor.bluetooth.wipower=false
 # ═══════════════════════════════════════════════════════════════
 # Camera HAL
 # ═══════════════════════════════════════════════════════════════
-persist.vendor.camera.preview.ubwc=1
+persist.vendor.camera.preview.ubwc=0
 persist.vendor.camera.dual.isp.sync=0
 
 # ═══════════════════════════════════════════════════════════════

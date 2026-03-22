@@ -1,1 +1,2 @@
 allow hal_wifi_default proc_net:file { w_file_perms };
+allow hal_wifi_default persist_vendor_debug_wifi_prop:file { read open getattr map };

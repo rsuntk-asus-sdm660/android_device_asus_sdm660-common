@@ -1,1 +1,10 @@
 allow hal_bluetooth_qti hal_bluetooth_qti:qipcrtr_socket { create };
+# Доступ к ssrdump для crash dumps
+allow hal_bluetooth_qti ramdump_vendor_data_file:dir { read write search open create add_name remove_name getattr };
+allow hal_bluetooth_qti ramdump_vendor_data_file:file { read write open create getattr setattr unlink };
+
+# Доступ к serial device (ttyHS)
+allow hal_bluetooth_qti serial_device:chr_file { read write open ioctl getattr };
+
+# Симлинк
+allow hal_bluetooth_qti device:lnk_file { read getattr };

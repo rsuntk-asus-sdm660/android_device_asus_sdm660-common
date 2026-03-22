@@ -1,2 +1,5 @@
 #============= platform_app ==============
 dontaudit platform_app default_android_hwservice:hwservice_manager find;
+
+# Fix SystemUI reading bluetooth_finder_prop
+get_prop(platform_app, bluetooth_finder_prop)

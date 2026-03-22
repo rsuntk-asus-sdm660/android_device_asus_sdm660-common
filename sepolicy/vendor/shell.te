@@ -1,12 +1,4 @@
-# Разрешаем shell (adb) видеть perf сервис через lshal
-allow shell hal_perf_hwservice:hwservice_manager find;
-binder_call(shell, hal_perf_default)
 
-# Разрешаем shell читать свойства perf
 get_prop(shell, vendor_mpctl_prop)
-
-# Разрешаем shell (lshal) читать логи биндера
-allow shell binderfs_logs:dir search;
-allow shell binderfs_logs:file r_file_perms;
 
 allow shell proc_sched:file r_file_perms;

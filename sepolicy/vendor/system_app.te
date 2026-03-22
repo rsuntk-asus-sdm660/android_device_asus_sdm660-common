@@ -20,3 +20,9 @@ dontaudit system_app vendor_default_prop:file { open getattr map };
 dontaudit system_app default_android_service:service_manager { find };
 
 get_prop(system_app, qemu_hw_prop)
+
+# system_app -> HAL binder calls
+allow system_app hal_audio_default:binder { call };
+allow system_app hal_camera_default:binder { call };
+allow system_app hal_health_default:binder { call };
+allow system_app hal_memtrack_default:binder { call };

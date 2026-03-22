@@ -1,0 +1,2 @@
+# USB HAL -> sysfs UDC
+allow hal_usb_qti sysfs_udc:dir { search };

@@ -5,3 +5,7 @@ allow hal_camera_default sysfs_sensors:lnk_file r_file_perms;
 set_prop(hal_camera_default, vendor_camera_prop)
 set_prop(hal_camera_default, vendor_video_prop)
 get_prop(hal_camera_default, bootanim_system_prop)
+
+# camera HAL -> sysfs wakeup
+allow hal_camera_default sysfs_wakeup:dir { search };
+allow hal_camera_default sysfs_wakeup:file { read open };

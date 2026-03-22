@@ -39,11 +39,11 @@ allow hal_thermal_default sysfs_thermal:file rw_file_perms;
 allow hal_thermal_default sysfs_thermal:lnk_file read;
 
 # Связываем тип с нашим новым системным атрибутом
-typeattribute hal_thermal_default hal_thermal_override;
-
-# Разрешаем dac_override (теперь легально через исключение)
-allow hal_thermal_default self:capability { dac_override dac_read_search };
+#typeattribute hal_thermal_default hal_thermal_override;
 
 # Обычно Thermal HAL тоже требует доступ к файлам настройки
 allow hal_thermal_default sysfs:file w_file_perms;
 allow hal_thermal_default proc:file w_file_perms;
+
+# hal_thermal needs DAC override
+#allow hal_thermal_default hal_thermal_default:capability { dac_override };

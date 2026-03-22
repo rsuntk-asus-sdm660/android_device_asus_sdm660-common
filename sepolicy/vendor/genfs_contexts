@@ -45,3 +45,5 @@ genfscon sysfs /class/kgsl/kgsl-3d0/max_gpu_clk    u:object_r:sysfs_kgsl:s0
 genfscon sysfs /class/kgsl/kgsl-3d0/min_pwrlevel   u:object_r:sysfs_kgsl:s0
 genfscon sysfs /class/kgsl/kgsl-3d0/max_pwrlevel   u:object_r:sysfs_kgsl:s0
 
+# Allow kernel to read persist partition
+genfscon ext4 /persist u:object_r:persist_file:s0

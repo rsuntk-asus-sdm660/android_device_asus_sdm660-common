@@ -17,5 +17,8 @@
 <permissions>
     <privapp-permissions package="com.google.android.gms">
         <permission name="android.permission.WRITE_DEVICE_CONFIG" />
+        <permission name="android.permission.ACCESS_FINE_LOCATION"/>
+        <permission name="android.permission.ACCESS_COARSE_LOCATION"/>
+        <permission name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
     </privapp-permissions>
 </permissions>

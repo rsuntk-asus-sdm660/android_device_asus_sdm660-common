@@ -882,9 +882,22 @@ GnssAdapter::setConfig()
     }
 
     std::string oldMoServerUrl = getMoServerUrl();
-    setSuplHostServer(ContextBase::mGps_conf.SUPL_HOST,
-                      ContextBase::mGps_conf.SUPL_PORT,
-                      LOC_AGPS_SUPL_SERVER);
+    // Primary SUPL server
+    if (ContextBase::mGps_conf.SUPL_HOST[0] != 0) {
+        setSuplHostServer(ContextBase::mGps_conf.SUPL_HOST,
+                          ContextBase::mGps_conf.SUPL_PORT,
+                          LOC_AGPS_SUPL_SERVER);
+    } else if (ContextBase::mGps_conf.SUPL_HOST2[0] != 0) {
+        // Fallback to backup SUPL server
+        LOC_LOGi("Using backup SUPL: %s:%d",
+                 ContextBase::mGps_conf.SUPL_HOST2,
+                 ContextBase::mGps_conf.SUPL_PORT2);
+        setSuplHostServer(ContextBase::mGps_conf.SUPL_HOST2,
+                          ContextBase::mGps_conf.SUPL_PORT2,
+                          LOC_AGPS_SUPL_SERVER);
+    }
+
+    // MO SUPL server
     setSuplHostServer(ContextBase::mGps_conf.MO_SUPL_HOST,
                       ContextBase::mGps_conf.MO_SUPL_PORT,
                       LOC_AGPS_MO_SUPL_SERVER);

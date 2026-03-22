@@ -93,6 +93,8 @@ AUDIO_FEATURE_ENABLED_SND_MONITOR := true
 # Bootloader
 TARGET_NO_BOOTLOADER := true
 
+# A-only SAR
+TARGET_NO_RECOVERY := false
 
 # Camera
 BOARD_QTI_CAMERA_32BIT_ONLY := true

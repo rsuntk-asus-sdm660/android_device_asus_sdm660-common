@@ -73,7 +73,6 @@ PRODUCT_COPY_FILES += \
 
 # ANT+
 PRODUCT_PACKAGES += \
-    AntHalService-Soong \
     com.dsi.ant@1.0.vendor
 
 # Boot animation
@@ -308,12 +307,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
     libmm-omxcore \
-    libOmxAacEnc \
-    libOmxAmrEnc \
     libOmxCore \
-    libOmxEvrcEnc \
-    libOmxG711Enc \
-    libOmxQcelp13Enc \
     libOmxVdec \
     libOmxVenc \
     libstagefrighthw \
@@ -427,7 +421,6 @@ PRODUCT_PACKAGES += \
 
 # RIL
 PRODUCT_PACKAGES += \
-    libprotobuf-cpp-full \
     android.hardware.radio@1.5 \
     android.hardware.radio@1.5.vendor \
     android.hardware.radio.config@1.2 \
@@ -518,10 +511,6 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_PACKAGES += \
     android.hardware.thermal@2.0-service.asus_sdm660.qti
 
-# Trust HAL
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
-
 # Touch
 PRODUCT_PACKAGES += \
     vendor.lineage.touch-service.asus_sdm660
@@ -540,12 +529,6 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Vibrator
 $(call inherit-product, vendor/qcom/opensource/vibrator/vibrator-vendor-product.mk)
-
-# FIXME: master: compat for libprotobuf
-# See https://android-review.googlesource.com/c/platform/prebuilts/vndk/v28/+/1109518
-PRODUCT_PACKAGES += \
-    libprotobuf-cpp-full-vendorcompat \
-    libprotobuf-cpp-lite-vendorcompat
 
 # Wifi
 PRODUCT_PACKAGES += \

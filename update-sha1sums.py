@@ -20,11 +20,15 @@ import os
 import sys
 from hashlib import sha1
 
-device='sdm660-common'
-vendor='asus'
+device = 'sdm660-common'
+vendor = 'asus'
+
+# Devices sharing this common vendor tree
+COMMON_DEVICES = ['X00TD', 'X01BD']
 
 with open('proprietary-files.txt', 'r') as f:
     lines = f.read().splitlines()
+
 vendorPath = '../../../vendor/' + vendor + '/' + device + '/proprietary'
 needSHA1 = False
 

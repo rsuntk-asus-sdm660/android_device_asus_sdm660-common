@@ -16,6 +16,9 @@ $(call inherit-product, hardware/qcom-caf/common/common.mk)
 # Shipping API level (original device shipped with Android 8.1)
 PRODUCT_SHIPPING_API_LEVEL := 27
 
+# Apex
+PRODUCT_COMPRESSED_APEX := false
+
 # Default is nosdcard, S/W button enabled in resource
 PRODUCT_CHARACTERISTICS := nosdcard
 

@@ -187,7 +187,7 @@ PRODUCT_COPY_FILES += \
 
 # Doze mode
 PRODUCT_PACKAGES += \
-    Doze
+    DeviceDoze
 
 # DRM
 PRODUCT_PACKAGES += \

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2024 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,23 @@
 
 #define LOG_TAG "TouchscreenGestureService"
 
-#include <unordered_map>
+#include "TouchscreenGesture.h"
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
+
 #include <fstream>
-#include "TouchscreenGesture.h"
+#include <unordered_map>
 
 namespace {
+
 typedef struct {
     int32_t keycode;
     const char* name;
-} GestureInfo;
+} GestureData;
 
 // id -> info
-const std::unordered_map<int32_t, GestureInfo> kGestureInfoMap = {
+const std::unordered_map<int32_t, GestureData> kGestureInfoMap = {
     {0, {748, "Gesture C"}},
     {1, {749, "Gesture e"}},
     {2, {750, "Gesture M"}},
@@ -44,43 +46,42 @@ const std::unordered_map<int32_t, GestureInfo> kGestureInfoMap = {
     {10, {758, "Gesture Swipe Left"}},
     {11, {759, "Gesture Swipe Right"}},
 };
+
+static constexpr const char* kGestureNodePath = "/proc/tpd_gesture";
+
 }  // anonymous namespace
 
+namespace aidl {
 namespace vendor {
 namespace lineage {
 namespace touch {
-namespace V1_0 {
-namespace implementation {
 
-static constexpr const char* kGestureNodePath =
-    "/proc/tpd_gesture";
-
-Return<void> TouchscreenGesture::getSupportedGestures(getSupportedGestures_cb resultCb) {
-    std::vector<Gesture> gestures;
-
+::ndk::ScopedAStatus TouchscreenGesture::getSupportedGestures(
+        std::vector<Gesture>* _aidl_return) {
     for (const auto& entry : kGestureInfoMap) {
-        gestures.push_back({entry.first, entry.second.name, entry.second.keycode});
+        Gesture gesture;
+        gesture.id = entry.first;
+        gesture.name = entry.second.name;
+        gesture.keycode = entry.second.keycode;
+        _aidl_return->push_back(gesture);
     }
-    resultCb(gestures);
-
-    return Void();
+    return ::ndk::ScopedAStatus::ok();
 }
 
-Return<bool> TouchscreenGesture::setGestureEnabled(
-    const ::vendor::lineage::touch::V1_0::Gesture& gesture, bool enabled) {
-    const auto entry = kGestureInfoMap.find(gesture.id);
+::ndk::ScopedAStatus TouchscreenGesture::setGestureEnabled(
+        const Gesture& in_gesture, bool in_enabled) {
+    const auto entry = kGestureInfoMap.find(in_gesture.id);
     if (entry == kGestureInfoMap.end()) {
-        return false;
+        return ::ndk::ScopedAStatus::ok();
     }
 
     std::ofstream file(kGestureNodePath);
-    file << (enabled ? "1" : "0");
+    file << (in_enabled ? "1" : "0");
     LOG(DEBUG) << "Wrote file " << kGestureNodePath << " fail " << file.fail();
-    return !file.fail();
+    return ::ndk::ScopedAStatus::ok();
 }
 
-}  // namespace implementation
-}  // namespace V1_0
 }  // namespace touch
 }  // namespace lineage
 }  // namespace vendor
+}  // namespace aidl

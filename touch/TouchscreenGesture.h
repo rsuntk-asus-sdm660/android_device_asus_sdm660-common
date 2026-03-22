@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2024 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,32 +14,24 @@
  * limitations under the License.
  */
 
-#ifndef VENDOR_LINEAGE_TOUCH_V1_0_TOUCHSCREENGESTURE_H
-#define VENDOR_LINEAGE_TOUCH_V1_0_TOUCHSCREENGESTURE_H
+#pragma once
 
-#include <vendor/lineage/touch/1.0/ITouchscreenGesture.h>
+#include <aidl/vendor/lineage/touch/BnTouchscreenGesture.h>
 
+namespace aidl {
 namespace vendor {
 namespace lineage {
 namespace touch {
-namespace V1_0 {
-namespace implementation {
 
-using ::android::hardware::Return;
-using ::android::hardware::Void;
-
-class TouchscreenGesture : public ITouchscreenGesture {
-   public:
-    // Methods from ::vendor::lineage::touch::V1_0::ITouchscreenGesture follow.
-    Return<void> getSupportedGestures(getSupportedGestures_cb resultCb) override;
-    Return<bool> setGestureEnabled(const ::vendor::lineage::touch::V1_0::Gesture& gesture,
-                                   bool enabled) override;
+class TouchscreenGesture : public BnTouchscreenGesture {
+  public:
+    ::ndk::ScopedAStatus getSupportedGestures(
+        std::vector<Gesture>* _aidl_return) override;
+    ::ndk::ScopedAStatus setGestureEnabled(
+        const Gesture& in_gesture, bool in_enabled) override;
 };
 
-}  // namespace implementation
-}  // namespace V1_0
 }  // namespace touch
 }  // namespace lineage
 }  // namespace vendor
-
-#endif  // VENDOR_LINEAGE_TOUCH_V1_0_TOUCHSCREENGESTURE_H
+}  // namespace aidl

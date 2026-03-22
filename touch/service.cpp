@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2024 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,33 +14,38 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "vendor.lineage.touch@1.0-service.asus_sdm660"
+#define LOG_TAG "vendor.lineage.touch-service.asus_sdm660"
 
 #include <android-base/logging.h>
-#include <hidl/HidlTransportSupport.h>
+#include <android/binder_manager.h>
+#include <android/binder_process.h>
 
 #include "TouchscreenGesture.h"
 
-using ::android::OK;
-using ::android::sp;
-
-using ::vendor::lineage::touch::V1_0::ITouchscreenGesture;
-using ::vendor::lineage::touch::V1_0::implementation::TouchscreenGesture;
+using ::aidl::vendor::lineage::touch::TouchscreenGesture;
 
 int main() {
-    sp<ITouchscreenGesture> gestureService = new TouchscreenGesture();
+    ABinderProcess_setThreadPoolMaxThreadCount(0);
 
-    android::hardware::configureRpcThreadpool(1, true /*callerWillJoin*/);
+    std::shared_ptr<TouchscreenGesture> gesture =
+        ndk::SharedRefBase::make<TouchscreenGesture>();
 
-    if (gestureService->registerAsService() != OK) {
-        LOG(ERROR) << "Cannot register touchscreen gesture HAL service.";
+    const std::string instance =
+        std::string() + TouchscreenGesture::descriptor + "/default";
+
+    binder_status_t status =
+        AServiceManager_addService(gesture->asBinder().get(), instance.c_str());
+
+    if (status != STATUS_OK) {
+        LOG(ERROR) << "Cannot register touchscreen gesture HAL service: "
+                   << status;
         return 1;
     }
 
-    LOG(INFO) << "Touchscreen HAL service ready.";
+    LOG(INFO) << "Touchscreen gesture HAL service ready.";
 
-    android::hardware::joinRpcThreadpool();
+    ABinderProcess_joinThreadPool();
 
-    LOG(ERROR) << "Touchscreen HAL service failed to join thread pool.";
+    LOG(ERROR) << "Touchscreen gesture HAL service failed to join thread pool.";
     return 1;
 }

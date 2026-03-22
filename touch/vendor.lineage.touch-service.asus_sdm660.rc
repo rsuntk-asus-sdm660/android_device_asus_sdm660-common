@@ -1,0 +1,5 @@
+service vendor.touch-hal-aidl /vendor/bin/hw/vendor.lineage.touch-service.asus_sdm660
+    class hal
+    user system
+    group system
+    shutdown critical

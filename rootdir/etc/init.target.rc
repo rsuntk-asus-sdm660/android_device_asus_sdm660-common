@@ -114,7 +114,7 @@ service vendor.pd_mapper /vendor/bin/pd-mapper
     class core
 
 on property:vold.decrypt=trigger_restart_framework
-    restart vendor.camera-provider-2-4
+    restart vendor.camera.provider
 
 service dcvs-sh /vendor/bin/init.qti.dcvs.sh
     class late_start

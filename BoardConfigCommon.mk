@@ -153,11 +153,10 @@ ODM_MANIFEST_NFC_FILES := $(VENDOR_PATH)/manifest_nfc.xml
 HWUI_COMPILE_FOR_PERF := true
 
 # Init
-TARGET_INIT_VENDOR_LIB := //$(VENDOR_PATH):libinit_sdm660
-TARGET_RECOVERY_DEVICE_MODULES := libinit_sdm660
+$(call soong_config_set,libinit,vendor_init_lib,//$(VENDOR_PATH):libinit_sdm660)
 
 # Lineage Health
-TARGET_HEALTH_CHARGING_CONTROL_CHARGING_PATH := /sys/class/power_supply/battery/charging_enabled)
+$(call soong_config_set,lineage_health,charging_control_charging_path,/sys/class/power_supply/battery/charging_enabled)
 
 # LMKD
 TARGET_LMKD_STATS_LOG := true

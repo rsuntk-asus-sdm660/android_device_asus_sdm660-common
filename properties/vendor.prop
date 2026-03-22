@@ -126,7 +126,6 @@ vidc.enc.target_support_bframe=1
 vendor.vidc.enc.disable_bframes=0
 vendor.vidc.dec.enable.downscalar=1
 vendor.vidc.enc.disable.pq=true
-vendor.video.disable.ubwc=0
 
 # ═══════════════════════════════════════════════════════════════
 # Network / Data HAL

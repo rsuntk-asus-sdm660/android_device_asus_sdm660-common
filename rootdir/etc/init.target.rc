@@ -30,6 +30,7 @@ on fs
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     start hwservicemanager
     mount_all --early
+    mount tmpfs tmpfs /metadata size=10m
 
     chown root system /mnt/vendor/persist
     chmod 0771 /mnt/vendor/persist

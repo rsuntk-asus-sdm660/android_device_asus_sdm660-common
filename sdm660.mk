@@ -19,6 +19,9 @@ PRODUCT_SHIPPING_API_LEVEL := 27
 # Apex
 PRODUCT_COMPRESSED_APEX := false
 
+# Kernel
+TARGET_KERNEL_VERSION ?= 4.19
+
 # Default is nosdcard, S/W button enabled in resource
 PRODUCT_CHARACTERISTICS := nosdcard
 

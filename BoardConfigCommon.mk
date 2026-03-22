@@ -252,5 +252,8 @@ WIFI_DRIVER_STATE_OFF := "OFF"
 CONFIG_ACS := true
 CONFIG_IEEE80211AC := true
 
+# GRF/VF
+BOARD_SHIPPING_API_LEVEL := 33
+
 # Inherit the proprietary files
 include vendor/asus/sdm660-common/BoardConfigVendor.mk

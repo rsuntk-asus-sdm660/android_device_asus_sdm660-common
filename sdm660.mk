@@ -514,8 +514,8 @@ PRODUCT_PACKAGES += \
 # USB
 PRODUCT_PACKAGES += \
     usb_compositions.conf \
-    android.hardware.usb@1.0-service.basic \
-    android.hardware.usb.gadget@1.2-service-qti
+    android.hardware.usb@1.3-service.basic \
+    android.hardware.usb.gadget-service.qti
 
 PRODUCT_VENDOR_PROPERTIES += \
     vendor.usb.controller=a800000.dwc3
@@ -529,7 +529,7 @@ $(call inherit-product, vendor/qcom/opensource/vibrator/vibrator-vendor-product.
 # Wifi
 PRODUCT_PACKAGES += \
     android.hardware.wifi.hostapd@1.3.vendor \
-    android.hardware.wifi@1.0-service \
+    android.hardware.wifi-service \
     android.hardware.wifi@1.6.vendor \
     hostapd \
     hostapd_cli \

@@ -393,11 +393,7 @@ else
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/powerhint-sdm660.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
 endif
-
-# Remove unwanted packages
-PRODUCT_PACKAGES += \
-    RemovePackages
-
+    
 # QCOM
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/privapp-permissions-qti.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-qti.xml \

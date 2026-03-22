@@ -364,6 +364,11 @@ service mlid /vendor/bin/mlid
     socket mlid stream 0666 gps gps
     task_profiles ServiceCapacityLow
 
+service vendor.hvdcp_opti /vendor/bin/hvdcp_opti
+    class main
+    user root
+    group system wakelock
+
 service loc_launcher /vendor/bin/loc_launcher
     class late_start
     user gps
@@ -412,6 +417,8 @@ service vendor.ssr_diag /system/vendor/bin/ssr_diag
 
 on charger
     start vendor.qcom-post-boot
+    start vendor.hvdcp_opti
+    start vendor.power_off_alarm
 
 on property:vendor.rild.libpath=*
     setprop rild.libpath ${vendor.rild.libpath}

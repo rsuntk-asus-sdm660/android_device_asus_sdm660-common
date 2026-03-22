@@ -10,8 +10,6 @@ on early-init
     # chown root root /dev/hw_random
     write /sys/module/msm_thermal/parameters/enabled N
 
-    exec u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules audio_apr audio_wglink audio_adsp_loader audio_q6_pdr audio_q6_notifier audio_q6 audio_usf audio_native audio_pinctrl_wcd audio_pinctrl_lpi audio_swr audio_platform audio_hdmi audio_wcd_spi audio_stub audio_digital_cdc audio_analog_cdc audio_msm_sdw audio_wcd_cpe audio_cpe_lsm audio_wcd9335 audio_machine_sdm660 audio_wcd934x audio_mbhc audio_wcd9xxx audio_wcd_core
-
 on init
     # Schedtune baseline (умеренный)
     write /dev/stune/foreground/schedtune.sched_boost_no_override 1
@@ -126,16 +124,6 @@ service dcvs-sh /vendor/bin/init.qti.dcvs.sh
 
 on property:vendor.dcvs.prop=1
     start dcvs-sh
-
-on charger
-    start vendor.qcom-post-boot
-    start vendor.hvdcp_opti
-    start vendor.power_off_alarm
-
-service vendor.hvdcp_opti /vendor/bin/hvdcp_opti
-    class main
-    user root
-    group system wakelock
 
 # ═══════════════════════════════════════════════════════════════════════════
 # Boot completed — thermal caps HAL handles performance, not this script

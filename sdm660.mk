@@ -100,54 +100,40 @@ PRODUCT_PACKAGES += \
     libxml2 \
     Aperture
 
-# Configstore
-PRODUCT_PACKAGES += \
-    disable_configstore
-
 # Cgroup and task_profiles
 PRODUCT_COPY_FILES += \
     system/core/libprocessgroup/profiles/cgroups.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
     system/core/libprocessgroup/profiles/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
 
+# Configstore (Disabled)
+PRODUCT_PACKAGES += \
+    disable_configstore
+
 # Dex/ART optimization
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := everything
-USE_DEX2OAT_DEBUG := false 
+USE_DEX2OAT_DEBUG := false
 
 # Dexpreopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI
 
-# Core Display Libraries
+# Display
 PRODUCT_PACKAGES += \
-    gralloc.sdm660 \
-    hwcomposer.sdm660 \
-    memtrack.sdm660 \
-    libdisplayconfig \
-    libgralloc.qti \
-    libtinyxml \
-    libqdMetaData.system \
-    libqdMetaData
-
-PRODUCT_PACKAGES += \
-    android.frameworks.displayservice@1.0_32 \
-    android.frameworks.displayservice@1.0.vendor \
     android.hardware.graphics.composer@2.1-service \
     android.hardware.graphics.mapper@3.0-impl-qti-display \
     android.hardware.graphics.mapper@4.0-impl-qti-display \
     android.frameworks.displayservice@1.0 \
-    vendor.qti.hardware.display.allocator-service \
-    vendor.qti.hardware.display.mapper@2.0.vendor \
-    vendor.qti.hardware.display.mapper@3.0.vendor \
-    vendor.qti.hardware.display.mapper@4.0.vendor \
-    android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service \
+    android.frameworks.displayservice@1.0_32 \
+    android.frameworks.displayservice@1.0.vendor \
+    gralloc.sdm660 \
+    libtinyxml \
+    libdisplayconfig \
+    hwcomposer.qcom \
     vendor.display.config@1.0.vendor \
-    vendor.display.config@2.0
-
-###########################################
-# Display Properties
-###########################################
+    vendor.display.config@2.0 \
+    vendor.qti.hardware.display.allocator-service \
+    vendor.qti.hardware.memtrack-service
 
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.hw=1 \
@@ -500,9 +486,6 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
 
 # Soong namespaces
-QCOM_SOONG_NAMESPACE := \
-    $(COMMON_PATH)/qcom-caf
-
 PRODUCT_SOONG_NAMESPACES += \
     vendor/qcom/opensource/display
 

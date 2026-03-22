@@ -10,60 +10,109 @@
          РАЗДЕЛ 1: ЭКРАН И ЯРКОСТЬ (FULL POWER)
          ═══════════════════════════════════════════════════════════ -->
 
-    <bool name="config_automatic_brightness_available">true</bool>
-    <bool name="config_skipScreenOnBrightnessRamp">true</bool>
+<bool name="config_automatic_brightness_available">true</bool>
+<bool name="config_skipScreenOnBrightnessRamp">false</bool>
 
-    <!-- Ramp Rate: Возвращаем сток (180/60), т.к. HAL защищает от OVP -->
-    <integer name="config_brightness_ramp_rate_fast">180</integer>
-    <integer name="config_brightness_ramp_rate_slow">60</integer>
+<!-- Умеренная рампа -->
+<integer name="config_brightness_ramp_rate_fast">60</integer>
+<integer name="config_brightness_ramp_rate_slow">20</integer>
 
-    <!-- Маппинг: 1..255 = 2.0..420.0 Нит (Честный масштаб) -->
-    <integer-array name="config_screenBrightnessBacklight">
-        <item>1</item>
-        <item>255</item>
-    </integer-array>
+<!-- Маппинг -->
+<integer-array name="config_screenBrightnessBacklight">
+    <item>1</item>
+    <item>255</item>
+</integer-array>
 
-    <array name="config_screenBrightnessNits">
-        <item>2.0</item>
-        <item>420.0</item>
-    </array>
+<array name="config_screenBrightnessNits">
+    <item>2.0</item>
+    <item>420.0</item>
+</array>
 
-    <!-- Уровни освещенности -->
-    <integer-array name="config_autoBrightnessLevels">
-        <item>1</item> <item>2</item> <item>3</item> <item>4</item>
-        <item>8</item> <item>12</item> <item>20</item> <item>33</item>
-        <item>55</item> <item>90</item> <item>148</item> <item>245</item>
-        <item>403</item> <item>665</item> <item>1097</item> <item>1808</item>
-        <item>2981</item> <item>5000</item>
-    </integer-array>
+<!-- ★ Умеренные debounce -->
+<integer name="config_autoBrightnessBrighteningLightDebounce">3000</integer>
+<integer name="config_autoBrightnessDarkeningLightDebounce">6000</integer>
 
-    <!-- Значения яркости -->
-    <array name="config_autoBrightnessDisplayValuesNits">
-        <item>10.45</item> <item>29.25</item> <item>34.24</item> <item>37.51</item>
-        <item>40.01</item> <item>46.88</item> <item>51.62</item> <item>58.61</item>
-        <item>66.89</item> <item>77.61</item> <item>90.22</item> <item>105.80</item>
-        <item>126.07</item> <item>154.17</item> <item>191.83</item> <item>240.74</item>
-        <item>294.84</item> <item>348.05</item> <item>420.00</item> <!-- FULL 420 -->
-    </array>
+<!-- ★ Нормальная скорость сенсора -->
+<integer name="config_autoBrightnessInitialLightSensorRate">250</integer>
+<integer name="config_autoBrightnessLightSensorRate">500</integer>
 
-    <!-- ГРАНИЦЫ: 100% UNLOCKED -->
-    <integer name="config_screenBrightnessSettingMinimum">1</integer>
-    <integer name="config_screenBrightnessSettingMaximum">255</integer>
-    <integer name="config_screenBrightnessSettingDefault">102</integer>
-    <integer name="config_screenBrightnessDim">1</integer>
-    <integer name="config_screenBrightnessDoze">1</integer>
+<fraction name="config_autoBrightnessAdjustmentMaxGamma">300%</fraction>
+<bool name="config_autoBrightnessResetAmbientLuxAfterWarmUp">true</bool>
+<integer name="config_autoBrightnessShortTermModelTimeout">300000</integer>
 
-    <!-- Float Values: 0.0 - 1.0 (Full Range) -->
-    <item name="config_screenBrightnessSettingMinimumFloat" format="float" type="dimen">0.004</item>
-    <item name="config_screenBrightnessSettingMaximumFloat" format="float" type="dimen">1.0</item>
-    <item name="config_screenBrightnessSettingDefaultFloat" format="float" type="dimen">0.4</item>
-    <item name="config_screenBrightnessDimFloat" format="float" type="dimen">0.004</item>
-    <item name="config_screenBrightnessDozeFloat" format="float" type="dimen">0.0</item>
+<!-- ★ КЛЮЧЕВОЕ: Разумные шаги, но без мелких в темноте -->
+<integer-array name="config_autoBrightnessLevels">
+    <item>10</item>
+    <item>30</item>
+    <item>60</item>
+    <item>100</item>
+    <item>180</item>
+    <item>320</item>
+    <item>550</item>
+    <item>950</item>
+    <item>1600</item>
+    <item>2800</item>
+    <item>5000</item>
+</integer-array>
 
-    <!-- Тайминги (Safe) -->
-    <integer name="config_autoBrightnessBrighteningLightDebounce">2000</integer>
-    <integer name="config_autoBrightnessDarkeningLightDebounce">4000</integer>
-    <bool name="config_autoBrightnessResetAmbientLuxAfterWarmUp">true</bool>
+<!-- 12 значений яркости -->
+<array name="config_autoBrightnessDisplayValuesNits">
+    <item>6.0</item>
+    <item>18.0</item>
+    <item>38.0</item>
+    <item>62.0</item>
+    <item>92.0</item>
+    <item>130.0</item>
+    <item>175.0</item>
+    <item>230.0</item>
+    <item>290.0</item>
+    <item>350.0</item>
+    <item>395.0</item>
+    <item>420.0</item>
+</array>
+
+<!-- Idle -->
+<integer-array name="config_autoBrightnessLevelsIdle">
+    <item>10</item>
+    <item>30</item>
+    <item>60</item>
+    <item>100</item>
+    <item>180</item>
+    <item>320</item>
+    <item>550</item>
+    <item>950</item>
+    <item>1600</item>
+    <item>2800</item>
+    <item>5000</item>
+</integer-array>
+
+<array name="config_autoBrightnessDisplayValuesNitsIdle">
+    <item>4.0</item>
+    <item>14.0</item>
+    <item>32.0</item>
+    <item>55.0</item>
+    <item>85.0</item>
+    <item>120.0</item>
+    <item>165.0</item>
+    <item>220.0</item>
+    <item>280.0</item>
+    <item>340.0</item>
+    <item>385.0</item>
+    <item>420.0</item>
+</array>
+
+<!-- Границы -->
+<integer name="config_screenBrightnessSettingMinimum">1</integer>
+<integer name="config_screenBrightnessSettingMaximum">255</integer>
+<integer name="config_screenBrightnessSettingDefault">102</integer>
+<integer name="config_screenBrightnessDim">1</integer>
+<integer name="config_screenBrightnessDoze">1</integer>
+
+<item name="config_screenBrightnessSettingMinimumFloat" format="float" type="dimen">0.004</item>
+<item name="config_screenBrightnessSettingMaximumFloat" format="float" type="dimen">1.0</item>
+<item name="config_screenBrightnessSettingDefaultFloat" format="float" type="dimen">0.4</item>
+<item name="config_screenBrightnessDimFloat" format="float" type="dimen">0.004</item>
+<item name="config_screenBrightnessDozeFloat" format="float" type="dimen">0.0</item>
 
     <!-- Ночной режим -->
     <bool name="config_nightDisplayAvailable">true</bool>
@@ -86,8 +135,9 @@
     <!-- ★ Wake on plug/unplug -->
     <bool name="config_unplugTurnsOnScreen">true</bool>
     
-    <string name="config_dozeComponent" translatable="false"></string>
-    
+    <!-- Doze -->
+    <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
+
     <!-- ★ Doze/AOD отключены для корректной работы wake on plug -->
     <bool name="config_dozeAfterScreenOffByDefault">false</bool>
     <bool name="config_dozeAlwaysOnDisplayAvailable">false</bool>
@@ -125,24 +175,36 @@
     <bool name="config_voice_capable">true</bool>
     <bool name="config_sms_capable">true</bool>
     
+    <!-- ★ VoLTE/VoWiFi/IMS  -->
     <bool name="config_carrier_volte_available">true</bool>
     <bool name="config_device_volte_available">true</bool>
+    <bool name="config_device_vt_available">true</bool>
     <bool name="config_carrier_wfc_ims_available">true</bool>
     <bool name="config_device_wfc_ims_available">true</bool>
-    <bool name="config_use_voip_mode_for_ims">true</bool>
+    
+    <!-- Ускоряет инициализацию аудио при ВХОДЯЩИХ (MT) звонках -->
+    <bool name="config_speed_up_audio_on_mt_calls">true</bool>
+    
+    <!-- Предотвращает переключение телефона при смене состояния регистрации -->
+    <bool name="config_switch_phone_on_voice_reg_state_change">false</bool>
+    
+    <!-- VOIP режим конфликтует с нативным IMS audio routing -->
+    <bool name="config_use_voip_mode_for_ims">false</bool>
+    
+    <!-- Автофолбэк на CS при проблемах с VoLTE -->
+    <bool name="config_voice_data_sms_auto_fallback">true</bool>
 
-    <bool name="config_switch_phone_on_voice_reg_state_change">true</bool>
-    <bool name="config_speed_up_audio_on_mt_calls">false</bool>
     <bool name="config_sms_utf8_support">false</bool>
     <bool name="config_useVideoPauseWorkaround">true</bool>
 
-    <string name="config_networkLocationProviderPackageName" translatable="false">com.google.android.gms</string>
-    <string name="config_fusedLocationProviderPackageName" translatable="false">com.google.android.gms</string>
+    <!-- ★ Qualcomm CNE -->
+    <string name="config_systemAudioIntelligence" translatable="false">com.qualcomm.qti.cne</string>
 
+    <!-- networkAttributes с правильными приоритетами -->
     <string-array translatable="false" name="networkAttributes">
         <item>wifi,1,1,1,-1,true</item>
         <item>mobile,0,0,0,-1,true</item>
-        <item>mobile_mms,2,0,2,60000,true</item>
+        <item>mobile_mms,2,0,4,60000,true</item>
         <item>mobile_supl,3,0,2,60000,true</item>
         <item>mobile_dun,4,0,2,60000,true</item>
         <item>mobile_hipri,5,0,3,60000,true</item>
@@ -150,12 +212,14 @@
         <item>mobile_ims,11,0,2,60000,true</item>
         <item>mobile_cbs,12,0,2,60000,true</item>
         <item>bluetooth,7,7,2,-1,true</item>
-        <item>mobile_emergency,15,0,2,-1,true</item>
+        <item>mobile_emergency,15,0,5,-1,true</item>
         <item>ethernet,9,9,9,-1,true</item>
     </string-array>
 
     <string-array translatable="false" name="radioAttributes">
-        <item>1,1</item> <item>0,1</item> <item>7,1</item>
+        <item>1,1</item>
+        <item>0,1</item>
+        <item>7,1</item>
     </string-array>
 
     <string-array name="config_mobile_tcp_buffers">
@@ -181,7 +245,21 @@
 
 
     <!-- ═══════════════════════════════════════════════════════════
-         РАЗДЕЛ 4: ИНТЕРФЕЙС И КНОПКИ
+         РАЗДЕЛ 4: GPS / LOCATION SERVICES
+         ═══════════════════════════════════════════════════════════ -->
+
+    <!-- ★ Location Providers -->
+    <string-array name="config_locationProviderPackageNames" translatable="false">
+        <item>com.google.android.gms</item>
+        <item>com.android.location.fused</item>
+    </string-array>
+
+    <string name="config_networkLocationProviderPackageName" translatable="false">com.google.android.gms</string>
+    <string name="config_fusedLocationProviderPackageName" translatable="false">com.google.android.gms</string>
+
+
+    <!-- ═══════════════════════════════════════════════════════════
+         РАЗДЕЛ 5: ИНТЕРФЕЙС И КНОПКИ
          ═══════════════════════════════════════════════════════════ -->
 
     <integer name="config_shortAnimTime">200</integer>
@@ -221,7 +299,7 @@
     <bool name="config_useRoundIcon">true</bool>
 
     <!-- ═══════════════════════════════════════════════════════════
-         РАЗДЕЛ 5: ЗВУК, LED, БИОМЕТРИЯ
+         РАЗДЕЛ 6: ЗВУК, LED, БИОМЕТРИЯ
          ═══════════════════════════════════════════════════════════ -->
 
     <bool name="config_useDevInputEventForAudioJack">true</bool>
@@ -250,7 +328,9 @@
     <integer name="config_fingerprintMaxTemplatesPerUser">5</integer>
     <bool name="config_fingerprintSupportsGestures">false</bool>
 
-    <bool name="config_hotswapCapable">false</bool>
+    <!-- Hotswap для Dual SIM -->
+    <bool name="config_hotswapCapable">true</bool>
+    
     <bool name="config_batterySdCardAccessibility">false</bool>
     <bool name="config_usbChargingMessage">true</bool>
 
@@ -258,10 +338,11 @@
     <integer name="config_ntpTimeout">5000</integer>
 
     <string name="config_defaultAutofillService" translatable="false">com.google.android.gms/.autofill.service.AutofillService</string>
-    
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  РАЗДЕЛ 6: ПАМЯТЬ И ПРОИЗВОДИТЕЛЬНОСТЬ (РАСШИРЕННЫЕ)     ║
-         ╚══════════════════════════════════════════════════════════╝ -->
+
+
+    <!-- ═══════════════════════════════════════════════════════════
+         РАЗДЕЛ 7: ПАМЯТЬ И ПРОИЗВОДИТЕЛЬНОСТЬ
+         ═══════════════════════════════════════════════════════════ -->
 
     <!-- Используем системные дефолты - LMKD сам определяет пороги -->
     <integer name="config_lowMemoryKillerMinFreeKbytesAbsolute">-1</integer>
@@ -277,5 +358,12 @@
         <item>/apex/com.android.art/javalib/core-oj.jar</item>
         <item>/apex/com.android.art/javalib/core-libart.jar</item>
     </string-array>
-
+    
+    <string-array name="config_deviceDisabledComponents">
+        <item>com.google.android.googlequicksearchbox/com.google.android.hotword.service.HotwordService</item>
+        <item>com.google.android.gms/.chimera.GmsIntentOperationService$PersistentTrustedReceiver</item>
+        <item>com.google.android.gms/.stats.service.DropBoxEntryAddedReceiver</item>
+        <item>com.google.android.gms/com.google.android.gms.nearby.messages.service.NearbyMessagesService</item>
+        <item>com.google.android.gms/com.google.android.gms.nearby.discovery.service.DiscoveryService</item>
+    </string-array>
 </resources>

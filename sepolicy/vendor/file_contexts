@@ -72,6 +72,3 @@
 # Zram
 /vendor/bin/init\.zram\.sh      u:object_r:zram_config_exec:s0
 /vendor/bin/init\.zram_vm\.sh   u:object_r:zram_config_exec:s0
-
-# perfd
-/dev/socket/perfd    u:object_r:mpctl_socket:s0

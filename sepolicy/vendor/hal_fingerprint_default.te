@@ -1,7 +1,6 @@
 typeattribute hal_fingerprint_default data_between_core_and_vendor_violators;
 
 vndbinder_use(hal_fingerprint_default)
-binder_call(hal_fingerprint_default, hal_perf_default)
 
 # Device Nodes
 allow hal_fingerprint_default goodix_device:chr_file rw_file_perms;
@@ -12,7 +11,6 @@ allow hal_fingerprint_default tee_device:chr_file rw_file_perms;
 allow hal_fingerprint_default uhid_device:chr_file rw_file_perms;
 
 # Services
-allow hal_fingerprint_default hal_perf_hwservice:hwservice_manager find;
 
 # Filesystem
 allow hal_fingerprint_default persist_drm_file:file create_file_perms;

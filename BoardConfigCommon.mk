@@ -210,9 +210,6 @@ BOARD_ROOT_EXTRA_SYMLINKS := \
 TARGET_BOARD_PLATFORM := sdm660
 TARGET_ENFORCES_QSSI := true
 
-# Power
-TARGET_USES_INTERACTION_BOOST := true
-
 # Properties
 TARGET_PRODUCT_PROP += $(COMMON_PATH)/properties/product.prop
 TARGET_SYSTEM_PROP += $(COMMON_PATH)/properties/system.prop
@@ -269,9 +266,3 @@ CONFIG_IEEE80211AC := true
 
 # Inherit the proprietary files
 include vendor/asus/sdm660-common/BoardConfigVendor.mk
-
-# QTI Perf from source
-TARGET_USES_QCOM_PERF := true
-SOONG_CONFIG_NAMESPACES += perf
-SOONG_CONFIG_perf := ioctl
-SOONG_CONFIG_perf_ioctl := false

@@ -371,31 +371,27 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.vulkan.deqp.level-2021-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
 
-# Power
-PRODUCT_PACKAGES += \
-    android.hardware.power@1.0 \
-    android.hardware.power@1.0.vendor \
-    android.hardware.power@1.1 \
-    android.hardware.power@1.1.vendor \
-    android.hardware.power@1.2 \
-    android.hardware.power@1.2.vendor \
-    android.hardware.power@1.3 \
-    android.hardware.power@1.3.vendor \
-    android.hardware.power-service-qti \
-    android.hardware.power.stats@1.0-service.mock
-
 # Perf
 PRODUCT_PACKAGES += \
    libtflite \
    libtextclassifier_hash
-    
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/perf/perf-profile0.conf:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perf-profile0.conf \
-    $(COMMON_PATH)/configs/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml    
 
 # Public Libraries
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
+
+# Power (AIDL)
+PRODUCT_PACKAGES += \
+    android.hardware.power-service.lineage-libperfmgr \
+    libqti-perfd-client
+
+ifneq ($(filter X00TD,$(TARGET_DEVICE)),)
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/configs/powerhint-sdm636.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+else
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/configs/powerhint-sdm660.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+endif
 
 # Remove unwanted packages
 PRODUCT_PACKAGES += \
@@ -487,7 +483,10 @@ PRODUCT_COPY_FILES += \
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    vendor/qcom/opensource/display
+    hardware/google/interfaces \
+    hardware/google/pixel \
+    hardware/lineage/interfaces/power-libperfmgr \
+    hardware/qcom-caf/common/libqti-perfd-client
 
 # Telephony
 PRODUCT_PACKAGES += \
@@ -559,52 +558,3 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(COMMON_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     $(COMMON_PATH)/configs/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
-
-# QTI Perf - build from source
-TARGET_PERF_DIR := sdm660
-
-PRODUCT_PACKAGES += \
-    vendor.qti.hardware.perf@2.2-service \
-    libqti-perfd \
-    libqti-perfd-client \
-    libqti-util \
-    libperfconfig \
-    libperfgluelayer \
-    libperfioctl
-
-# Include perf configs
--include vendor/qcom/proprietary/android-perf/profiles.mk
-
-# QTI PerfService (Binder service for Framework)
-PRODUCT_PACKAGES += \
-    perfservice
-
-# QTI PerfService (Binder service for Framework)
-PRODUCT_PACKAGES += \
-    perfservice \
-    libqti-perfd-client_system
-
-# QPerformance Java library
-PRODUCT_PACKAGES += \
-    QPerformance \
-    com.qualcomm.qti.Performance.xml
-
-# Boot JAR
-PRODUCT_BOOT_JARS += \
-    QPerformance
-
-# UxPerformance Java library
-PRODUCT_PACKAGES += \
-    UxPerformance \
-    com.qualcomm.qti.UxPerformance.xml
-
-# Activity Trigger
-PRODUCT_PACKAGES += \
-    libqti-at
-
-# QTI Performance
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=libqti-perfd-client.so \
-    ro.vendor.perf-hal.ver=2.2 \
-    ro.vendor.perf.scroll_opt=true \
-    vendor.perf.gestureflingboost.enable=true

@@ -30,8 +30,6 @@ ro.config.device.no_voice                     u:object_r:build_prop:s0
 ro.hq.support.nfc                             u:object_r:nfc_nq_prop:s0
 
 # Perf
-vendor.perf.                     u:object_r:vendor_perf_prop:s0
-persist.vendor.perf.             u:object_r:vendor_perf_prop:s0
 vendor.mpctl.                    u:object_r:vendor_mpctl_prop:s0
 persist.vendor.mpctl.            u:object_r:vendor_mpctl_prop:s0
 vendor.target.init.complete      u:object_r:vendor_mpctl_prop:s0

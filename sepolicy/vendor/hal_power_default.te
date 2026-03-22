@@ -1,5 +1,3 @@
-# device/asus/sdm660-common/sepolicy/vendor/hal_power_default.te
-
 # Allow powerhal to read/write to dt2w node
 allow hal_power_default proc_tpd_gesture:file rw_file_perms;
 allow hal_power_default proc_tpd_gesture:dir r_dir_perms;
@@ -21,16 +19,12 @@ allow hal_power_default proc:file { write };
 allow hal_power_default cgroup:file read;
 
 # Связь с Perf HAL через binder
-allow hal_power_default hal_perf_hwservice:hwservice_manager find;
-binder_call(hal_power_default, hal_perf_default)
-allow hal_power_default hal_perf_default:binder { call transfer };
 allow hal_power_default hwservicemanager:binder { call transfer };
 vndbinder_use(hal_power_default)
 
 # Perf socket доступ
 allow hal_power_default mpctl_socket:dir search;
 allow hal_power_default mpctl_socket:sock_file { write getattr };
-allow hal_power_default hal_perf_default:unix_stream_socket connectto;
 
 # Capability для boost
 allow hal_power_default self:capability { sys_nice sys_admin };

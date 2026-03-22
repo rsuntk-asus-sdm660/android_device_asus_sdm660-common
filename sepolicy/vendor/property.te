@@ -8,6 +8,3 @@ vendor_public_prop(nfc_nq_prop)
 # ZRAM properties
 type vendor_zram_prop, property_type;
 typeattribute vendor_zram_prop vendor_property_type;
-
-# Perf properties
-vendor_public_prop(vendor_perf_prop)

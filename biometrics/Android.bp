@@ -13,7 +13,7 @@ cc_binary {
     shared_libs: [
         "libcutils",
         "liblog",
-        "libhidlbase",
+        "libhidlbase-v32",
         "libhardware",
         "libutils",
         "android.hardware.biometrics.fingerprint@2.1",

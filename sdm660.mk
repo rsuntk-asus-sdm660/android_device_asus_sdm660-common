@@ -314,8 +314,12 @@ PRODUCT_PACKAGES += \
     libOmxCore \
     libOmxVdec \
     libOmxVenc \
+    libstagefright_amrnb_common.vendor \
+    libstagefright_enc_common \
+    libstagefright_enc_common.vendor \
     libstagefrighthw \
-    libstagefright_softomx_plugin.vendor
+    libstagefright_softomx_plugin.vendor \
+    libstagefright_softomx.vendor
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \

@@ -21,6 +21,7 @@ PRODUCT_COMPRESSED_APEX := false
 
 # Kernel
 TARGET_KERNEL_VERSION ?= 4.19
+PRODUCT_ENABLE_UFFD_GC := true
 
 # Default is nosdcard, S/W button enabled in resource
 PRODUCT_CHARACTERISTICS := nosdcard

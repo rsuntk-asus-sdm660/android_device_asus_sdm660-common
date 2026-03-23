@@ -65,7 +65,7 @@
 /sys/devices/soc/soc:goodix_fingerprint/wakeup(/.*)?    u:object_r:sysfs_wakeup:s0
 
 # Thermal
-/vendor/bin/hw/android\.hardware\.thermal@2\.0-service\.asus_sdm660\.qti   u:object_r:hal_thermal_default_exec:s0
+/vendor/bin/hw/android\.hardware\.thermal-service\.asus_sdm660   u:object_r:hal_thermal_default_exec:s0
 /data/vendor/thermal(/.*)?                      u:object_r:thermal_data_file:s0
 /sys/devices/system/cpu/cpufreq/policy[0-9]/scaling_max_freq    u:object_r:sysfs_devices_system_cpu:s0
 

@@ -1,96 +1,62 @@
 /*
  * Copyright (c) 2020, The Linux Foundation. All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are
- * met:
- *	* Redistributions of source code must retain the above copyright
- *	  notice, this list of conditions and the following disclaimer.
- *	* Redistributions in binary form must reproduce the above
- *	  copyright notice, this list of conditions and the following
- *	  disclaimer in the documentation and/or other materials provided
- *	  with the distribution.
- *	* Neither the name of The Linux Foundation nor the names of its
- *	  contributors may be used to endorse or promote products derived
- *	  from this software without specific prior written permission.
- *
- *
- * THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
- * ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
- * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
- * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * SPDX-License-Identifier: BSD-3-Clause
  */
 
 #ifndef THERMAL_THERMAL_DATA_H__
 #define THERMAL_THERMAL_DATA_H__
 
-#include <vector>
-#include <string>
-#include <mutex>
 #include <cmath>
+#include <mutex>
+#include <string>
+#include <vector>
 
-#include <android/hardware/thermal/2.0/IThermal.h>
+#include <aidl/android/hardware/thermal/CoolingDevice.h>
+#include <aidl/android/hardware/thermal/CoolingType.h>
+#include <aidl/android/hardware/thermal/Temperature.h>
+#include <aidl/android/hardware/thermal/TemperatureThreshold.h>
+#include <aidl/android/hardware/thermal/TemperatureType.h>
+#include <aidl/android/hardware/thermal/ThrottlingSeverity.h>
 
 #define UNKNOWN_TEMPERATURE (NAN)
 
-namespace android {
-namespace hardware {
-namespace thermal {
-namespace V2_0 {
-namespace implementation {
+namespace aidl::android::hardware::thermal::implementation {
 
-using ::android::hardware::hidl_vec;
-using ::android::hardware::thermal::V1_0::CpuUsage;
-using CoolingDevice_1_0 = ::android::hardware::thermal::V1_0::CoolingDevice;
-using Temperature_1_0 = ::android::hardware::thermal::V1_0::Temperature;
-using TemperatureType_1_0 = ::android::hardware::thermal::V1_0::TemperatureType;
-using ::android::hardware::thermal::V1_0::ThermalStatus;
-using ::android::hardware::thermal::V1_0::ThermalStatusCode;
+using ::aidl::android::hardware::thermal::CoolingDevice;
+using ::aidl::android::hardware::thermal::CoolingType;
+using ::aidl::android::hardware::thermal::Temperature;
+using ::aidl::android::hardware::thermal::TemperatureThreshold;
+using ::aidl::android::hardware::thermal::TemperatureType;
+using ::aidl::android::hardware::thermal::ThrottlingSeverity;
 
-using cdevType = ::android::hardware::thermal::V2_0::CoolingType;
-using CoolingDevice = ::android::hardware::thermal::V2_0::CoolingDevice;
-using Temperature = ::android::hardware::thermal::V2_0::Temperature;
-using TemperatureType = ::android::hardware::thermal::V2_0::TemperatureType;
-using TemperatureThreshold =
-	::android::hardware::thermal::V2_0::TemperatureThreshold;
-using ::android::hardware::thermal::V2_0::ThrottlingSeverity;
+static constexpr size_t kThrottlingSeverityCount =
+    static_cast<size_t>(ThrottlingSeverity::SHUTDOWN) + 1;
 
-	struct target_therm_cfg {
-		TemperatureType type;
-		std::vector<std::string> sensor_list;
-		std::string label;
-		int throt_thresh;
-		int shutdwn_thresh;
-		int vr_thresh;
-		bool positive_thresh_ramp;
-	};
+struct target_therm_cfg {
+    TemperatureType type;
+    std::vector<std::string> sensor_list;
+    std::string label;
+    int throt_thresh;
+    int shutdwn_thresh;
+    bool positive_thresh_ramp;
+};
 
-	struct therm_sensor {
-		int tzn;
-		int mulFactor;
-		bool positiveThresh;
-		std::string sensor_name;
-		ThrottlingSeverity lastThrottleStatus;
-		Temperature t;
-		TemperatureThreshold thresh;
-	};
+struct therm_sensor {
+    int tzn;
+    int mulFactor;
+    bool positiveThresh;
+    std::string sensor_name;
+    ThrottlingSeverity lastThrottleStatus;
+    Temperature t;
+    TemperatureThreshold thresh;
+};
 
-	struct therm_cdev {
-		int cdevn;
-		CoolingDevice c;
-	};
+struct therm_cdev {
+    int cdevn;
+    CoolingDevice c;
+};
 
-}  // namespace implementation
-}  // namespace V2_0
-}  // namespace thermal
-}  // namespace hardware
-}  // namespace android
+}  // namespace aidl::android::hardware::thermal::implementation
 
 #endif  // THERMAL_THERMAL_DATA_H__

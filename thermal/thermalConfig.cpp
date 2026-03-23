@@ -2,22 +2,19 @@
  * Copyright (c) 2020, The Linux Foundation. All rights reserved.
  *
  * Updated for ASUS X00TD/X01BD - kernel 4.19
- * Full thermal zone support including restored battery zones
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#include <unordered_map>
-#include <android-base/logging.h>
-#include <android/hardware/thermal/2.0/IThermal.h>
 #include <cstdlib>
+#include <unordered_map>
 
-#include "thermalData.h"
+#include <android-base/logging.h>
+
 #include "thermalConfig.h"
+#include "thermalData.h"
 
-namespace android {
-namespace hardware {
-namespace thermal {
-namespace V2_0 {
-namespace implementation {
+namespace aidl::android::hardware::thermal::implementation {
 
 constexpr std::string_view socIDPath("/sys/devices/soc0/soc_id");
 
@@ -48,8 +45,8 @@ constexpr std::string_view socIDPath("/sys/devices/soc0/soc_id");
  * tz21: cpuss-3-usr    - CPU Silver cluster 3 (mC)
  * tz22-27: *-step      - Step-wise cooling (kernel internal)
  * tz28: soc            - Battery SoC % (raw percentage)
- * tz29: battery        - Battery temperature (mC) [RESTORED]
- * tz30: bms            - BMS temperature (mC) [RESTORED]
+ * tz29: battery        - Battery temperature (mC)
+ * tz30: bms            - BMS temperature (mC)
  * ══════════════════════════════════════════════════════════════════
  */
 
@@ -58,8 +55,7 @@ constexpr std::string_view socIDPath("/sys/devices/soc0/soc_id");
  * Silver cluster (cores 0-3): cpuss-0/1/2/3-usr
  * Gold cluster (cores 4-7): cpu-1-0/1/2/3-usr
  */
-std::vector<std::string> cpu_sensors_unified =
-{
+std::vector<std::string> cpu_sensors_unified = {
     "cpuss-0-usr",   // Core 0 (Silver)
     "cpuss-1-usr",   // Core 1 (Silver)
     "cpuss-2-usr",   // Core 2 (Silver)
@@ -70,33 +66,29 @@ std::vector<std::string> cpu_sensors_unified =
     "cpu-1-3-usr",   // Core 7 (Gold)
 };
 
-std::vector<struct target_therm_cfg> sensor_cfg_unified =
-{
+std::vector<struct target_therm_cfg> sensor_cfg_unified = {
     {
         TemperatureType::CPU,
         cpu_sensors_unified,
         "",
         95000,        // Throttling threshold (mC)
         115000,       // Shutdown threshold (mC)
-        95000,        // VR threshold (mC)
         true,         // Positive ramp
     },
     {
         TemperatureType::GPU,
-        { "gpu-usr" },
+        {"gpu-usr"},
         "GPU",
         95000,
         115000,
-        95000,
         true,
     },
     {
         TemperatureType::SKIN,
-        { "msm-therm-adc" },
+        {"msm-therm-adc"},
         "skin",
         45000,
         65000,
-        45000,
         true,
     },
     {
@@ -105,11 +97,10 @@ std::vector<struct target_therm_cfg> sensor_cfg_unified =
          * Reports in milliCelsius (31000 = 31.0°C)
          */
         TemperatureType::BATTERY,
-        { "battery" },
+        {"battery"},
         "battery",
         45000,        // 45°C - throttle charging
         60000,        // 60°C - critical
-        45000,
         true,
     },
     {
@@ -119,11 +110,10 @@ std::vector<struct target_therm_cfg> sensor_cfg_unified =
          * Reports in milliCelsius (31000 = 31.0°C)
          */
         TemperatureType::BATTERY,
-        { "bms" },
+        {"bms"},
         "bms",
         46000,        // Slightly offset to avoid duplicate alerts
         60000,
-        46000,
         true,
     },
     {
@@ -132,11 +122,10 @@ std::vector<struct target_therm_cfg> sensor_cfg_unified =
          * ibat-high reports battery discharge current
          */
         TemperatureType::BCL_CURRENT,
-        { "ibat-high" },
+        {"ibat-high"},
         "ibat",
         4500,         // 4.5A
         5000,         // 5A critical
-        4500,
         true,
     },
     {
@@ -145,11 +134,10 @@ std::vector<struct target_therm_cfg> sensor_cfg_unified =
          * vbat_adc reports battery voltage in mV
          */
         TemperatureType::BCL_VOLTAGE,
-        { "vbat_adc" },
+        {"vbat_adc"},
         "vbat",
         3200,         // 3.2V low
         3000,         // 3.0V critical
-        3200,
         false,        // Negative ramp (lower = worse)
     },
     {
@@ -158,11 +146,10 @@ std::vector<struct target_therm_cfg> sensor_cfg_unified =
          * Reports raw percentage (100 = 100%)
          */
         TemperatureType::BCL_PERCENTAGE,
-        { "soc" },
+        {"soc"},
         "soc",
         10,           // 10% - start power saving
         2,            // 2% - critical
-        10,
         false,        // Negative ramp
     },
 };
@@ -177,8 +164,7 @@ const std::unordered_map<int, std::vector<struct target_therm_cfg>>
     {326, sensor_cfg_unified},  // SDM660 variant
 };
 
-ThermalConfig::ThermalConfig():cmnInst()
-{
+ThermalConfig::ThermalConfig() : cmnInst() {
     std::unordered_map<int, std::vector<struct target_therm_cfg>>::const_iterator it;
     std::string soc_val;
 
@@ -198,12 +184,8 @@ ThermalConfig::ThermalConfig():cmnInst()
         thermalConfig = it->second;
     }
 
-    LOG(INFO) << "ThermalHAL: SoC ID=" << soc_id 
+    LOG(INFO) << "ThermalHAL: SoC ID=" << soc_id
               << " sensors=" << thermalConfig.size();
 }
 
-}  // namespace implementation
-}  // namespace V2_0
-}  // namespace thermal
-}  // namespace hardware
-}  // namespace android
+}  // namespace aidl::android::hardware::thermal::implementation

@@ -120,9 +120,6 @@
     <!-- Split shade (только для планшетов) -->
     <bool name="config_use_split_notification_shade">false</bool>
 
-    <!-- Скругления -->
-    <string name="config_rounded_mask" translatable="false">"M8,0C3.6,0,0,3.6,0,8"</string>
-
     <!-- ╔══════════════════════════════════════════════════════════╗
          ║  ПАНЕЛЬ НАВИГАЦИИ (SYSTEMUI)                             ║
          ╚══════════════════════════════════════════════════════════╝ -->

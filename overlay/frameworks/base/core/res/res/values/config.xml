@@ -1,118 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+╔══════════════════════════════════════════════════════════════════════╗
+║         ASUS X00TD / X01BD — LineageOS Custom Configuration          ║
+║         Display: IPS LCD 1080p, 420 nits max, 60Hz                   ║
+║         SoC: Qualcomm SDM636/SDM660, Dual SIM                        ║
+║         Android 13+ nits-based brightness mapping                    ║
+╚══════════════════════════════════════════════════════════════════════╝
+-->
 <resources>
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  ASUS X00TD / X01BD — UNLOCKED FULL POWER (420 NITS)     ║
-         ║  Logic: Nits-based mapping (Android 13+ standard)        ║
-         ║  Max Brightness: 255 (Physical Hardware Max)             ║
-         ╚══════════════════════════════════════════════════════════╝ -->
 
-    <!-- ═══════════════════════════════════════════════════════════
-         РАЗДЕЛ 1: ЭКРАН И ЯРКОСТЬ (FULL POWER)
-         ═══════════════════════════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════════════════════════════
+         РАЗДЕЛ 1: ДИСПЛЕЙ И ЯРКОСТЬ
+         ═══════════════════════════════════════════════════════════════ -->
 
-<bool name="config_automatic_brightness_available">true</bool>
-<bool name="config_skipScreenOnBrightnessRamp">false</bool>
+    <!-- Автояркость -->
+    <bool name="config_automatic_brightness_available">true</bool>
+    <bool name="config_skipScreenOnBrightnessRamp">false</bool>
+    <bool name="config_autoBrightnessResetAmbientLuxAfterWarmUp">true</bool>
+    <bool name="config_allowAutoBrightnessWhileDozing">false</bool>
 
-<!-- Умеренная рампа -->
-<integer name="config_brightness_ramp_rate_fast">60</integer>
-<integer name="config_brightness_ramp_rate_slow">20</integer>
+    <!-- Плавная рампа яркости (fast=быстрый отклик, slow=фоновые переходы) -->
+    <integer name="config_brightness_ramp_rate_fast">40</integer>
+    <integer name="config_brightness_ramp_rate_slow">12</integer>
 
-<!-- Маппинг -->
-<integer-array name="config_screenBrightnessBacklight">
-    <item>1</item>
-    <item>255</item>
-</integer-array>
+    <!-- Гамма коррекции пользовательских сдвигов -->
+    <fraction name="config_autoBrightnessAdjustmentMaxGamma">200%</fraction>
 
-<array name="config_screenBrightnessNits">
-    <item>2.0</item>
-    <item>420.0</item>
-</array>
+    <!-- Таймаут краткосрочной модели автояркости (5 минут) -->
+    <integer name="config_autoBrightnessShortTermModelTimeout">300000</integer>
 
-<!-- ★ Умеренные debounce -->
-<integer name="config_autoBrightnessBrighteningLightDebounce">3000</integer>
-<integer name="config_autoBrightnessDarkeningLightDebounce">6000</integer>
+    <!-- Debounce: не реагируем на мгновенные изменения освещения
+         Brightening: 5 сек — защита от случайной засветки
+         Darkening:   8 сек — защита от мимолётной тени              -->
+    <integer name="config_autoBrightnessBrighteningLightDebounce">5000</integer>
+    <integer name="config_autoBrightnessDarkeningLightDebounce">8000</integer>
 
-<!-- ★ Нормальная скорость сенсора -->
-<integer name="config_autoBrightnessInitialLightSensorRate">250</integer>
-<integer name="config_autoBrightnessLightSensorRate">500</integer>
+    <!-- Опрос сенсора освещённости (реже = меньше шума) -->
+    <integer name="config_autoBrightnessInitialLightSensorRate">500</integer>
+    <integer name="config_autoBrightnessLightSensorRate">1000</integer>
 
-<fraction name="config_autoBrightnessAdjustmentMaxGamma">300%</fraction>
-<bool name="config_autoBrightnessResetAmbientLuxAfterWarmUp">true</bool>
-<integer name="config_autoBrightnessShortTermModelTimeout">300000</integer>
+    <!-- Маппинг backlight → физические значения яркости -->
+    <integer-array name="config_screenBrightnessBacklight">
+        <item>1</item>
+        <item>255</item>
+    </integer-array>
 
-<!-- ★ КЛЮЧЕВОЕ: Разумные шаги, но без мелких в темноте -->
-<integer-array name="config_autoBrightnessLevels">
-    <item>10</item>
-    <item>30</item>
-    <item>60</item>
-    <item>100</item>
-    <item>180</item>
-    <item>320</item>
-    <item>550</item>
-    <item>950</item>
-    <item>1600</item>
-    <item>2800</item>
-    <item>5000</item>
-</integer-array>
+    <array name="config_screenBrightnessNits">
+        <item>2.0</item>
+        <item>420.0</item>
+    </array>
 
-<!-- 12 значений яркости -->
-<array name="config_autoBrightnessDisplayValuesNits">
-    <item>6.0</item>
-    <item>18.0</item>
-    <item>38.0</item>
-    <item>62.0</item>
-    <item>92.0</item>
-    <item>130.0</item>
-    <item>175.0</item>
-    <item>230.0</item>
-    <item>290.0</item>
-    <item>350.0</item>
-    <item>395.0</item>
-    <item>420.0</item>
-</array>
+    <!-- Пороги освещённости (lux)
+         Первый порог 25 lux — выше зоны шума сенсора (0–15 lux)
+         Всё ниже 25 lux = одна яркость, без мерцания              -->
+    <integer-array name="config_autoBrightnessLevels">
+        <item>25</item>
+        <item>50</item>
+        <item>100</item>
+        <item>180</item>
+        <item>320</item>
+        <item>500</item>
+        <item>800</item>
+        <item>1300</item>
+        <item>2200</item>
+        <item>3800</item>
+        <item>6000</item>
+    </integer-array>
 
-<!-- Idle -->
-<integer-array name="config_autoBrightnessLevelsIdle">
-    <item>10</item>
-    <item>30</item>
-    <item>60</item>
-    <item>100</item>
-    <item>180</item>
-    <item>320</item>
-    <item>550</item>
-    <item>950</item>
-    <item>1600</item>
-    <item>2800</item>
-    <item>5000</item>
-</integer-array>
+    <!-- Целевая яркость дисплея (nits) для каждого диапазона lux
+         10→20 nits (×2) плавнее старого 6→18 (×3)                 -->
+    <array name="config_autoBrightnessDisplayValuesNits">
+        <item>10.0</item>   <!--    0 –   25 lux : тёмная комната    -->
+        <item>20.0</item>   <!--   25 –   50 lux : слабое освещение  -->
+        <item>45.0</item>   <!--   50 –  100 lux : офис вечером      -->
+        <item>80.0</item>   <!--  100 –  180 lux : офис              -->
+        <item>120.0</item>  <!--  180 –  320 lux : яркий офис        -->
+        <item>165.0</item>  <!--  320 –  500 lux : облачно           -->
+        <item>215.0</item>  <!--  500 –  800 lux : пасмурно          -->
+        <item>270.0</item>  <!--  800 – 1300 lux : тень на улице     -->
+        <item>330.0</item>  <!-- 1300 – 2200 lux : рассеянный свет   -->
+        <item>375.0</item>  <!-- 2200 – 3800 lux : солнечно          -->
+        <item>400.0</item>  <!-- 3800 – 6000 lux : яркое солнце      -->
+        <item>420.0</item>  <!-- 6000+       lux : прямое солнце     -->
+    </array>
 
-<array name="config_autoBrightnessDisplayValuesNitsIdle">
-    <item>4.0</item>
-    <item>14.0</item>
-    <item>32.0</item>
-    <item>55.0</item>
-    <item>85.0</item>
-    <item>120.0</item>
-    <item>165.0</item>
-    <item>220.0</item>
-    <item>280.0</item>
-    <item>340.0</item>
-    <item>385.0</item>
-    <item>420.0</item>
-</array>
+    <!-- Пороги и яркость для режима Idle (экран без взаимодействия) -->
+    <integer-array name="config_autoBrightnessLevelsIdle">
+        <item>25</item>
+        <item>50</item>
+        <item>100</item>
+        <item>180</item>
+        <item>320</item>
+        <item>500</item>
+        <item>800</item>
+        <item>1300</item>
+        <item>2200</item>
+        <item>3800</item>
+        <item>6000</item>
+    </integer-array>
 
-<!-- Границы -->
-<integer name="config_screenBrightnessSettingMinimum">1</integer>
-<integer name="config_screenBrightnessSettingMaximum">255</integer>
-<integer name="config_screenBrightnessSettingDefault">102</integer>
-<integer name="config_screenBrightnessDim">1</integer>
-<integer name="config_screenBrightnessDoze">1</integer>
+    <array name="config_autoBrightnessDisplayValuesNitsIdle">
+        <item>7.0</item>
+        <item>16.0</item>
+        <item>38.0</item>
+        <item>70.0</item>
+        <item>110.0</item>
+        <item>155.0</item>
+        <item>205.0</item>
+        <item>260.0</item>
+        <item>320.0</item>
+        <item>365.0</item>
+        <item>395.0</item>
+        <item>420.0</item>
+    </array>
 
-<item name="config_screenBrightnessSettingMinimumFloat" format="float" type="dimen">0.004</item>
-<item name="config_screenBrightnessSettingMaximumFloat" format="float" type="dimen">1.0</item>
-<item name="config_screenBrightnessSettingDefaultFloat" format="float" type="dimen">0.4</item>
-<item name="config_screenBrightnessDimFloat" format="float" type="dimen">0.004</item>
-<item name="config_screenBrightnessDozeFloat" format="float" type="dimen">0.0</item>
+    <!-- Границы яркости (integer — устаревший API, float — актуальный) -->
+    <integer name="config_screenBrightnessSettingMinimum">1</integer>
+    <integer name="config_screenBrightnessSettingMaximum">255</integer>
+    <integer name="config_screenBrightnessSettingDefault">102</integer>
+    <integer name="config_screenBrightnessDim">1</integer>
+    <integer name="config_screenBrightnessDoze">1</integer>
+
+    <item name="config_screenBrightnessSettingMinimumFloat"
+          format="float" type="dimen">0.004</item>
+    <item name="config_screenBrightnessSettingMaximumFloat"
+          format="float" type="dimen">1.0</item>
+    <item name="config_screenBrightnessSettingDefaultFloat"
+          format="float" type="dimen">0.4</item>
+    <item name="config_screenBrightnessDimFloat"
+          format="float" type="dimen">0.004</item>
+    <item name="config_screenBrightnessDozeFloat"
+          format="float" type="dimen">0.0</item>
 
     <!-- Ночной режим -->
     <bool name="config_nightDisplayAvailable">true</bool>
@@ -120,42 +138,43 @@
     <integer name="config_nightDisplayColorTemperatureMin">1600</integer>
     <integer name="config_nightDisplayColorTemperatureMax">4082</integer>
     <integer name="config_nightDisplayColorTemperatureDefault">2650</integer>
-    
-    <!-- Refresh Rate (60Hz LCD) -->
+
+    <!-- Частота обновления (IPS LCD, фиксированные 60 Hz) -->
     <integer name="config_defaultRefreshRate">60</integer>
     <integer name="config_defaultPeakRefreshRate">60</integer>
 
-    <!-- ═══════════════════════════════════════════════════════════
-         РАЗДЕЛ 2: СИСТЕМА И ПИТАНИЕ
-         ═══════════════════════════════════════════════════════════ -->
 
+    <!-- ═══════════════════════════════════════════════════════════════
+         РАЗДЕЛ 2: ПИТАНИЕ И РЕЖИМ СНА
+         ═══════════════════════════════════════════════════════════════ -->
+
+    <!-- Режимы энергосбережения -->
     <bool name="config_enableAutoPowerModes">true</bool>
     <bool name="config_autoPowerModeUseMotionSensor">false</bool>
-    
-    <!-- ★ Wake on plug/unplug -->
-    <bool name="config_unplugTurnsOnScreen">true</bool>
-    
-    <!-- Doze -->
-    <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
 
-    <!-- ★ Doze/AOD отключены для корректной работы wake on plug -->
+    <!-- Включение экрана при подключении/отключении зарядки -->
+    <bool name="config_unplugTurnsOnScreen">true</bool>
+
+    <!-- Doze / AOD отключены (конфликт с wake-on-plug) -->
+    <string name="config_dozeComponent" translatable="false">
+        com.android.systemui/com.android.systemui.doze.DozeService
+    </string>
     <bool name="config_dozeAfterScreenOffByDefault">false</bool>
     <bool name="config_dozeAlwaysOnDisplayAvailable">false</bool>
     <bool name="config_displayBlanksAfterDoze">false</bool>
-    <bool name="config_allowAutoBrightnessWhileDozing">false</bool>
-    
-    <!-- ★ Dreams отключены по умолчанию -->
+
+    <!-- Daydream (screensaver) — поддерживается, но отключён по умолчанию -->
     <bool name="config_dreamsSupported">true</bool>
     <bool name="config_dreamsEnabledByDefaultConfig">false</bool>
     <bool name="config_dreamsActivatedOnSleepByDefaultConfig">false</bool>
     <bool name="config_dreamsEnabledOnBatteryConfig">false</bool>
 
-    <!-- Suspend Config -->
+    <!-- Suspend / интерактивный режим -->
     <bool name="config_powerDecoupleAutoSuspendModeFromDisplay">true</bool>
-    <bool name="config_powerDecoupleInteractiveModeFromDisplay">false</bool> 
+    <bool name="config_powerDecoupleInteractiveModeFromDisplay">false</bool>
     <bool name="config_suspendWhenScreenOffDueToProximity">true</bool>
 
-    <!-- Database optimizations -->
+    <!-- Оптимизация SQLite -->
     <string name="db_default_journal_mode">MEMORY</string>
     <string name="db_default_sync_mode">OFF</string>
     <string name="db_wal_sync_mode">OFF</string>
@@ -165,42 +184,47 @@
     <bool name="config_sf_limitedAlpha">true</bool>
 
 
-    <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════════
          РАЗДЕЛ 3: СЕТЬ И ТЕЛЕФОНИЯ
-         ═══════════════════════════════════════════════════════════ -->
+         ═══════════════════════════════════════════════════════════════ -->
 
-    <string name="config_radio_access_family" translatable="false">LTE,WCDMA</string>
+    <!-- Dual SIM, голос + SMS -->
     <integer name="config_num_physical_slots">2</integer>
-
     <bool name="config_voice_capable">true</bool>
     <bool name="config_sms_capable">true</bool>
-    
-    <!-- ★ VoLTE/VoWiFi/IMS  -->
+    <bool name="config_hotswapCapable">true</bool>
+
+    <!-- Radio Access Family -->
+    <string name="config_radio_access_family" translatable="false">LTE,WCDMA</string>
+
+    <!-- VoLTE / VoWiFi / IMS / Video Call -->
     <bool name="config_carrier_volte_available">true</bool>
     <bool name="config_device_volte_available">true</bool>
     <bool name="config_device_vt_available">true</bool>
     <bool name="config_carrier_wfc_ims_available">true</bool>
     <bool name="config_device_wfc_ims_available">true</bool>
-    
-    <!-- Ускоряет инициализацию аудио при ВХОДЯЩИХ (MT) звонках -->
+
+    <!-- Ускоряет инициализацию аудио для входящих (MT) звонков -->
     <bool name="config_speed_up_audio_on_mt_calls">true</bool>
-    
-    <!-- Предотвращает переключение телефона при смене состояния регистрации -->
+
+    <!-- Не переключать телефон при смене состояния регистрации -->
     <bool name="config_switch_phone_on_voice_reg_state_change">false</bool>
-    
-    <!-- VOIP режим конфликтует с нативным IMS audio routing -->
+
+    <!-- VOIP-режим конфликтует с нативным IMS audio routing -->
     <bool name="config_use_voip_mode_for_ims">false</bool>
-    
+
     <!-- Автофолбэк на CS при проблемах с VoLTE -->
     <bool name="config_voice_data_sms_auto_fallback">true</bool>
 
+    <!-- Прочие параметры телефонии -->
     <bool name="config_sms_utf8_support">false</bool>
     <bool name="config_useVideoPauseWorkaround">true</bool>
 
-    <!-- ★ Qualcomm CNE -->
-    <string name="config_systemAudioIntelligence" translatable="false">com.qualcomm.qti.cne</string>
+    <!-- Qualcomm CNE (Connectivity Engine) -->
+    <string name="config_systemAudioIntelligence"
+            translatable="false">com.qualcomm.qti.cne</string>
 
-    <!-- networkAttributes с правильными приоритетами -->
+    <!-- Типы сетей и их приоритеты -->
     <string-array translatable="false" name="networkAttributes">
         <item>wifi,1,1,1,-1,true</item>
         <item>mobile,0,0,0,-1,true</item>
@@ -222,6 +246,7 @@
         <item>7,1</item>
     </string-array>
 
+    <!-- TCP-буферы для мобильных технологий -->
     <string-array name="config_mobile_tcp_buffers">
         <item>lte:2097152,4194304,8388608,262144,524288,1048576</item>
         <item>lte_ca:4096,6291456,12582912,4096,1048576,4194304</item>
@@ -234,131 +259,160 @@
         <item>gprs:4092,8760,11680,4096,8760,11680</item>
     </string-array>
 
+    <!-- DHCP-диапазоны для точки доступа -->
     <string-array translatable="false" name="config_tether_dhcp_range">
-        <item>192.168.42.2</item> <item>192.168.42.254</item>
-        <item>192.168.43.2</item> <item>192.168.43.254</item>
-        <item>192.168.44.2</item> <item>192.168.44.254</item>
-        <item>192.168.45.2</item> <item>192.168.45.254</item>
+        <item>192.168.42.2</item>
+        <item>192.168.42.254</item>
+        <item>192.168.43.2</item>
+        <item>192.168.43.254</item>
+        <item>192.168.44.2</item>
+        <item>192.168.44.254</item>
+        <item>192.168.45.2</item>
+        <item>192.168.45.254</item>
     </string-array>
 
+    <!-- Не показывать диалог "переключиться на лучшую сеть" -->
     <integer translatable="false" name="config_networkNotifySwitchType">0</integer>
 
 
-    <!-- ═══════════════════════════════════════════════════════════
-         РАЗДЕЛ 4: GPS / LOCATION SERVICES
-         ═══════════════════════════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════════════════════════════
+         РАЗДЕЛ 4: GPS И ГЕОЛОКАЦИЯ
+         ═══════════════════════════════════════════════════════════════ -->
 
-    <!-- ★ Location Providers -->
     <string-array name="config_locationProviderPackageNames" translatable="false">
         <item>com.google.android.gms</item>
         <item>com.android.location.fused</item>
     </string-array>
 
-    <string name="config_networkLocationProviderPackageName" translatable="false">com.google.android.gms</string>
-    <string name="config_fusedLocationProviderPackageName" translatable="false">com.google.android.gms</string>
+    <string name="config_networkLocationProviderPackageName"
+            translatable="false">com.google.android.gms</string>
+    <string name="config_fusedLocationProviderPackageName"
+            translatable="false">com.google.android.gms</string>
 
 
-    <!-- ═══════════════════════════════════════════════════════════
-         РАЗДЕЛ 5: ИНТЕРФЕЙС И КНОПКИ
-         ═══════════════════════════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════════════════════════════
+         РАЗДЕЛ 5: ИНТЕРФЕЙС, НАВИГАЦИЯ И ЖЕСТЫ
+         ═══════════════════════════════════════════════════════════════ -->
 
+    <!-- Длительность системных анимаций -->
     <integer name="config_shortAnimTime">200</integer>
     <integer name="config_mediumAnimTime">400</integer>
     <integer name="config_longAnimTime">500</integer>
 
+    <!-- Навигационная панель -->
     <bool name="config_showNavigationBar">true</bool>
-    <integer name="config_navBarInteractionMode">2</integer>
     <bool name="config_navBarCanMove">true</bool>
+    <bool name="config_navBarNeedsScrim">true</bool>
     <bool name="config_navBarTapThrough">false</bool>
     <bool name="config_imeDrawsImeNavBar">false</bool>
     <bool name="config_navBarAlwaysShowOnSideEdgeGesture">true</bool>
-    <dimen name="config_backGestureInset">18dp</dimen>
+    <bool name="config_hideNavBarForKeyboard">false</bool>
+    <bool name="config_allowSeamlessRotationDespiteNavBarMoving">true</bool>
+    <bool name="config_showGesturalNavigationHints">true</bool>
+    <integer name="config_navBarInteractionMode">2</integer>
+    <integer name="config_navBarOpacityMode">0</integer>
 
+    <!-- Жест «назад» (свайп с края) -->
+    <dimen name="config_backGestureInset">18dp</dimen>
     <array name="config_backGestureInsetScales">
         <item>0.75</item>
         <item>1.00</item>
         <item>1.33</item>
     </array>
 
+    <!-- Жест двойного касания для пробуждения -->
     <bool name="config_supportDoubleTapWake">true</bool>
 
-    <bool name="config_navBarNeedsScrim">true</bool>
-    <bool name="config_allowSeamlessRotationDespiteNavBarMoving">true</bool>
-    <bool name="config_showGesturalNavigationHints">true</bool>
-    <bool name="config_hideNavBarForKeyboard">false</bool>
-    <bool name="config_forceWindowDrawsStatusBarBackground">true</bool>
-    <integer name="config_navBarOpacityMode">0</integer>
-
+    <!-- Ориентация и вращение -->
     <bool name="config_allowAllRotations">true</bool>
     <bool name="config_supportAutoRotation">true</bool>
+
+    <!-- Системные отрисовки -->
+    <bool name="config_forceWindowDrawsStatusBarBackground">true</bool>
+
+    <!-- Виджеты и обои -->
     <bool name="config_enableAppWidgetService">true</bool>
     <bool name="config_enableWallpaperService">true</bool>
-    
+
+    <!-- Скруглённые углы и форма иконок -->
     <bool name="config_supportsRoundedCornersOnWindows">true</bool>
-    <string name="config_icon_mask" translatable="false">"M50,0L92,0C96.42,0 100,4.58 100,8L100,92C100,96.42 96.42,100 92,100L8,100C4.58,100 0,96.42 0,92L0,8C0,4.42 4.42,0 8,0L50,0Z"</string>
     <bool name="config_useRoundIcon">true</bool>
+    <string name="config_icon_mask" translatable="false">
+        M50,0L92,0C96.42,0 100,4.58 100,8L100,92C100,96.42 96.42,100
+        92,100L8,100C4.58,100 0,96.42 0,92L0,8C0,4.42 4.42,0 8,0L50,0Z
+    </string>
 
-    <!-- ═══════════════════════════════════════════════════════════
-         РАЗДЕЛ 6: ЗВУК, LED, БИОМЕТРИЯ
-         ═══════════════════════════════════════════════════════════ -->
 
+    <!-- ═══════════════════════════════════════════════════════════════
+         РАЗДЕЛ 6: ЗВУК, LED-УВЕДОМЛЕНИЯ И БИОМЕТРИЯ
+         ═══════════════════════════════════════════════════════════════ -->
+
+    <!-- Аудио -->
     <bool name="config_useDevInputEventForAudioJack">true</bool>
     <bool name="config_supportAudioSourceUnprocessed">true</bool>
     <bool name="config_camera_sound_forced">false</bool>
 
+    <!-- LED-уведомления -->
     <bool name="config_useAttentionLight">true</bool>
     <bool name="config_intrusiveNotificationLed">true</bool>
     <bool name="config_notificationBadging">true</bool>
-    
     <integer name="config_defaultNotificationLedOn">1000</integer>
     <integer name="config_defaultNotificationLedOff">5000</integer>
     <color name="config_defaultNotificationColor">#FF00FF00</color>
 
-    <!-- LED батареи -->
-    <integer name="config_notificationsBatteryLowARGB">0xFFFF0000</integer>
-    <integer name="config_notificationsBatteryMediumARGB">0xFF50FF00</integer>
-    <integer name="config_notificationsBatteryFullARGB">0xFF00FF00</integer>
+    <!-- LED индикатор состояния батареи -->
+    <integer name="config_notificationsBatteryLowARGB">0xFFFF0000</integer>    <!-- Красный  -->
+    <integer name="config_notificationsBatteryMediumARGB">0xFF50FF00</integer> <!-- Жёлтый   -->
+    <integer name="config_notificationsBatteryFullARGB">0xFF00FF00</integer>   <!-- Зелёный  -->
 
+    <!-- Haptic feedback -->
     <bool name="config_enableHapticTextHandle">true</bool>
 
+    <!-- Сканер отпечатка пальца -->
     <string-array name="config_biometric_sensors" translatable="false">
         <item>0:2:15</item>
     </string-array>
-
     <integer name="config_fingerprintMaxTemplatesPerUser">5</integer>
     <bool name="config_fingerprintSupportsGestures">false</bool>
 
-    <!-- Hotswap для Dual SIM -->
-    <bool name="config_hotswapCapable">true</bool>
-    
+    <!-- Прочие аппаратные опции -->
     <bool name="config_batterySdCardAccessibility">false</bool>
     <bool name="config_usbChargingMessage">true</bool>
 
+    <!-- NTP -->
     <integer name="config_ntpPollingInterval">64800000</integer>
     <integer name="config_ntpTimeout">5000</integer>
 
-    <string name="config_defaultAutofillService" translatable="false">com.google.android.gms/.autofill.service.AutofillService</string>
+    <!-- Автозаполнение -->
+    <string name="config_defaultAutofillService" translatable="false">
+        com.google.android.gms/.autofill.service.AutofillService
+    </string>
 
 
-    <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════════
          РАЗДЕЛ 7: ПАМЯТЬ И ПРОИЗВОДИТЕЛЬНОСТЬ
-         ═══════════════════════════════════════════════════════════ -->
+         ═══════════════════════════════════════════════════════════════ -->
 
-    <!-- Используем системные дефолты - LMKD сам определяет пороги -->
+    <!-- LMKD: системные дефолты (LMKD сам определяет пороги) -->
     <integer name="config_lowMemoryKillerMinFreeKbytesAbsolute">-1</integer>
     <integer name="config_lowMemoryKillerMinFreeKbytesAdjust">0</integer>
     <integer name="config_extraFreeKbytesAdjust">0</integer>
 
+    <!-- Производительная аутентификация -->
     <bool name="config_performantAuthDefault">true</bool>
+
+    <!-- Свободное размещение окон (Freeform) -->
     <bool name="config_freeformWindowManagement">true</bool>
 
+    <!-- Pinner Service: файлы, закреплённые в RAM для быстрого старта -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
         <item>/system/framework/framework.jar</item>
         <item>/system/framework/services.jar</item>
         <item>/apex/com.android.art/javalib/core-oj.jar</item>
         <item>/apex/com.android.art/javalib/core-libart.jar</item>
     </string-array>
-    
+
+    <!-- Отключённые компоненты Google (снижение фонового потребления) -->
     <string-array name="config_deviceDisabledComponents">
         <item>com.google.android.googlequicksearchbox/com.google.android.hotword.service.HotwordService</item>
         <item>com.google.android.gms/.chimera.GmsIntentOperationService$PersistentTrustedReceiver</item>
@@ -366,4 +420,5 @@
         <item>com.google.android.gms/com.google.android.gms.nearby.messages.service.NearbyMessagesService</item>
         <item>com.google.android.gms/com.google.android.gms.nearby.discovery.service.DiscoveryService</item>
     </string-array>
+
 </resources>

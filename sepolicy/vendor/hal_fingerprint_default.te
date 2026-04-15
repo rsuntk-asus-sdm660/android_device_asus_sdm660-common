@@ -77,3 +77,6 @@ allow vendor_fingerprint_init fingerprintd_data_file:dir { read search open geta
 allow vendor_fingerprint_init fingerprintd_data_file:file { read open getattr };
 allow vendor_fingerprint_init fingerprint_vendor_data_file:dir { read search open getattr };
 allow vendor_fingerprint_init fingerprint_vendor_data_file:file { read open getattr };
+
+binder_call(hal_fingerprint_default, system_server)
+vndbinder_use(hal_fingerprint_default)

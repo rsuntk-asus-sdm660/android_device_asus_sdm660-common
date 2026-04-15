@@ -386,11 +386,11 @@
     </hal>
 
     <!-- ========== FINGERPRINT ========== -->
-    <hal format="hidl" optional="true">
+    <hal format="aidl" optional="true">
         <name>android.hardware.biometrics.fingerprint</name>
-        <version>2.1</version>
+        <version>3</version>
         <interface>
-            <name>IBiometricsFingerprint</name>
+            <name>IFingerprint</name>
             <instance>default</instance>
         </interface>
     </hal>

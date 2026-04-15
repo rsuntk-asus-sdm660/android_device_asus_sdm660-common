@@ -1,84 +1,161 @@
-/*
- * Copyright (C) 2017 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+#pragma once
 
-#ifndef ANDROID_HARDWARE_BIOMETRICS_FINGERPRINT_V2_1_BIOMETRICSFINGERPRINT_H
-#define ANDROID_HARDWARE_BIOMETRICS_FINGERPRINT_V2_1_BIOMETRICSFINGERPRINT_H
+#include <aidl/android/hardware/biometrics/fingerprint/BnFingerprint.h>
+#include <aidl/android/hardware/biometrics/fingerprint/BnSession.h>
+#include <aidl/android/hardware/biometrics/fingerprint/ISessionCallback.h>
+#include <aidl/android/hardware/biometrics/fingerprint/SensorProps.h>
+#include <aidl/android/hardware/biometrics/fingerprint/PointerContext.h>
+#include <aidl/android/hardware/biometrics/common/BnCancellationSignal.h>
+#include <aidl/android/hardware/biometrics/common/ICancellationSignal.h>
+#include <aidl/android/hardware/biometrics/common/OperationContext.h>
+#include <aidl/android/hardware/keymaster/HardwareAuthToken.h>
 
-#include <log/log.h>
-#include <android/log.h>
-#include <hardware/hardware.h>
 #include <hardware/fingerprint.h>
-#include <hidl/MQDescriptor.h>
-#include <hidl/Status.h>
-#include <android/hardware/biometrics/fingerprint/2.1/IBiometricsFingerprint.h>
+#include <hardware/hardware.h>
 
+#include <mutex>
+#include <memory>
+#include <atomic>
+
+namespace aidl {
 namespace android {
 namespace hardware {
 namespace biometrics {
 namespace fingerprint {
-namespace V2_1 {
-namespace implementation {
 
-using ::android::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprint;
-using ::android::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprintClientCallback;
-using ::android::hardware::biometrics::fingerprint::V2_1::RequestStatus;
-using ::android::hardware::Return;
-using ::android::hardware::Void;
-using ::android::hardware::hidl_vec;
-using ::android::hardware::hidl_string;
-using ::android::sp;
+using ::aidl::android::hardware::biometrics::common::ICancellationSignal;
+using ::aidl::android::hardware::biometrics::common::OperationContext;
+using ::aidl::android::hardware::keymaster::HardwareAuthToken;
 
-struct BiometricsFingerprint : public IBiometricsFingerprint {
+class CancellationSignal
+    : public ::aidl::android::hardware::biometrics::common::BnCancellationSignal {
 public:
-    BiometricsFingerprint();
-    ~BiometricsFingerprint();
+    explicit CancellationSignal(fingerprint_device_t* device)
+        : mDevice(device) {}
 
-    // Method to wrap legacy HAL with BiometricsFingerprint class
-    static IBiometricsFingerprint* getInstance();
-
-    // Methods from ::android::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprint follow.
-    Return<uint64_t> setNotify(const sp<IBiometricsFingerprintClientCallback>& clientCallback) override;
-    Return<uint64_t> preEnroll() override;
-    Return<RequestStatus> enroll(const hidl_array<uint8_t, 69>& hat, uint32_t gid, uint32_t timeoutSec) override;
-    Return<RequestStatus> postEnroll() override;
-    Return<uint64_t> getAuthenticatorId() override;
-    Return<RequestStatus> cancel() override;
-    Return<RequestStatus> enumerate() override;
-    Return<RequestStatus> remove(uint32_t gid, uint32_t fid) override;
-    Return<RequestStatus> setActiveGroup(uint32_t gid, const hidl_string& storePath) override;
-    Return<RequestStatus> authenticate(uint64_t operationId, uint32_t gid) override;
+    ndk::ScopedAStatus cancel() override {
+        if (mDevice) {
+            mDevice->cancel(mDevice);
+        }
+        return ndk::ScopedAStatus::ok();
+    }
 
 private:
-    static fingerprint_device_t* openHal();
-    static void notify(const fingerprint_msg_t *msg); /* Static callback for legacy HAL implementation */
-    static Return<RequestStatus> ErrorFilter(int32_t error);
-    static FingerprintError VendorErrorFilter(int32_t error, int32_t* vendorCode);
-    static FingerprintAcquiredInfo VendorAcquiredFilter(int32_t error, int32_t* vendorCode);
-    static BiometricsFingerprint* sInstance;
-
-    std::mutex mClientCallbackMutex;
-    sp<IBiometricsFingerprintClientCallback> mClientCallback;
-    fingerprint_device_t *mDevice;
+    fingerprint_device_t* mDevice;
 };
 
-}  // namespace implementation
-}  // namespace V2_1
+class FingerprintSession : public BnSession {
+public:
+    FingerprintSession(
+        fingerprint_device_t* device,
+        int32_t sensorId,
+        int32_t userId,
+        const std::shared_ptr<ISessionCallback>& cb);
+
+    ~FingerprintSession() override;
+
+    ndk::ScopedAStatus generateChallenge() override;
+    ndk::ScopedAStatus revokeChallenge(int64_t challenge) override;
+
+    ndk::ScopedAStatus enroll(
+        const HardwareAuthToken& hat,
+        std::shared_ptr<ICancellationSignal>* out) override;
+
+    ndk::ScopedAStatus authenticate(
+        int64_t operationId,
+        std::shared_ptr<ICancellationSignal>* out) override;
+
+    ndk::ScopedAStatus detectInteraction(
+        std::shared_ptr<ICancellationSignal>* out) override;
+
+    ndk::ScopedAStatus enumerateEnrollments() override;
+
+    ndk::ScopedAStatus removeEnrollments(
+        const std::vector<int32_t>& enrollmentIds) override;
+
+    ndk::ScopedAStatus getAuthenticatorId() override;
+    ndk::ScopedAStatus invalidateAuthenticatorId() override;
+
+    ndk::ScopedAStatus resetLockout(
+        const HardwareAuthToken& hat) override;
+
+    ndk::ScopedAStatus close() override;
+
+    ndk::ScopedAStatus onPointerDown(
+        int32_t pointerId, int32_t x, int32_t y,
+        float minor, float major) override;
+
+    ndk::ScopedAStatus onPointerUp(int32_t pointerId) override;
+
+    ndk::ScopedAStatus onUiReady() override;
+
+    // V3 WithContext methods
+    ndk::ScopedAStatus authenticateWithContext(
+        int64_t operationId,
+        const OperationContext& context,
+        std::shared_ptr<ICancellationSignal>* out) override;
+
+    ndk::ScopedAStatus enrollWithContext(
+        const HardwareAuthToken& hat,
+        const OperationContext& context,
+        std::shared_ptr<ICancellationSignal>* out) override;
+
+    ndk::ScopedAStatus detectInteractionWithContext(
+        const OperationContext& context,
+        std::shared_ptr<ICancellationSignal>* out) override;
+
+    ndk::ScopedAStatus onPointerDownWithContext(
+        const PointerContext& context) override;
+
+    ndk::ScopedAStatus onPointerUpWithContext(
+        const PointerContext& context) override;
+
+    ndk::ScopedAStatus onPointerCancelWithContext(
+        const PointerContext& context) override;
+
+    ndk::ScopedAStatus onContextChanged(
+        const OperationContext& context) override;
+
+    ndk::ScopedAStatus setIgnoreDisplayTouches(
+        bool shouldIgnore) override;
+
+    static void legacyNotify(const fingerprint_msg_t* msg);
+    static FingerprintSession* sCurrentSession;
+
+private:
+    static Error vendorErrorFilter(int32_t error, int32_t* vendorCode);
+    static AcquiredInfo vendorAcquiredFilter(int32_t info, int32_t* vendorCode);
+
+    fingerprint_device_t* mDevice;
+    int32_t mUserId;
+    std::shared_ptr<ISessionCallback> mCb;
+    std::mutex mMutex;
+};
+
+class BiometricsFingerprint : public BnFingerprint {
+public:
+    BiometricsFingerprint();
+    ~BiometricsFingerprint() override;
+
+    static std::shared_ptr<BiometricsFingerprint> create();
+
+    ndk::ScopedAStatus getSensorProps(
+        std::vector<SensorProps>* props) override;
+
+    ndk::ScopedAStatus createSession(
+        int32_t sensorId,
+        int32_t userId,
+        const std::shared_ptr<ISessionCallback>& cb,
+        std::shared_ptr<ISession>* session) override;
+
+private:
+    fingerprint_device_t* openHal();
+    fingerprint_device_t* mDevice;
+    std::mutex mSessionMutex;
+};
+
 }  // namespace fingerprint
 }  // namespace biometrics
 }  // namespace hardware
 }  // namespace android
-
-#endif  // ANDROID_HARDWARE_BIOMETRICS_FINGERPRINT_V2_1_BIOMETRICSFINGERPRINT_H
+}  // namespace aidl

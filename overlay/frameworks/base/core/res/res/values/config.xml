@@ -368,13 +368,6 @@
     <!-- Haptic feedback -->
     <bool name="config_enableHapticTextHandle">true</bool>
 
-    <!-- Сканер отпечатка пальца -->
-    <string-array name="config_biometric_sensors" translatable="false">
-        <item>0:2:15</item>
-    </string-array>
-    <integer name="config_fingerprintMaxTemplatesPerUser">5</integer>
-    <bool name="config_fingerprintSupportsGestures">false</bool>
-
     <!-- Прочие аппаратные опции -->
     <bool name="config_batterySdCardAccessibility">false</bool>
     <bool name="config_usbChargingMessage">true</bool>

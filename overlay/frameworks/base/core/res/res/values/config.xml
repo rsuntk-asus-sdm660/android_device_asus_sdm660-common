@@ -334,15 +334,6 @@
     <bool name="config_enableAppWidgetService">true</bool>
     <bool name="config_enableWallpaperService">true</bool>
 
-    <!-- Скруглённые углы и форма иконок -->
-    <bool name="config_supportsRoundedCornersOnWindows">true</bool>
-    <bool name="config_useRoundIcon">true</bool>
-    <string name="config_icon_mask" translatable="false">
-        M50,0L92,0C96.42,0 100,4.58 100,8L100,92C100,96.42 96.42,100
-        92,100L8,100C4.58,100 0,96.42 0,92L0,8C0,4.42 4.42,0 8,0L50,0Z
-    </string>
-
-
     <!-- ═══════════════════════════════════════════════════════════════
          РАЗДЕЛ 6: ЗВУК, LED-УВЕДОМЛЕНИЯ И БИОМЕТРИЯ
          ═══════════════════════════════════════════════════════════════ -->

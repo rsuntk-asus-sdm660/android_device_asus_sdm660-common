@@ -24,37 +24,6 @@
          calculate the status bar height. -->
     <dimen name="status_bar_height_default">@dimen/status_bar_height_portrait</dimen>
 
-    <!-- ═══════════ СКРУГЛЕНИЯ ДИАЛОГОВ ═══════════ -->
-
-    <!-- Системные диалоги -->
-    <dimen name="config_dialogCornerRadius">28dp</dimen>
-
-    <!-- Bottom sheet диалоги -->
-    <dimen name="config_bottomDialogCornerRadius">20dp</dimen>
-
-    <!-- Кнопки -->
-    <dimen name="config_buttonCornerRadius">8dp</dimen>
-
-    <!-- Progress bar -->
-    <dimen name="config_progressBarCornerRadius">16dp</dimen>
-
-    <!-- ═══════════ СКРУГЛЕНИЯ ЭКРАНА ═══════════ -->
-
-    <!-- Радиус скругления дисплея (если есть) -->
-    <dimen name="rounded_corner_radius">0dp</dimen>
-    <dimen name="rounded_corner_radius_top">0dp</dimen>
-    <dimen name="rounded_corner_radius_bottom">0dp</dimen>
-
-    <!-- Для второго дисплея (если есть) -->
-    <dimen name="secondary_rounded_corner_radius">0dp</dimen>
-    <dimen name="secondary_rounded_corner_radius_top">0dp</dimen>
-    <dimen name="secondary_rounded_corner_radius_bottom">0dp</dimen>
-
-    <!-- Adjustments -->
-    <dimen name="rounded_corner_radius_adjustment">0dp</dimen>
-    <dimen name="rounded_corner_radius_top_adjustment">0dp</dimen>
-    <dimen name="rounded_corner_radius_bottom_adjustment">0dp</dimen>
-
     <!-- ═══════════ WATERFALL DISPLAY (нет) ═══════════ -->
 
     <dimen name="waterfall_display_left_edge_size">0dp</dimen>

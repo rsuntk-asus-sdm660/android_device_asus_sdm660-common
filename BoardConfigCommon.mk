@@ -185,8 +185,8 @@ DEVICE_MATRIX_FILE                        := $(VENDOR_PATH)/compatibility_matrix
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(VENDOR_PATH)/framework_compatibility_matrix.xml
 
 # ODM манифест для SKU с NFC
-ODM_MANIFEST_SKUS      += NFC
-ODM_MANIFEST_NFC_FILES := $(VENDOR_PATH)/manifest_nfc.xml
+#ODM_MANIFEST_SKUS      += NFC
+#ODM_MANIFEST_NFC_FILES := $(VENDOR_PATH)/manifest_nfc.xml
 
 
 # ============================================================

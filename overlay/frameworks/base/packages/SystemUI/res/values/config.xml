@@ -37,13 +37,6 @@
     <!-- Лимит на экране блокировки -->
     <integer name="keyguard_max_notification_count">4</integer>
 
-    <!-- Отрисовка -->
-    <bool name="config_renderNotifications">true</bool>
-    <bool name="config_showNotificationGear">true</bool>
-    <bool name="config_enableNotificationShadeDrag">true</bool>
-    <bool name="config_clipNotificationScrollToTop">true</bool>
-    <bool name="config_enableNonGroupedNotificationExpand">true</bool>
-
     <!-- Smart Reply -->
     <bool name="config_smart_replies_in_notifications_enabled">true</bool>
     <bool name="config_smart_replies_in_notifications_show_in_heads_up">true</bool>
@@ -189,22 +182,4 @@
         <!-- sensorRadius -->
     </integer-array>
     
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  СКРУГЛЕНИЯ И ОТРИСОВКА УВЕДОМЛЕНИЙ                      ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <!-- Включить скруглённые углы для уведомлений -->
-    <bool name="config_clipNotificationsToOutline">true</bool>
-
-    <!-- Рисовать фон уведомлений -->
-    <bool name="config_drawNotificationBackground">true</bool>
-
-    <!-- Показывать фон групповых уведомлений при раскрытии -->
-    <bool name="config_showGroupNotificationBgWhenExpanded">true</bool>
-
-    <!-- Тени для дочерних уведомлений -->
-    <bool name="config_enableShadowOnChildNotifications">true</bool>
-
-    <!-- Скругление на полную ширину в ландшафте -->
-    <bool name="config_skinnyNotifsInLandscape">true</bool>
 </resources>

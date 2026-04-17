@@ -183,8 +183,8 @@ PRODUCT_PACKAGES += \
 # DeviceAsWebCam
 # ============================================================
 
-PRODUCT_PACKAGES += \
-    AsusDeviceAsWebcam
+#PRODUCT_PACKAGES += \
+#    AsusDeviceAsWebcam
 
 
 # ============================================================
@@ -591,6 +591,12 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
 
+# ============================================================
+# Remove packages
+# ============================================================
+
+PRODUCT_PACKAGES += \
+    RemovePackages
 
 # ============================================================
 # QCOM — whitelist и privapp разрешения

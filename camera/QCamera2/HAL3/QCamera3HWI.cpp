@@ -137,6 +137,10 @@ namespace qcamera {
 #define UBWC_COMP_RATIO 1.26
 #define PERF_CONFIG_PATH "/vendor/etc/camera/cameraconfig.txt"
 
+#define CTS_WA_HEIGHT_CHECK 3120
+#define CTS_WA_WIDTH_CHECK 4160
+#define CTS_WA_MINFRAMEDURATION 66666666
+
 // Whether to check for the GPU stride padding, or use the default
 //#define CHECK_GPU_PIXEL_ALIGNMENT
 
@@ -12449,6 +12453,14 @@ int QCamera3HardwareInterface::initStaticMetadata(uint32_t cameraId)
                 available_min_durations.add(scalar_formats[j]);
                 available_min_durations.add(gCamCapability[cameraId]->picture_sizes_tbl[i].width);
                 available_min_durations.add(gCamCapability[cameraId]->picture_sizes_tbl[i].height);
+
+                if ((scalar_formats[j] == HAL_PIXEL_FORMAT_YCbCr_420_888) &&
+                    (gCamCapability[cameraId]->picture_sizes_tbl[i].height
+                     == CTS_WA_HEIGHT_CHECK) &&
+                    (gCamCapability[cameraId]->picture_sizes_tbl[i].width == CTS_WA_WIDTH_CHECK)) {
+                    gCamCapability[cameraId]->picture_min_duration[i] = CTS_WA_MINFRAMEDURATION;
+
+                }
                 available_min_durations.add(gCamCapability[cameraId]->picture_min_duration[i]);
             }
             break;

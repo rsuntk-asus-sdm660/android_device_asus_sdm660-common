@@ -29,7 +29,7 @@
          ║  LIVEDISPLAY (Цветокалибровка)                           ║
          ╚══════════════════════════════════════════════════════════╝ -->
 
-    <bool name="config_enableLiveDisplay">false</bool>
+    <bool name="config_enableLiveDisplay">true</bool>
     
     <!-- Температуры -->
     <integer name="config_dayColorTemperature">6500</integer>

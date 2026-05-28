@@ -424,13 +424,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_vendor.xml \
     $(LOCAL_PATH)/configs/media/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_ODM)/etc/media_profiles_V1_0.xml
 
-# Google C2 кодеки из frameworks
-PRODUCT_COPY_FILES += \
-    frameworks/av/media/libstagefright/data/media_codecs_google_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_c2_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_audio.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_c2_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_video.xml
-
-
 # ============================================================
 # Сеть
 # ============================================================
@@ -507,6 +500,8 @@ DEVICE_PACKAGE_OVERLAYS += \
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 
+PRODUCT_PACKAGES += \
+    NcmTetheringOverlay
 
 # ============================================================
 # Разделы (partition mountpoints)
@@ -601,6 +596,11 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     RemovePackages
+
+# ============================================================
+# Platform
+# ============================================================
+TARGET_BOARD_PLATFORM := sdm660
 
 # ============================================================
 # QCOM — whitelist и privapp разрешения
@@ -816,6 +816,14 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/configs/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
 
+# ============================================================
 # Симлинк на конфигурацию Wi-Fi прошивки
+# ============================================================
 PRODUCT_PACKAGES += \
     firmware_WCNSS_qcom_cfg.ini_symlink
+
+# ============================================================
+# WiFi Display
+# ============================================================
+PRODUCT_PACKAGES += \
+    android.media.audio.common.types-V2-cpp

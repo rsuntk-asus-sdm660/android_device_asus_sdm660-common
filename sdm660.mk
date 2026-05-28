@@ -270,12 +270,12 @@ PRODUCT_PACKAGES += \
 # FM-радио
 # ============================================================
 
-PRODUCT_PACKAGES += \
-    android.hardware.broadcastradio@1.0-impl \
-    FM2 \
-    libqcomfm_jni \
-    qcom.fmradio \
-    qcom.fmradio.xml
+#PRODUCT_PACKAGES += \
+#    android.hardware.broadcastradio@1.0-impl \
+#    FM2 \
+#    libqcomfm_jni \
+#    qcom.fmradio \
+#    qcom.fmradio.xml
 
 
 # ============================================================

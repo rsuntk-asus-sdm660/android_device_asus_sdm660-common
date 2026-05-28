@@ -108,8 +108,8 @@ drm.service.enabled=true
 # ═══════════════════════════════════════════════════════════════
 # FM Radio
 # ═══════════════════════════════════════════════════════════════
-vendor.fm.a2dp.conc.disabled=false
-vendor.hw.fm.init=0
+#vendor.fm.a2dp.conc.disabled=false
+#vendor.hw.fm.init=0
 
 # ═══════════════════════════════════════════════════════════════
 # FRP (Factory Reset Protection)

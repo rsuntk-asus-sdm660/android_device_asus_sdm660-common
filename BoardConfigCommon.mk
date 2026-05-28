@@ -86,7 +86,7 @@ AUDIO_FEATURE_ENABLED_EXTN_FLAC_DECODER        := true
 AUDIO_FEATURE_ENABLED_EXTN_FORMATS             := true
 AUDIO_FEATURE_ENABLED_EXTN_RESAMPLER           := true
 AUDIO_FEATURE_ENABLED_FLAC_OFFLOAD             := true
-AUDIO_FEATURE_ENABLED_FM_POWER_OPT             := true
+AUDIO_FEATURE_ENABLED_FM_POWER_OPT             := false
 AUDIO_FEATURE_ENABLED_HDMI_SPK                 := true
 AUDIO_FEATURE_ENABLED_HW_ACCELERATED_EFFECTS   := false
 AUDIO_FEATURE_ENABLED_PCM_OFFLOAD              := true
@@ -159,9 +159,8 @@ TARGET_FS_CONFIG_GEN := $(VENDOR_PATH)/config.fs
 # FM-радио (Qualcomm Cherokee SoC)
 # ============================================================
 
-BOARD_HAS_QCA_FM_SOC := cherokee
-BOARD_HAVE_QCOM_FM   := true
-
+#BOARD_HAS_QCA_FM_SOC := cherokee
+#BOARD_HAVE_QCOM_FM   := true
 
 # ============================================================
 # GPS

@@ -43,7 +43,7 @@ vendor.audio.feature.hwdep_cal.enable=false
 vendor.audio.feature.incall_music.enable=true
 vendor.audio.feature.multi_voice_session.enable=true
 vendor.audio.feature.keep_alive.enable=false
-vendor.audio.feature.kpi_optimize.enable=false
+vendor.audio.feature.kpi_optimize.enable=true
 vendor.audio.feature.maxx_audio.enable=false
 vendor.audio.feature.ras.enable=true
 vendor.audio.feature.record_play_concurency.enable=false
@@ -65,10 +65,10 @@ vendor.audio.offload.buffer.size.kb=256
 vendor.audio.offload.gapless.enabled=true
 vendor.audio.offload.multiaac.enable=true
 vendor.audio.offload.multiple.enabled=false
-vendor.audio.offload.passthrough=true
+vendor.audio.offload.passthrough=false
 vendor.audio.offload.track.enable=true
 vendor.audio.parser.ip.buffer.size=262144
-vendor.audio.safx.pbe.enabled=true
+vendor.audio.safx.pbe.enabled=false
 vendor.audio.spkr_prot.tx.sampling_rate=48000
 vendor.audio.use.sw.alac.decoder=true
 vendor.audio.use.sw.ape.decoder=true
@@ -114,7 +114,7 @@ drm.service.enabled=true
 # ═══════════════════════════════════════════════════════════════
 # FRP (Factory Reset Protection)
 # ═══════════════════════════════════════════════════════════════
-ro.frp.pst=/dev/block/bootdevice/by-name/frp
+#ro.frp.pst=/dev/block/bootdevice/by-name/frp
 
 # ═══════════════════════════════════════════════════════════════
 # Media / Video Codec HAL
@@ -188,5 +188,15 @@ vendor.usb.use_gadget_hal=1
 # ═══════════════════════════════════════════════════════════════
 sys.vendor.shutdown.waittime=500
 
+# ═══════════════════════════════════════════════════════════════
 # Incremental FS
+# ═══════════════════════════════════════════════════════════════
 ro.incremental.enable=1
+
+# ═══════════════════════════════════════════════════════════════
+# Crypto
+# ═══════════════════════════════════════════════════════════════
+ro.crypto.dm_default_key.options_format.version=2
+ro.crypto.volume.filenames_mode=aes-256-cts
+ro.crypto.volume.metadata.method=dm-default-key
+ro.crypto.volume.options=::v2

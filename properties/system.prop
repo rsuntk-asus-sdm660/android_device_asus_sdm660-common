@@ -26,7 +26,10 @@ audio.offload.video=true
 audio.sys.noisy.broadcast.delay=600
 audio.sys.offload.pstimeout.secs=3
 audio.offload.min.duration.secs=30
-audio.safemedia.bypass=false
+audio.safemedia.bypass=true
+ro.config.media_vol_steps=25
+ro.config.vc_call_vol_steps=14
+ro.config.alarm_vol_steps=25
 ro.audio.jack.detection=true
 persist.audio.jack.event=1
 
@@ -142,6 +145,11 @@ persist.backup.ntpServer="0.pool.ntp.org"
 # Performance (System level)
 # ═══════════════════════════════════════════════════════════════
 ro.sys.fw.bg_apps_limit=48
+
+# ═══════════════════════════════════════════════════════════════
+# RCS
+# ═══════════════════════════════════════════════════════════════
+persist.rcs.supported=1
 
 # ═══════════════════════════════════════════════════════════════
 # SSR

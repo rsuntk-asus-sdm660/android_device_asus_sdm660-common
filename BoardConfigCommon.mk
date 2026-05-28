@@ -337,8 +337,8 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
 # ============================================================
 
 # Устройство изначально поставлялось с Android 8.1 (API 27)
-# Vendor freeze зафиксирован на уровне Android 13 (API 33)
-BOARD_SHIPPING_API_LEVEL := 33
+# Vendor freeze зафиксирован на уровне Android 14 (API 34)
+BOARD_SHIPPING_API_LEVEL := 34
 
 
 # ============================================================

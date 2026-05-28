@@ -178,13 +178,10 @@ ro.soc.model=SDM660
 # ═══════════════════════════════════════════════════════════════
 # USB HAL
 # ═══════════════════════════════════════════════════════════════
-ro.usb.uvc.disable_video_encode_flag=true
-ro.usb.uvc.enabled=true
 vendor.usb.diag.func.name=diag
 vendor.usb.use_ffs_mtp=1
 sys.usb.mtp.batchcancel=1
 vendor.usb.use_gadget_hal=1
-vendor.usb.uvc.payload_transfer_size=1024
 
 # ═══════════════════════════════════════════════════════════════
 # Shutdown

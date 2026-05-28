@@ -44,7 +44,7 @@ caps: BLOCK_SUSPEND NET_ADMIN
 mode: 0755
 user: AID_SYSTEM
 group: AID_SYSTEM
-caps: NET_BIND_SERVICE
+caps: NET_BIND_SERVICE SYS_BOOT
 
 [vendor/bin/pd-mapper]
 mode: 0755
@@ -110,28 +110,4 @@ caps: NET_BIND_SERVICE
 mode: 0771
 user: AID_SYSTEM
 group: AID_SYSTEM
-caps: 0
-
-[vendor/bt_firmware/]
-mode: 0771
-user: AID_SYSTEM
-group: AID_SYSTEM
-caps: 0
-
-[persist/]
-mode: 0771
-user: AID_SYSTEM
-group: AID_SYSTEM
-caps: 0
-
-[/mnt/vendor/persist/]
-mode: 0771
-user: AID_SYSTEM
-group: AID_SYSTEM
-caps: 0
-
-[vendor/dsp/]
-mode: 0771
-user: AID_MEDIA
-group: AID_MEDIA
 caps: 0

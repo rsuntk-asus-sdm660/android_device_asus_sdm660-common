@@ -168,9 +168,6 @@ BOARD_HAVE_QCOM_FM   := true
 # ============================================================
 
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := default
-GNSS_HIDL_VERSION                      := 2.1
-LOC_HIDL_VERSION                       := 4.0
-
 
 # ============================================================
 # HIDL / VINTF манифесты
@@ -178,8 +175,7 @@ LOC_HIDL_VERSION                       := 4.0
 
 DEVICE_MANIFEST_FILE := $(VENDOR_PATH)/manifest.xml
 DEVICE_MANIFEST_FILE += \
-    $(VENDOR_PATH)/manifest_android.hardware.drm@1.3-service.widevine.xml \
-    $(VENDOR_PATH)/vendor.qti.gnss@4.0-service.xml
+    $(VENDOR_PATH)/manifest_android.hardware.drm@1.3-service.widevine.xml
 
 DEVICE_MATRIX_FILE                        := $(VENDOR_PATH)/compatibility_matrix.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(VENDOR_PATH)/framework_compatibility_matrix.xml

@@ -80,8 +80,6 @@ const loc_param_s_type ContextBase::mGps_conf_table[] =
   {"MODEM_TYPE",                     &mGps_conf.MODEM_TYPE,                     NULL, 'n' },
   {"MO_SUPL_HOST",                   &mGps_conf.MO_SUPL_HOST,                   NULL, 's' },
   {"MO_SUPL_PORT",                   &mGps_conf.MO_SUPL_PORT,                   NULL, 'n' },
-  {"SUPL_HOST2",                     &mGps_conf.SUPL_HOST2,                     NULL, 's'},
-  {"SUPL_PORT2",                     &mGps_conf.SUPL_PORT2,                     NULL, 'n'},
   {"CONSTRAINED_TIME_UNCERTAINTY_ENABLED",
            &mGps_conf.CONSTRAINED_TIME_UNCERTAINTY_ENABLED,      NULL, 'n'},
   {"CONSTRAINED_TIME_UNCERTAINTY_THRESHOLD",
@@ -134,8 +132,6 @@ void ContextBase::readConfig()
         mGps_conf.SUPL_ES = 0;
         mGps_conf.CP_MTLR_ES = 0;
         mGps_conf.SUPL_HOST[0] = 0;
-        mGps_conf.SUPL_HOST2[0] = 0;
-        mGps_conf.SUPL_PORT2 = 7275;
         mGps_conf.SUPL_PORT = 0;
         mGps_conf.CAPABILITIES = 0x7;
         /* LTE Positioning Profile configuration is disable by default*/

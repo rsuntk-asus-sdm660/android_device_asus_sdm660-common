@@ -45,10 +45,10 @@ LocAdapterBase::LocAdapterBase(const LOC_API_ADAPTER_EVENT_MASK_T mask,
                                ContextBase* context, bool isMaster,
                                LocAdapterProxyBase *adapterProxyBase,
                                bool waitForDoneInit) :
-    mIsMaster(isMaster), mIsEngineCapabilitiesKnown(ContextBase::sIsEngineCapabilitiesKnown),
-    mEvtMask(mask), mContext(context),
-    mLocApi(context->getLocApi()), mLocAdapterProxyBase(adapterProxyBase),
-    mMsgTask(context->getMsgTask())
+    mIsMaster(isMaster),
+    mIsEngineCapabilitiesKnown(ContextBase::sIsEngineCapabilitiesKnown),
+    mEvtMask(mask), mContext(context), mLocApi(context->getLocApi()),
+    mLocAdapterProxyBase(adapterProxyBase), mMsgTask(context->getMsgTask())
 {
     LOC_LOGd("waitForDoneInit: %d", waitForDoneInit);
     if (!waitForDoneInit) {
@@ -88,8 +88,8 @@ void LocAdapterBase::
                         const GpsLocationExtended& locationExtended,
                         enum loc_sess_status status,
                         LocPosTechMask loc_technology_mask,
-                        GnssDataNotification* /*pDataNotify*/,
-                        int /*msInWeek*/)
+                        GnssDataNotification* pDataNotify __unused,
+                        int msInWeek __unused)
 {
     if (mLocAdapterProxyBase != NULL) {
         mLocAdapterProxyBase->reportPositionEvent((UlpLocation&)location,
@@ -433,7 +433,7 @@ LocAdapterBase::reportLatencyInfoEvent(const GnssLatencyInfo& /*gnssLatencyInfo*
 DEFAULT_IMPL()
 
 bool LocAdapterBase::
-    reportQwesCapabilities(const std::unordered_map<LocationQwesFeatureType, bool>& /*featureMap*/)
+    reportQwesCapabilities(const std::unordered_map<LocationQwesFeatureType, bool> &/*featureMap*/)
 DEFAULT_IMPL(false)
 
 } // namespace loc_core

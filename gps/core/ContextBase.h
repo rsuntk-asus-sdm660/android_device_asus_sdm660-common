@@ -72,8 +72,6 @@ typedef struct loc_gps_cfg_s
     uint32_t       MODEM_TYPE;
     char           MO_SUPL_HOST[LOC_MAX_PARAM_STRING];
     uint32_t       MO_SUPL_PORT;
-    char           SUPL_HOST2[LOC_MAX_PARAM_STRING];
-    uint32_t       SUPL_PORT2;
     uint32_t       CONSTRAINED_TIME_UNCERTAINTY_ENABLED;
     double         CONSTRAINED_TIME_UNCERTAINTY_THRESHOLD;
     uint32_t       CONSTRAINED_TIME_UNCERTAINTY_ENERGY_BUDGET;

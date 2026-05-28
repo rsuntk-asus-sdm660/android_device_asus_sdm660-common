@@ -1,0 +1,4 @@
+# artd needs to read app data for dexopt
+allow artd app_data_file:lnk_file { read getattr };
+allow artd app_data_file:dir { search getattr open read };
+allow artd app_data_file:file { read open getattr map };

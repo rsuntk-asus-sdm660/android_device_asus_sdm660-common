@@ -10,3 +10,6 @@ type qchook_service, service_manager_type;
 
 # Теперь используем только что объявленный тип
 allow radio qchook_service:service_manager add;
+
+add_service(radio, qcrilhook_service)
+allow radio qcrilhook_service:service_manager find;

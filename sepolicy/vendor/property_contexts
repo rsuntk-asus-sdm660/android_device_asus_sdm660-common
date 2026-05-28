@@ -50,3 +50,22 @@ ro.hwversion                                  u:object_r:build_prop:s0
 
 # ZRAM properties
 vendor.zram.                                  u:object_r:vendor_zram_prop:s0
+
+vendor.bluetooth.soc u:object_r:vendor_bt_soc_prop:s0 exact string
+persist.vendor.overlay.izat.optin u:object_r:vendor_izat_optin_prop:s0 exact string
+vendor.hw.fm.init u:object_r:vendor_hw_fm_init_prop:s0 exact string
+
+media.settings.xml u:object_r:media_settings_xml_prop:s0 exact string
+vidc.enc.target_support_bframe u:object_r:vidc_enc_target_support_bframe_prop:s0 exact string
+persist.data.df.dev_name u:object_r:persist_data_df_dev_name_prop:s0 exact string
+sdm.debug.disable_skip_validate u:object_r:sdm_debug_disable_skip_validate_prop:s0 exact string
+
+# optional
+ro.build.expect.modem u:object_r:ro_build_expect_modem_prop:s0 exact string
+ro.build.expect.firmware u:object_r:ro_build_expect_firmware_prop:s0 exact string
+
+# POWERHAL
+vendor.powerhal.state        u:object_r:vendor_power_prop:s0
+vendor.powerhal.audio        u:object_r:vendor_power_prop:s0
+vendor.powerhal.rendering    u:object_r:vendor_power_prop:s0
+vendor.powerhal.init         u:object_r:vendor_power_prop:s0

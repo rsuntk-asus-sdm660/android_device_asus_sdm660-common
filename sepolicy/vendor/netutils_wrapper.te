@@ -1,0 +1,2 @@
+# Скрываем предупреждения о kill-вызове в ip6tables, не нарушая neverallow
+dontaudit netutils_wrapper self:capability kill;

@@ -30,3 +30,14 @@ allow vendor_init rng_device:chr_file { getattr read open };
 
 allow vendor_init vendor_mwqem_prop:property_service { set };
 allow vendor_init vendor_reschedule_service_prop:property_service { set };
+
+set_prop(vendor_init, vendor_bt_soc_prop)
+set_prop(vendor_init, vendor_izat_optin_prop)
+
+system_vendor_config_prop(vidc_enc_target_support_bframe_prop)
+system_vendor_config_prop(persist_data_df_dev_name_prop)
+system_vendor_config_prop(sdm_debug_disable_skip_validate_prop)
+
+# optional / low priority
+system_vendor_config_prop(ro_build_expect_modem_prop)
+system_vendor_config_prop(ro_build_expect_firmware_prop)

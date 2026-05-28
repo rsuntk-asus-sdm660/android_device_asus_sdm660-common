@@ -8,3 +8,10 @@ vendor_public_prop(nfc_nq_prop)
 # ZRAM properties
 type vendor_zram_prop, property_type;
 typeattribute vendor_zram_prop vendor_property_type;
+
+vendor_internal_prop(vendor_bt_soc_prop)
+vendor_internal_prop(vendor_izat_optin_prop)
+vendor_internal_prop(vendor_hw_fm_init_prop)
+
+# Свойства для Power HAL
+type vendor_power_prop, property_type, vendor_property_type;

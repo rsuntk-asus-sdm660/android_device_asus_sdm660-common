@@ -73,3 +73,8 @@
 # Zram
 /vendor/bin/init\.zram\.sh      u:object_r:zram_config_exec:s0
 /vendor/bin/init\.zram_vm\.sh   u:object_r:zram_config_exec:s0
+
+# Ensure cgroup paths have the correct labels
+/dev/cpuset(/.*)?           u:object_r:cgroup:s0
+/dev/stune(/.*)?            u:object_r:cgroup:s0
+/dev/cpuctl(/.*)?           u:object_r:cgroup:s0

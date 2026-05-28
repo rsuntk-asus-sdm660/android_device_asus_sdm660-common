@@ -33,3 +33,19 @@ allow hal_power_default self:capability { sys_nice sys_admin };
 allow hal_power_default sysfs_devices_system_cpu:lnk_file read;
 
 hwbinder_use(hal_power_default)
+
+# Разрешаем запись в ноды cpufreq и cpu_boost
+allow hal_power_default sysfs_devices_system_cpu:file rw_file_perms;
+allow hal_power_default sysfs:file rw_file_perms; # Если input_boost лежит в sysfs
+
+# Разрешаем работу с cpuset cgroups
+allow hal_power_default cgroup:dir r_dir_perms;
+allow hal_power_default cgroup:file rw_file_perms;
+
+set_prop(hal_power_default, vendor_power_prop)
+
+# Разрешить Power HAL находить системную службу статистики (IStats)
+allow hal_power_default fwk_stats_service:service_manager find;
+
+# Делаем Power HAL легальным клиентом теплового сервиса (EAS Thermal Listener)
+hal_client_domain(hal_power_default, hal_thermal)

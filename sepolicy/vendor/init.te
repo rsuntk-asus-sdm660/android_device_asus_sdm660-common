@@ -55,3 +55,10 @@ allow init configfs:dir w_dir_perms;
 
 allow init cgroup:file w_file_perms;
 allow init proc_sched:file rw_file_perms;
+
+allow init self:capability { dac_override dac_read_search };
+allow init cgroup:file { write open };
+allow init cgroup:dir { search write add_name };
+allow init cgroup_v2:file { write open };
+allow init cgroup_v2:dir { search write add_name };
+allow init sysfs_devices_system_cpu:file { write open };

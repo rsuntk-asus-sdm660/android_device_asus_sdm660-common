@@ -174,11 +174,9 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := default
 # ============================================================
 
 DEVICE_MANIFEST_FILE := $(VENDOR_PATH)/manifest.xml
-DEVICE_MANIFEST_FILE += \
-    $(VENDOR_PATH)/manifest_android.hardware.drm@1.3-service.widevine.xml
-
 DEVICE_MATRIX_FILE                        := $(VENDOR_PATH)/compatibility_matrix.xml
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(VENDOR_PATH)/framework_compatibility_matrix.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
+    $(VENDOR_PATH)/framework_compatibility_matrix.xml
 
 # ODM манифест для SKU с NFC
 #ODM_MANIFEST_SKUS      += NFC

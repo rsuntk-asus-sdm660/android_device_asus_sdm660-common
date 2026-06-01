@@ -21,19 +21,20 @@
             <value>0.0</value>
             <nits>2.0</nits>
         </point>
-        <!-- 
-             FULL POWER UNLOCKED
-             100% Slider (1.0) = 420 Nits = 255 PWM
+
+        <!--
+             COMMON PROFILE FOR X00TD / X01BD
+             100% slider (1.0) = 450 nits
         -->
         <point>
             <value>1.0</value>
-            <nits>420.0</nits>
+            <nits>450.0</nits>
         </point>
     </screenBrightnessMap>
-    
+
     <screenBrightnessDefault>0.4</screenBrightnessDefault>
-    
-    <!-- Ramp Rate (Stock) -->
+
+    <!-- Ramp rate -->
     <screenBrightnessRampFastDecrease>0.7</screenBrightnessRampFastDecrease>
     <screenBrightnessRampFastIncrease>0.7</screenBrightnessRampFastIncrease>
     <screenBrightnessRampSlowDecrease>0.23</screenBrightnessRampSlowDecrease>

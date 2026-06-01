@@ -7,9 +7,11 @@
 #include "BacklightDevice.h"
 
 #include <android-base/logging.h>
+
+#include <algorithm>
 #include <fstream>
 #include <unistd.h>
-#include <algorithm> // для std::min
+
 #include "Utils.h"
 
 #define LOG_TAG "BacklightDevice"
@@ -22,10 +24,6 @@ namespace light {
 static const std::string kBacklightBasePath = "/sys/class/backlight/";
 static const uint32_t kDefaultMaxBrightness = 255;
 
-// ★ REAL HARDWARE LIMIT FOR X00TD/X01BD
-// Ядро врет про 4095. Реальный лимит PM660L WLED = 3259.
-static const uint32_t kTrueHardwareMax = 3259;
-
 static const std::string kBrightnessNode = "brightness";
 static const std::string kMaxBrightnessNode = "max_brightness";
 
@@ -33,16 +31,24 @@ BacklightDevice::BacklightDevice(const std::string& name)
     : mName(name),
       mBasePath(kBacklightBasePath + name + "/"),
       mMaxBrightness(kDefaultMaxBrightness) {
-    
-    // Читаем то, что дает ядро (4095)
-    readFromFile(mBasePath + kMaxBrightnessNode, mMaxBrightness);
+    /*
+     * Универсальный режим:
+     * - читаем max_brightness из sysfs;
+     * - не вводим device-specific hardcap вроде 3259;
+     * - если ядро вернуло некорректное значение (0), откатываемся к 255.
+     */
+    uint32_t reportedMax = kDefaultMaxBrightness;
+    readFromFile(mBasePath + kMaxBrightnessNode, reportedMax);
 
-    // ★ FIX: Если ядро дает больше реального лимита, обрезаем
-    if (mMaxBrightness > kTrueHardwareMax) {
-        LOG(WARNING) << "Kernel reported max brightness " << mMaxBrightness 
-                     << " is too high! Capping to hardware safe limit: " << kTrueHardwareMax;
-        mMaxBrightness = kTrueHardwareMax;
+    if (reportedMax == 0) {
+        LOG(WARNING) << "Invalid max_brightness=0 for " << mName
+                     << ", fallback to default: " << kDefaultMaxBrightness;
+        mMaxBrightness = kDefaultMaxBrightness;
+    } else {
+        mMaxBrightness = reportedMax;
     }
+
+    LOG(INFO) << "Backlight " << mName << " max_brightness=" << mMaxBrightness;
 }
 
 std::string BacklightDevice::getName() const {
@@ -54,9 +60,8 @@ bool BacklightDevice::exists() const {
 }
 
 bool BacklightDevice::setBrightness(uint8_t value) {
-    // Теперь scaleBrightness будет масштабировать 0-255 в 0-3259
-    // OVP не сработает!
-    return writeToFile(mBasePath + kBrightnessNode, scaleBrightness(value, mMaxBrightness));
+    const uint32_t scaled = std::min(scaleBrightness(value, mMaxBrightness), mMaxBrightness);
+    return writeToFile(mBasePath + kBrightnessNode, scaled);
 }
 
 void BacklightDevice::dump(int fd) const {

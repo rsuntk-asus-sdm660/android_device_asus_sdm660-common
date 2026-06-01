@@ -62,7 +62,7 @@
 
     <array name="config_screenBrightnessNits">
         <item>2.0</item>
-        <item>420.0</item>
+        <item>450.0</item>
     </array>
 
     <!-- Пороги освещённости для автояркости
@@ -84,17 +84,17 @@
     <!-- Целевая яркость дисплея по диапазонам освещённости -->
     <array name="config_autoBrightnessDisplayValuesNits">
         <item>10.0</item>
-        <item>20.0</item>
-        <item>45.0</item>
-        <item>80.0</item>
-        <item>120.0</item>
-        <item>165.0</item>
-        <item>215.0</item>
-        <item>270.0</item>
-        <item>330.0</item>
-        <item>375.0</item>
-        <item>400.0</item>
-        <item>420.0</item>
+        <item>22.0</item>
+        <item>48.0</item>
+        <item>85.0</item>
+        <item>130.0</item>
+        <item>180.0</item>
+        <item>235.0</item>
+        <item>295.0</item>
+        <item>355.0</item>
+        <item>405.0</item>
+        <item>430.0</item>
+        <item>450.0</item>
     </array>
 
     <!-- Яркость в режиме простоя/idle -->
@@ -114,17 +114,17 @@
 
     <array name="config_autoBrightnessDisplayValuesNitsIdle">
         <item>7.0</item>
-        <item>16.0</item>
-        <item>38.0</item>
-        <item>70.0</item>
-        <item>110.0</item>
-        <item>155.0</item>
-        <item>205.0</item>
-        <item>260.0</item>
-        <item>320.0</item>
-        <item>365.0</item>
+        <item>17.0</item>
+        <item>40.0</item>
+        <item>74.0</item>
+        <item>117.0</item>
+        <item>165.0</item>
+        <item>220.0</item>
+        <item>282.0</item>
+        <item>342.0</item>
         <item>395.0</item>
-        <item>420.0</item>
+        <item>425.0</item>
+        <item>450.0</item>
     </array>
 
     <!-- Границы яркости, старый integer API -->
@@ -217,12 +217,9 @@
     <bool name="config_dozeAlwaysOnEnabled">false</bool>
     <bool name="config_displayBlanksAfterDoze">false</bool>
     <bool name="config_displayBrightnessBucketsInDoze">false</bool>
-    <bool name="config_dozePulsePickup">true</bool>
-    <bool name="config_dozePickupGestureEnabled">true</bool>
     <bool name="config_dozeEnabled">true</bool>
 
     <!-- Dreaming / screensaver -->
-    <bool name="config_dreamsSupported">true</bool>
     <bool name="config_dreamsEnabledByDefault">false</bool>
     <bool name="config_dreamsActivatedOnDockByDefault">true</bool>
     <bool name="config_dreamsActivatedOnSleepByDefault">false</bool>
@@ -624,9 +621,6 @@
 
     <!-- Поведение диалогов -->
     <bool name="config_closeDialogWhenTouchOutside">true</bool>
-
-    <!-- Перевернуть для выключения экрана -->
-    <bool name="config_flipToScreenOffEnabled">true</bool>
 
     <!-- NTP -->
     <string-array translatable="false" name="config_ntpServers">

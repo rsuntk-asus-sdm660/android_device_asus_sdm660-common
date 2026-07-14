@@ -59,6 +59,7 @@ cc_library_shared {
         "libqexif_headers",
         "libstagefrighthw_headers",
         "libsystem_headers",
+        "libgui_headers",
         "media_plugin_headers",
     ],
 
@@ -71,6 +72,7 @@ cc_library_shared {
         "libhal_dbg",
         "libhardware",
         "libhidlbase",
+        "libgui",
         "libion",
         "liblog",
         "libmmcamera_interface",
@@ -129,6 +131,7 @@ cc_library_shared {
     ],
 
     include_dirs: [
+        "frameworks/native/include",
         "system/memory/libion/include",
         "system/memory/libion/kernel-headers",
     ],

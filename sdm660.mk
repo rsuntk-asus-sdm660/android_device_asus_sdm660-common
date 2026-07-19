@@ -17,6 +17,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/non_ab_device.mk)
 # Qualcomm common definitions
 $(call inherit-product, hardware/qcom-caf/common/common.mk)
 
+# Enable project quotas and casefolding for emulated storage without sdcardfs
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
 # ============================================================
 # Глобальные параметры продукта

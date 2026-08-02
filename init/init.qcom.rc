@@ -581,3 +581,12 @@ on property:sys.boot_completed=1
     write /sys/module/lpm_levels/system/system-pc/idle_enabled 1
     write /sys/module/lpm_levels/system/system-sve/idle_enabled 1
     write /sys/module/lpm_levels/system/system-sve-l3/idle_enabled 1
+
+service vendor.qti.hardware.display.allocator /vendor/bin/hw/vendor.qti.hardware.display.allocator-service
+    override
+    class hal animation
+    user system
+    group graphics drmrpc
+    capabilities SYS_NICE
+    onrestart restart surfaceflinger
+    task_profiles ProcessCapacityHigh HighPerformance

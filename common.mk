@@ -315,7 +315,7 @@ PRODUCT_PACKAGES += \
     libstagefright_softomx_plugin.vendor \
     libstagefrighthw
 
-$(call soong_config_set,stagefright,target_disables_thumbnail_block_model,true)
+$(call soong_config_set_bool,stagefright,target_disables_thumbnail_block_model,true)
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \

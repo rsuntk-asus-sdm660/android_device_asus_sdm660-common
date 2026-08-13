@@ -152,7 +152,7 @@ TARGET_KERNEL_NO_GCC     := true
 $(call soong_config_set,lineage_health,charging_control_charging_path,/sys/class/power_supply/battery/charging_enabled)
 
 # LMKD
-TARGET_LMKD_STATS_LOG := true
+TARGET_LMKD_STATS_LOG := false
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144

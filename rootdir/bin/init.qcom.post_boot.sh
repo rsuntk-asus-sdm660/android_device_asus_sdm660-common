@@ -11,16 +11,11 @@ write() { [ -e "$1" ] && echo "$2" > "$1"; }
 write_str() { [ -e "$1" ] && printf '%s' "$2" > "$1"; }
 
 function sdm660_sched_schedutil_dcvs() {
-    # ═══════════════════════════════════════════════════════════════
-    # 1. CPU FREQUENCY GOVERNOR (SCHEDUTIL)
-    # ═══════════════════════════════════════════════════════════════
-    # Big Cluster (Kryo Gold: CPU 0-3
+    # Big Cluster (Kryo Gold: CPU 0-3)
     write /sys/devices/system/cpu/cpufreq/policy0/scaling_governor "schedutil"
-    # Убираем rate_limit (0), чтобы ядро 4.19 само решало (максимальная отзывчивость)
     write /sys/devices/system/cpu/cpufreq/policy0/schedutil/up_rate_limit_us 0
     write /sys/devices/system/cpu/cpufreq/policy0/schedutil/down_rate_limit_us 0
     write /sys/devices/system/cpu/cpufreq/policy0/schedutil/iowait_boost_enable 0
-    # THERMAL CAPS: Низкий порог для работы термо-профилей
     write /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq 576000
 
     # Little Cluster (Kryo Silver: CPU 4-7)
@@ -28,45 +23,12 @@ function sdm660_sched_schedutil_dcvs() {
     write /sys/devices/system/cpu/cpufreq/policy4/schedutil/up_rate_limit_us 0
     write /sys/devices/system/cpu/cpufreq/policy4/schedutil/down_rate_limit_us 0
     write /sys/devices/system/cpu/cpufreq/policy4/schedutil/iowait_boost_enable 0
-    # THERMAL CAPS: Низкий порог для работы термо-профилей
     write /sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq 825600
 
-    # ═══════════════════════════════════════════════════════════════
-    # 2. SCHEDTUNE (EAS BOOST)
-    # ═══════════════════════════════════════════════════════════════
-    # Top-App: Легкий буст для плавности UI
-    write /dev/stune/top-app/schedtune.boost 10
-    write /dev/stune/top-app/schedtune.prefer_idle 1
-
-    # Foreground
-    write /dev/stune/foreground/schedtune.boost 0
-    write /dev/stune/foreground/schedtune.prefer_idle 0
-
-    # Background
-    write /dev/stune/background/schedtune.boost 0
-    write /dev/stune/background/schedtune.prefer_idle 0
-
-    # ═══════════════════════════════════════════════════════════════
-    # 3. CPUSETS
-    # ═══════════════════════════════════════════════════════════════
-    # Background: только малые ядра (cpu 4-7)
     write /dev/cpuset/background/cpus 4-7
     write /dev/cpuset/system-background/cpus 4-7
     write /dev/cpuset/restricted/cpus 4-7
-
-    # Top-App: все ядра (0-7)
     write /dev/cpuset/top-app/cpus 0-7
-
-    # ═══════════════════════════════════════════════════════════════
-    # 4. WALT TUNING
-    # ═══════════════════════════════════════════════════════════════
-    # Разрешить ротацию задач на больших ядрах
-    write /proc/sys/kernel/sched_walt_rotate_big_tasks 1
-    # Пороги миграции (EAS сам управляет, это подсказки)
-    write /proc/sys/kernel/sched_upmigrate 95
-    write /proc/sys/kernel/sched_downmigrate 85
-    write /proc/sys/kernel/sched_group_upmigrate 95
-    write /proc/sys/kernel/sched_group_downmigrate 85
 }
 
 function configure_storage_io() {

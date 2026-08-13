@@ -193,7 +193,7 @@ TARGET_SYSTEM_PROP  += $(VENDOR_PATH)/properties/system.prop
 TARGET_VENDOR_PROP  += $(VENDOR_PATH)/properties/vendor.prop
 
 # Recovery
-TARGET_RECOVERY_FSTAB         := $(VENDOR_PATH)/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB         := $(VENDOR_PATH)/init/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT  := RGBX_8888
 TARGET_RECOVERY_UPDATER_LIBS  := librecovery_updater_asus
 TARGET_RELEASETOOLS_EXTENSIONS := $(VENDOR_PATH)

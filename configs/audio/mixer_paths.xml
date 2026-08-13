@@ -62,84 +62,26 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
 <mixer>
-    <!-- Fix for INT4_MI2S_RX Format error -->
-    <ctl name="INT4_MI2S_RX Format" value="S16_LE" />
-    <ctl name="INT4_MI2S_RX SampleRate" value="KHZ_48" />
-    
-    <!-- Missing formats for Primary Codec (Headphones/Speaker) -->
-    <ctl name="INT0_MI2S_RX Format" value="S16_LE" />
-    <ctl name="INT0_MI2S_RX SampleRate" value="KHZ_48" />
-    
-    <!-- Missing formats for Mic recording -->
-    <ctl name="INT3_MI2S_TX Format" value="S16_LE" />
-    <ctl name="INT3_MI2S_TX SampleRate" value="KHZ_48" />
-
-    <!-- Fix for Audio Stream Capture App Type Cfg errors -->
-    <!-- VOIP / Camcorder / Voice Rec fixes -->
-    <ctl name="Audio Stream Capture 0 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 1 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 2 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 3 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 4 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 5 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 6 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 7 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 8 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 9 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 10 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 11 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 12 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 13 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 14 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 15 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 16 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 17 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 18 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 19 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 20 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 21 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 22 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 23 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 24 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 25 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 26 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 27 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 28 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 29 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 30 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 31 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 32 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 33 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 34 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 35 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 36 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 37 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 38 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 39 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 40 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 41 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 42 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 43 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 44 App Type Cfg" value="0" />
-    <ctl name="Audio Stream Capture 45 App Type Cfg" value="0" />
-
-    <!-- ═══════════════════════════════════════════════════════════
-         ★★★ VOICE CALL SETTINGS — FIXED FORMAT ★★★
-         ═══════════════════════════════════════════════════════════ -->
-    <ctl name="Voice Rx Device Mute" value="0 0 20" />
-    <ctl name="Voice Tx Mute" value="0 0 500" />
-    <ctl name="Voice Rx Gain" value="10 0 20" />
-    <ctl name="Voip Tx Mute" value="0 500" />
-    <ctl name="Voip Rx Gain" value="10 20" />
+    <!-- These are the initial mixer settings -->
+    <ctl name="Voice Rx Device Mute" id="0" value="0" />
+    <ctl name="Voice Rx Device Mute" id="1" value="-1" />
+    <ctl name="Voice Rx Device Mute" id="2" value="20" />
+    <ctl name="Voice Tx Mute" id="0" value="0" />
+    <ctl name="Voice Tx Mute" id="1" value="-1" />
+    <ctl name="Voice Tx Mute" id="2" value="500" />
+    <ctl name="Voice Rx Gain" id="0" value="0" />
+    <ctl name="Voice Rx Gain" id="1" value="-1" />
+    <ctl name="Voice Rx Gain" id="2" value="20" />
+    <ctl name="Voip Tx Mute" id="0" value="0" />
+    <ctl name="Voip Tx Mute" id="1" value="500" />
+    <ctl name="Voip Rx Gain" id="0" value="0" />
+    <ctl name="Voip Rx Gain" id="1" value="20" />
     <ctl name="Voip Mode Config" value="12" />
     <ctl name="Voip Rate Config" value="0" />
-    <ctl name="Voip Evrc Min Max Rate Config" value="1 4" />
+    <ctl name="Voip Evrc Min Max Rate Config" id="0" value="1" />
+    <ctl name="Voip Evrc Min Max Rate Config" id="1" value="4" />
     <ctl name="Voip Dtx Mode" value="0" />
     <ctl name="TTY Mode" value="OFF" />
-
-    <!-- ═══════════════════════════════════════════════════════════
-         MIXER INITIALIZATION
-         ═══════════════════════════════════════════════════════════ -->
     <ctl name="INT4_MI2S_RX Port Mixer INT3_MI2S_TX" value="0" />
     <ctl name="SLIMBUS_7_RX Audio Mixer MultiMedia1" value="0" />
     <ctl name="SLIMBUS_7_RX Audio Mixer MultiMedia4" value="0" />
@@ -302,7 +244,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <!-- Incall Music -->
     <ctl name="Incall_Music Audio Mixer MultiMedia2" value="0" />
-    <ctl name="Incall_Music Audio Mixer MultiMedia9" value="0" />
+	<ctl name="Incall_Music Audio Mixer MultiMedia9" value="0" />
     <!-- Incall Music End -->
 
     <!-- compress-voip-call start -->
@@ -362,26 +304,20 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <ctl name="SpkrRight WSA PA Mute" value="1" />
     <ctl name="EAR SPKR PA Gain" value="G_DEFAULT" />
 
-    <!-- Codec Controls -->
-    <ctl name="RX HPH Mode" value="NORMAL" />
-    <ctl name="COMP0 RX1" value="0" />
-    <ctl name="COMP0 RX2" value="0" />
-    <ctl name="COMP1 Switch" value="1" />
-    <ctl name="COMP2 Switch" value="1" />
-    
-    <!-- Volume Controls -->
-    <ctl name="HPHL Volume" value="20" />
-    <ctl name="HPHR Volume" value="20" />
-    <ctl name="EAR PA Gain" value="POS_6_DB" />
+    <!-- Volume controls -->
+    <ctl name="HPHL Volume" value="9" />
+    <ctl name="HPHR Volume" value="9" />
+    <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     <ctl name="EAR PA Boost" value="ENABLE" />
+
     <ctl name="RX1 Digital Volume" value="84" />
     <ctl name="RX2 Digital Volume" value="84" />
     <ctl name="RX3 Digital Volume" value="84" />
     <ctl name="RX4 Digital Volume" value="84" />
     <ctl name="RX5 Digital Volume" value="84" />
-    <ctl name="ADC1 Volume" value="6" />
-    <ctl name="ADC2 Volume" value="6" />
-    <ctl name="ADC3 Volume" value="6" />
+    <ctl name="ADC1 Volume" value="4" />
+    <ctl name="ADC2 Volume" value="4" />
+    <ctl name="ADC3 Volume" value="4" />
     <ctl name="DEC1 Volume" value="84" />
     <ctl name="DEC2 Volume" value="84" />
     <ctl name="DEC3 Volume" value="84" />
@@ -415,11 +351,33 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <ctl name="RX HPH Mode" value="NORMAL" />
     <ctl name="COMP0 RX1" value="0" />
     <ctl name="COMP0 RX2" value="0" />
-    <ctl name="IIR1 Band1" value="268435456 0 0 0 0" />
-    <ctl name="IIR1 Band2" value="268435456 0 0 0 0" />
-    <ctl name="IIR1 Band3" value="268435456 0 0 0 0" />
-    <ctl name="IIR1 Band4" value="268435456 0 0 0 0" />
-    <ctl name="IIR1 Band5" value="268435456 0 0 0 0" />
+
+    <!-- IIR/voice anc -->
+    <ctl name="IIR1 Band1" id ="0" value="268435456" />
+    <ctl name="IIR1 Band1" id ="1" value="0" />
+    <ctl name="IIR1 Band1" id ="2" value="0" />
+    <ctl name="IIR1 Band1" id ="3" value="0" />
+    <ctl name="IIR1 Band1" id ="4" value="0" />
+    <ctl name="IIR1 Band2" id ="0" value="268435456" />
+    <ctl name="IIR1 Band2" id ="1" value="0" />
+    <ctl name="IIR1 Band2" id ="2" value="0" />
+    <ctl name="IIR1 Band2" id ="3" value="0" />
+    <ctl name="IIR1 Band2" id ="4" value="0" />
+    <ctl name="IIR1 Band3" id ="0" value="268435456" />
+    <ctl name="IIR1 Band3" id ="1" value="0" />
+    <ctl name="IIR1 Band3" id ="2" value="0" />
+    <ctl name="IIR1 Band3" id ="3" value="0" />
+    <ctl name="IIR1 Band3" id ="4" value="0" />
+    <ctl name="IIR1 Band4" id ="0" value="268435456" />
+    <ctl name="IIR1 Band4" id ="1" value="0" />
+    <ctl name="IIR1 Band4" id ="2" value="0" />
+    <ctl name="IIR1 Band4" id ="3" value="0" />
+    <ctl name="IIR1 Band4" id ="4" value="0" />
+    <ctl name="IIR1 Band5" id ="0" value="268435456" />
+    <ctl name="IIR1 Band5" id ="1" value="0" />
+    <ctl name="IIR1 Band5" id ="2" value="0" />
+    <ctl name="IIR1 Band5" id ="3" value="0" />
+    <ctl name="IIR1 Band5" id ="4" value="0" />
     <ctl name="IIR1 Enable Band1" value="0" />
     <ctl name="IIR1 Enable Band2" value="0" />
     <ctl name="IIR1 Enable Band3" value="0" />
@@ -1746,8 +1704,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <ctl name="RX1 MIX1 INP1" value="RX1" />
         <ctl name="RDAC2 MUX" value="RX1" />
         <ctl name="EAR PA Gain" value="POS_6_DB" />
-        <ctl name="EAR PA Boost" value="ENABLE" />
-        <ctl name="RX1 Digital Volume" value="98" />
         <ctl name="EAR_S" value="Switch" />
     </path>
 

@@ -17,14 +17,8 @@ namespace fingerprint {
 
 static const uint16_t kVersion = HARDWARE_MODULE_API_VERSION(2, 1);
 
-// ─────────────────────────────────────────────
-// FingerprintSession – static member definition
-// ─────────────────────────────────────────────
 FingerprintSession* FingerprintSession::sCurrentSession = nullptr;
 
-// ─────────────────────────────────────────────
-// FingerprintSession – constructor / destructor
-// ─────────────────────────────────────────────
 FingerprintSession::FingerprintSession(
         fingerprint_device_t* device,
         int32_t /*sensorId*/,
@@ -51,9 +45,6 @@ FingerprintSession::~FingerprintSession() {
     }
 }
 
-// ─────────────────────────────────────────────
-// Vendor filter helpers
-// ─────────────────────────────────────────────
 Error FingerprintSession::vendorErrorFilter(int32_t error, int32_t* vendorCode) {
     *vendorCode = 0;
     switch (error) {
@@ -104,9 +95,6 @@ AcquiredInfo FingerprintSession::vendorAcquiredFilter(int32_t info, int32_t* ven
     }
 }
 
-// ─────────────────────────────────────────────
-// ISession implementation
-// ─────────────────────────────────────────────
 ndk::ScopedAStatus FingerprintSession::generateChallenge() {
     ALOGD("generateChallenge");
     if (mDevice) {
@@ -280,9 +268,6 @@ ndk::ScopedAStatus FingerprintSession::setIgnoreDisplayTouches(bool) {
     return ndk::ScopedAStatus::ok();
 }
 
-// ─────────────────────────────────────────────
-// Legacy HAL callback
-// ─────────────────────────────────────────────
 void FingerprintSession::legacyNotify(const fingerprint_msg_t* msg) {
     if (!sCurrentSession) {
         ALOGE("legacyNotify: no active session");
@@ -373,12 +358,12 @@ void FingerprintSession::legacyNotify(const fingerprint_msg_t* msg) {
                 msg->data.enumerated.remaining_templates);
             ALOGD("onEnumerate(fid=%d, remaining=%d)", fid, remaining);
 
-            // Accumulate and fire when done
-            static std::vector<int32_t> enumIds;
-            if (fid != 0) enumIds.push_back(fid);
+            if (fid != 0) {
+                self->mEnumIds.push_back(fid);
+            }
             if (remaining == 0) {
-                self->mCb->onEnrollmentsEnumerated(enumIds);
-                enumIds.clear();
+                self->mCb->onEnrollmentsEnumerated(self->mEnumIds);
+                self->mEnumIds.clear();
             }
             break;
         }
@@ -389,9 +374,6 @@ void FingerprintSession::legacyNotify(const fingerprint_msg_t* msg) {
     }
 }
 
-// ─────────────────────────────────────────────
-// BiometricsFingerprint
-// ─────────────────────────────────────────────
 BiometricsFingerprint::BiometricsFingerprint()
     : mDevice(nullptr) {
     mDevice = openHal();

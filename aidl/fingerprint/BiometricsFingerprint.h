@@ -152,6 +152,7 @@ private:
     fingerprint_device_t* openHal();
     fingerprint_device_t* mDevice;
     std::mutex mSessionMutex;
+    std::vector<int32_t> mEnumIds;
 };
 
 }  // namespace fingerprint

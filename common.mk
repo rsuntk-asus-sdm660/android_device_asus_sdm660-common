@@ -574,6 +574,8 @@ PRODUCT_PACKAGES += \
     android.hardware.power-service.lineage-libperfmgr \
     libqti-perfd-client
 
+$(call soong_config_set,power_libperfmgr,mode_extension_lib,//$(LOCAL_PATH):libperfmgr_asus-ext)
+
 # ============================================================
 # Public Libraries
 # ============================================================

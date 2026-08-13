@@ -645,6 +645,7 @@ PRODUCT_PACKAGES += \
 # Ramdisk — RC файлы
 PRODUCT_PACKAGES += \
     fstab.qcom \
+    fstab.qcom.ramdisk \
     init.qcom.asus.rc \
     init.qcom.rc \
     init.qcom.usb.rc \

@@ -169,9 +169,8 @@ PRODUCT_PACKAGES += \
 # ============================================================
 
 PRODUCT_COPY_FILES += \
-    device/asus/sdm660-common/configs/cgroups.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
+    system/core/libprocessgroup/profiles/cgroups.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
     system/core/libprocessgroup/profiles/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
-
 
 # ============================================================
 # Configstore (отключён — используется AIDL)

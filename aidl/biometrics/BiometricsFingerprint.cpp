@@ -1,4 +1,4 @@
-#define LOG_TAG "fingerprint-asus"
+#define LOG_TAG "android.hardware.biometrics.fingerprint-service.asus"
 
 #include "BiometricsFingerprint.h"
 

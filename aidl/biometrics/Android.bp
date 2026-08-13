@@ -1,7 +1,7 @@
 cc_binary {
     name: "android.hardware.biometrics.fingerprint-service.asus",
-    init_rc: ["fingerprint-asus.rc"],
-    vintf_fragments: ["fingerprint-asus.xml"],
+    init_rc: ["android.hardware.biometrics.fingerprint-service.asus.rc"],
+    vintf_fragments: ["android.hardware.biometrics.fingerprint-service.asus.xml"],
     vendor: true,
     relative_install_path: "hw",
     srcs: [

@@ -408,16 +408,6 @@
         </interface>
     </hal>
 
-    <!-- ========== TOUCH ========== -->
-    <hal format="hidl" optional="true">
-        <name>vendor.lineage.touch</name>
-        <version>1.0</version>
-        <interface>
-            <name>ITouchscreenGesture</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-
     <!-- ========== QTI DATA ========== -->
     <hal format="hidl" optional="true">
         <name>vendor.qti.data.factory</name>
@@ -672,16 +662,6 @@
         <interface>
             <name>IGatekeeper</name>
             <instance>default</instance>
-        </interface>
-    </hal>
-
-    <!-- ========== CAMERA ========== -->
-    <hal format="hidl" optional="true">
-        <name>android.hardware.camera.provider</name>
-        <version>2.4</version>
-        <interface>
-            <name>ICameraProvider</name>
-            <instance>legacy/0</instance>
         </interface>
     </hal>
 

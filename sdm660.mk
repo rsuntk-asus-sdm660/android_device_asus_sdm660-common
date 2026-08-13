@@ -582,7 +582,7 @@ PRODUCT_COPY_FILES += \
 # ============================================================
 
 PRODUCT_PACKAGES += \
-    android.hardware.power-service.asus-libperfmgr \
+    android.hardware.power-service.lineage-libperfmgr \
     libqti-perfd-client
 
 # ============================================================
@@ -731,9 +731,9 @@ PRODUCT_COPY_FILES += \
 # ============================================================
 
 PRODUCT_SOONG_NAMESPACES += \
+    hardware/lineage/power-libperfmgr \
     hardware/google/interfaces \
     hardware/google/pixel \
-    device/asus/sdm660-common/power-libperfmgr \
     hardware/qcom-caf/common/libqti-perfd-client \
     vendor/qcom/opensource/usb/etc
 

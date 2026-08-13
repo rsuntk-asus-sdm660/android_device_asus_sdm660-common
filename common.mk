@@ -235,6 +235,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     DeviceDoze
 
+# Dolby
+$(call inherit-product, hardware/dolby/dolby.mk)
 
 # ============================================================
 # DRM

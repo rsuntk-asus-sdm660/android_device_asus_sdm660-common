@@ -1,5 +1,5 @@
 on boot
-    # ========== GPU DEVFREQ ==========
+    # GPU devfreq
     chown system system /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
     chown system system /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
     chown system system /sys/class/kgsl/kgsl-3d0/devfreq/governor
@@ -7,7 +7,7 @@ on boot
     chmod 0664 /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
     chmod 0664 /sys/class/kgsl/kgsl-3d0/devfreq/governor
 
-    # ========== GPU POWER LEVELS ==========
+    # GPU power level
     chown system system /sys/class/kgsl/kgsl-3d0/min_pwrlevel
     chown system system /sys/class/kgsl/kgsl-3d0/max_pwrlevel
     chown system system /sys/class/kgsl/kgsl-3d0/default_pwrlevel
@@ -17,7 +17,7 @@ on boot
     chmod 0664 /sys/class/kgsl/kgsl-3d0/default_pwrlevel
     chmod 0664 /sys/class/kgsl/kgsl-3d0/thermal_pwrlevel
 
-    # ========== DEVFREQ BW ==========
+    # BW devfreq
     chown system system /sys/class/devfreq/soc:qcom,gpubw/min_freq
     chown system system /sys/class/devfreq/soc:qcom,gpubw/max_freq
     chown system system /sys/class/devfreq/soc:qcom,cpu-cpu-ddr-bw/min_freq
@@ -27,7 +27,7 @@ on boot
     chmod 0664 /sys/class/devfreq/soc:qcom,cpu-cpu-ddr-bw/min_freq
     chmod 0664 /sys/class/devfreq/soc:qcom,cpu-cpu-ddr-bw/max_freq
 
-    # ========== DDR LATENCY ==========
+    # DDR latency
     chown system system /sys/class/devfreq/soc:qcom,cpu0-cpu-ddr-lat/min_freq
     chown system system /sys/class/devfreq/soc:qcom,cpu0-cpu-ddr-lat/max_freq
     chown system system /sys/class/devfreq/soc:qcom,cpu0-cpu-ddr-latfloor/min_freq
@@ -45,7 +45,7 @@ on boot
     chmod 0664 /sys/class/devfreq/soc:qcom,cpu4-cpu-ddr-latfloor/min_freq
     chmod 0664 /sys/class/devfreq/soc:qcom,cpu4-cpu-ddr-latfloor/max_freq
 
-    # ========== CORE CTL ==========
+    # Core control
     chown system system /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
     chown system system /sys/devices/system/cpu/cpu0/core_ctl/max_cpus
     chown system system /sys/devices/system/cpu/cpu0/core_ctl/enable
@@ -59,7 +59,7 @@ on boot
     chmod 0664 /sys/devices/system/cpu/cpu4/core_ctl/max_cpus
     chmod 0664 /sys/devices/system/cpu/cpu4/core_ctl/enable
 
-    # ========== COOLING DEVICES ==========
+    # Cooling devices
     chown system system /sys/class/thermal/cooling_device0/cur_state
     chown system system /sys/class/thermal/cooling_device1/cur_state
     chown system system /sys/class/thermal/cooling_device2/cur_state
@@ -71,7 +71,7 @@ on boot
     chmod 0664 /sys/class/thermal/cooling_device3/cur_state
     chmod 0664 /sys/class/thermal/cooling_device4/cur_state
 
-    # ========== THERMAL ZONES MODE ==========
+    # Theraml zones
     chown system system /sys/class/thermal/thermal_zone0/mode
     chown system system /sys/class/thermal/thermal_zone1/mode
     chown system system /sys/class/thermal/thermal_zone2/mode
@@ -93,7 +93,7 @@ on boot
     chmod 0664 /sys/class/thermal/thermal_zone8/mode
     chmod 0664 /sys/class/thermal/thermal_zone9/mode
 
-    # ========== CPU IDLE ==========
+    # Cpuidle
     chown system system /sys/devices/system/cpu/cpu0/cpuidle/state0/disable
     chown system system /sys/devices/system/cpu/cpu0/cpuidle/state1/disable
     chown system system /sys/devices/system/cpu/cpu0/cpuidle/state2/disable
@@ -143,7 +143,7 @@ on boot
     chmod 0664 /sys/devices/system/cpu/cpu7/cpuidle/state1/disable
     chmod 0664 /sys/devices/system/cpu/cpu7/cpuidle/state2/disable
 
-    # ========== GPU EXTRA ==========
+    # GPU kgsl - Extra
     chown system system /sys/class/kgsl/kgsl-3d0/force_rail_on
     chown system system /sys/class/kgsl/kgsl-3d0/force_clk_on
     chown system system /sys/class/kgsl/kgsl-3d0/idle_timer
@@ -153,7 +153,7 @@ on boot
     chmod 0664 /sys/class/kgsl/kgsl-3d0/idle_timer
     chmod 0664 /sys/class/kgsl/kgsl-3d0/force_no_nap
 
-    # ========== CPU IDLE LATENCY ==========
+    # Cpuidle latency
     chown system system /sys/devices/system/cpu/cpu0/cpuidle/state0/latency
     chown system system /sys/devices/system/cpu/cpu1/cpuidle/state0/latency
     chown system system /sys/devices/system/cpu/cpu2/cpuidle/state0/latency
@@ -177,7 +177,7 @@ on boot
     chown system system /sys/devices/system/cpu/cpu_boost/input_boost_ms
     chmod 0664 /sys/devices/system/cpu/cpu_boost/input_boost_ms
 
-    # ========== CPU SCHEDUTIL ==========
+    # CPU schedutil
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_freq
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_load
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/schedutil/pl
@@ -204,7 +204,7 @@ on boot
     chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/schedutil/down_rate_limit_us
     chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/schedutil/up_rate_limit_us
 
-    # ========== SCHED LOAD BOOST ==========
+    # Sched load boost
     chown system system /sys/devices/system/cpu/cpu0/sched_load_boost
     chown system system /sys/devices/system/cpu/cpu1/sched_load_boost
     chown system system /sys/devices/system/cpu/cpu2/sched_load_boost

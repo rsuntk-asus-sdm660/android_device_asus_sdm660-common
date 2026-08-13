@@ -1,9 +1,5 @@
 # Copyright (c) 2012-2015, 2017-2020, The Linux Foundation. All rights reserved.
 # Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
-#
-# ASUS X00TD / X01BD Modified (Kernel 4.19)
-# Base: Original Qualcomm | Added: FP, NFC, Sensors fix
-#
 
 # Firmware directory Path
 firmware_directories /vendor/firmware/ /vendor/firmware_mnt/image/
@@ -224,8 +220,6 @@ firmware_directories /vendor/firmware/ /vendor/firmware_mnt/image/
 /dev/sensors              0660   system     system
 /sys/devices/i2c-12/12-*  pollrate_ms 0664 system system
 
-# OPTIMIZED SENSOR SECTION FOR X00TD/X01BD (KERNEL 4.19)
-# Replaced old hardcoded addresses with wildcards to prevent crashes on different revisions
 /sys/devices/platform/soc/*.i2c/i2c-*/*-*/iio:device*   buffer/enable                   0660    system  system
 /sys/devices/platform/soc/*.i2c/i2c-*/*-*/iio:device*   buffer/length                   0660    system  system
 /sys/devices/platform/soc/*.i2c/i2c-*/*-*/iio:device*   buffer/watermark                0660    system  system
@@ -282,9 +276,7 @@ firmware_directories /vendor/firmware/ /vendor/firmware_mnt/image/
 # Ramdump devices
 /dev/ramdump*             0640   system     system
 
-# ------------------------------------------------------------------
-# Fingerprint device (X00TD/X01BD merged)
-# ------------------------------------------------------------------
+# Fingerprint
 /dev/focaltech_fp         0660   system     system
 /dev/fpsdev0              0660   system     system
 /dev/goodix_fp            0660   system     system

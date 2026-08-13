@@ -1,10 +1,5 @@
 #!/vendor/bin/sh
 
-# ═══════════════════════════════════════════════════════════════════════════
-# init.qcom.post_boot.sh for SDM660/SDM636 on Kernel 4.19 (EAS)
-# Optimized for Android 15/16 + BFQ + Schedutil + Power HAL Start
-# ═══════════════════════════════════════════════════════════════════════════
-
 LOGTAG="post_boot_sdm660"
 
 write() { [ -e "$1" ] && echo "$2" > "$1"; }
@@ -32,9 +27,6 @@ function sdm660_sched_schedutil_dcvs() {
 }
 
 function configure_storage_io() {
-    # ═══════════════════════════════════════════════════════════════
-    # I/O TUNING: BFQ for eMMC
-    # ═══════════════════════════════════════════════════════════════
     # Internal Storage
     if [ -d /sys/block/mmcblk0 ]; then
         write_str /sys/block/mmcblk0/queue/scheduler "bfq"
@@ -51,10 +43,6 @@ function configure_storage_io() {
         write /sys/block/mmcblk1/queue/read_ahead_kb 128
     fi
 }
-
-# ═══════════════════════════════════════════════════════════════════════════
-# MAIN EXECUTION
-# ═══════════════════════════════════════════════════════════════════════════
 
 target=$(getprop ro.board.platform)
 

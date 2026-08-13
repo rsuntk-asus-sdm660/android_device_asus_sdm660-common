@@ -12,29 +12,18 @@ function sdm660_sched_schedutil_dcvs() {
     write /sys/devices/system/cpu/cpufreq/policy0/schedutil/down_rate_limit_us 0
     write /sys/devices/system/cpu/cpufreq/policy0/schedutil/iowait_boost_enable 0
     write /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq 576000
-
     # Little Cluster (Kryo Silver: CPU 4-7)
     write /sys/devices/system/cpu/cpufreq/policy4/scaling_governor "schedutil"
     write /sys/devices/system/cpu/cpufreq/policy4/schedutil/up_rate_limit_us 0
     write /sys/devices/system/cpu/cpufreq/policy4/schedutil/down_rate_limit_us 0
     write /sys/devices/system/cpu/cpufreq/policy4/schedutil/iowait_boost_enable 0
     write /sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq 825600
-
-    write /dev/cpuset/background/cpus 4-7
-    write /dev/cpuset/system-background/cpus 4-7
-    write /dev/cpuset/restricted/cpus 4-7
-    write /dev/cpuset/top-app/cpus 0-7
 }
 
 function configure_storage_io() {
     # Internal Storage
     if [ -d /sys/block/mmcblk0 ]; then
-        write_str /sys/block/mmcblk0/queue/scheduler "bfq"
         write /sys/block/mmcblk0/queue/read_ahead_kb 128
-        # Важно для Flash памяти на BFQ: убирает холостой ход, повышает скорость
-        write /sys/block/mmcblk0/queue/iosched/slice_idle 0
-        # Включаем low_latency для отзывчивости UI
-        write /sys/block/mmcblk0/queue/iosched/low_latency 1
     fi
 
     # SD Card (если есть)
@@ -50,11 +39,8 @@ case "$target" in
     "sdm660" | "sdm636")
         log -t "$LOGTAG" -p i "Starting post_boot for platform: $target"
 
-        # 1. IRQ affinity (раз msm_irqbalance удален)
-        # f = разрешить прерывания на всех ядрах (0-3)
         write /proc/irq/default_smp_affinity f
 
-        # 2. Core Control (Оставляем как было для стабильности)
         if [ -d /sys/devices/system/cpu/cpu4/core_ctl ]; then
             write /sys/devices/system/cpu/cpu4/core_ctl/min_cpus 2
             write /sys/devices/system/cpu/cpu4/core_ctl/max_cpus 4

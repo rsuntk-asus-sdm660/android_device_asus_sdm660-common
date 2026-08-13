@@ -16,14 +16,12 @@ on early-init
     chmod 0620 /dev/kmsg
 
 on init
-    # Создаем суб-контейнеры для cpuset
     mkdir /dev/cpuset/foreground 0750 system system
     mkdir /dev/cpuset/background 0750 system system
     mkdir /dev/cpuset/system-background 0750 system system
     mkdir /dev/cpuset/top-app 0750 system system
     mkdir /dev/cpuset/restricted 0750 system system
 
-    # Выдаем права на cpuset файлы
     chmod 0664 /dev/cpuset/tasks
     chmod 0664 /dev/cpuset/foreground/tasks
     chmod 0664 /dev/cpuset/background/tasks
@@ -88,14 +86,12 @@ on early-boot
     chown system graphics /sys/class/backlight/panel0-backlight/max_brightness
 
 on boot
-    start vendor.rmt_storage
     chmod 0444 /sys/devices/soc0/serial_number
 
-    # Ограничиваем фоновые cpuset (Kryo 260 Silver: ядра 0-3) на старте
+    # CPUsets
     write /dev/cpuset/background/cpus 0-3
     write /dev/cpuset/system-background/cpus 0-3
     write /dev/cpuset/restricted/cpus 0-3
-    # Active cpusets
     write /dev/cpuset/foreground/cpus 0-7
     write /dev/cpuset/top-app/cpus 0-7
 
@@ -466,10 +462,6 @@ on early-init
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-    # eMMC scheduler baseline for FBE v2 + emmc_optimized
-    write /sys/block/mmcblk0/queue/scheduler bfq
-    write /sys/block/mmcblk0/queue/iosched/low_latency 1
-    write /sys/block/mmcblk0/queue/iosched/slice_idle 0
     start hwservicemanager
     mount_all --early /vendor/etc/fstab.qcom
     mount tmpfs tmpfs /metadata size=10m
@@ -563,33 +555,14 @@ service dcvs-sh /vendor/bin/init.qti.dcvs.sh
 on property:vendor.dcvs.prop=1
     start dcvs-sh
 
-# ═══════════════════════════════════════════════════════════════════════════
-# ЕДИНЫЙ КОНСОЛИДИРОВАННЫЙ ТРИГГЕР ЗАВЕРШЕНИЯ ЗАГРУЗКИ (sys.boot_completed)
-# ═══════════════════════════════════════════════════════════════════════════
 on property:sys.boot_completed=1
-    write /dev/kmsg "Boot completed - optimizing system profiles"
-    
-    # 1. Запуск пост-бута для настройки частот и BFQ
     start vendor.qcom-post-boot
 
-    # 2. Ограничиваем фоновые cpuset (Kryo Silver: ядра 0-3)
-    write /dev/cpuset/background/cpus 0-3
-    write /dev/cpuset/system-background/cpus 0-3
-    write /dev/cpuset/restricted/cpus 0-3
-    # Активные процессы получают полный доступ ко всем 8 ядрам (0-7)
-    write /dev/cpuset/foreground/cpus 0-7
-    write /dev/cpuset/top-app/cpus 0-7
-
-    # 4. Тюнинг дисковой системы и виртуальной памяти
     write /sys/block/mmcblk0/queue/read_ahead_kb 256
     write /sys/block/dm-0/queue/read_ahead_kb 256
     write /sys/block/dm-1/queue/read_ahead_kb 256
     write /sys/block/dm-2/queue/read_ahead_kb 256
-    write /sys/block/mmcblk0/queue/scheduler bfq
-    write /sys/block/mmcblk0/queue/iosched/low_latency 1
-    write /sys/block/mmcblk0/queue/iosched/slice_idle 0
 
-    # 5. Тюнинг виртуальной памяти (VM) для eMMC
     write /proc/sys/vm/dirty_background_ratio 4
     write /proc/sys/vm/dirty_expire_centisecs 200
     write /proc/sys/vm/dirty_writeback_centisecs 500
@@ -597,17 +570,13 @@ on property:sys.boot_completed=1
     write /proc/sys/vm/vfs_cache_pressure 100
     write /sys/fs/cgroup/memory/bg/memory.swappiness 140
 
-    # 6. Включение термоконтроля и аудио-нод
     chown media audio /sys/kernel/wdsp0/boot
     chown media audio /sys/kernel/wcd_cpe0/fw_name
     chown media audio /sys/kernel/aud_dev/state
     write /sys/devices/virtual/cvp/cvp/boot 1
     setprop lmkd.reinit 1
 
-    # Разрешаем ядру уводить ядра процессора в глубокий сон (C3/C4) при выключенном экране
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
     write /sys/module/lpm_levels/system/system-pc/idle_enabled 1
     write /sys/module/lpm_levels/system/system-sve/idle_enabled 1
     write /sys/module/lpm_levels/system/system-sve-l3/idle_enabled 1
-
-    write /dev/kmsg "Boot completed - thermal caps active, FBE/eMMC profile loaded"

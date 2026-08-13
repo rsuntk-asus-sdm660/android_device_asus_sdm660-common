@@ -5,7 +5,7 @@
  * Migrated from HIDL service.cpp.
  */
 
-#define LOG_TAG "thermal_hal_asus_sdm660"
+#define LOG_TAG "thermal_hal_asus"
 
 #include <android-base/logging.h>
 #include <android/binder_manager.h>

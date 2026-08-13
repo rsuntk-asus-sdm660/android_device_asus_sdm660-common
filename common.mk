@@ -757,7 +757,7 @@ PRODUCT_BOOT_JARS += \
 # ============================================================
 
 PRODUCT_PACKAGES += \
-    android.hardware.thermal-service.asus_sdm660
+    android.hardware.thermal-service.asus
 
 
 # ============================================================
@@ -765,7 +765,7 @@ PRODUCT_PACKAGES += \
 # ============================================================
 
 PRODUCT_PACKAGES += \
-    vendor.lineage.touch-service.asus_sdm660
+    vendor.lineage.touch-service.asus
 
 
 # ============================================================

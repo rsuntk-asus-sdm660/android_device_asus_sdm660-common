@@ -14,9 +14,9 @@
 // limitations under the License.
 
 cc_binary {
-    name: "vendor.lineage.touch-service.asus_sdm660",
-    init_rc: ["vendor.lineage.touch-service.asus_sdm660.rc"],
-    vintf_fragments: ["vendor.lineage.touch-service.asus_sdm660.xml"],
+    name: "vendor.lineage.touch-service.asus",
+    init_rc: ["vendor.lineage.touch-service.asus.rc"],
+    vintf_fragments: ["vendor.lineage.touch-service.asus.xml"],
     relative_install_path: "hw",
     vendor: true,
     srcs: [

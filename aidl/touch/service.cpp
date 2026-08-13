@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "vendor.lineage.touch-service.asus_sdm660"
+#define LOG_TAG "vendor.lineage.touch-service.asus"
 
 #include <android-base/logging.h>
 #include <android/binder_manager.h>

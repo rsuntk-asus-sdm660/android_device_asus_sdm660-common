@@ -1,10 +1,10 @@
 cc_binary {
-    name: "android.hardware.thermal-service.asus_sdm660",
+    name: "android.hardware.thermal-service.asus",
     vendor: true,
     relative_install_path: "hw",
 
-    init_rc: ["android.hardware.thermal-service.asus_sdm660.rc"],
-    vintf_fragments: ["android.hardware.thermal-service.asus_sdm660.xml"],
+    init_rc: ["android.hardware.thermal-service.asus.rc"],
+    vintf_fragments: ["android.hardware.thermal-service.asus.xml"],
 
     srcs: [
         "main.cpp",
@@ -30,6 +30,6 @@ cc_binary {
         "-Wextra",
         "-Wno-unused-parameter",
         "-Wno-unused-variable",
-        "-DLOG_TAG=\"thermal_hal_asus_sdm660\"",
+        "-DLOG_TAG=\"thermal_hal_asus\"",
     ],
 }

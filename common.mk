@@ -448,6 +448,7 @@ PRODUCT_PACKAGES += \
     init.sysfs_permissions.rc \
     init.target.rc \
     init.zram.rc \
+    init.uclamp.rc \
     ueventd.qcom.rc
 
 # RCS

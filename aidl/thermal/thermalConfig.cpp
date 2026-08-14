@@ -1,8 +1,6 @@
 /*
  * Copyright (c) 2020, The Linux Foundation. All rights reserved.
  *
- * Updated for ASUS X00TD/X01BD - kernel 4.19
- *
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
@@ -19,8 +17,7 @@ namespace aidl::android::hardware::thermal::implementation {
 constexpr std::string_view socIDPath("/sys/devices/soc0/soc_id");
 
 /*
- * Thermal Zone Map for X00TD/X01BD (kernel 4.19):
- * ══════════════════════════════════════════════════════════════════
+ * Kernel 4.19 thermal zone
  * tz0:  pm660-tz       - PMIC temperature (mC)
  * tz1:  pm660l-tz      - PMIC-L temperature (mC)
  * tz2:  xo-therm-adc   - Crystal oscillator thermistor (mC)
@@ -47,7 +44,6 @@ constexpr std::string_view socIDPath("/sys/devices/soc0/soc_id");
  * tz28: soc            - Battery SoC % (raw percentage)
  * tz29: battery        - Battery temperature (mC)
  * tz30: bms            - BMS temperature (mC)
- * ══════════════════════════════════════════════════════════════════
  */
 
 /*
@@ -158,10 +154,10 @@ std::vector<struct target_therm_cfg> bcl_conf = {};
 
 const std::unordered_map<int, std::vector<struct target_therm_cfg>>
     msm_soc_map = {
-    {345, sensor_cfg_unified},  // SDM636 (X00TD)
-    {317, sensor_cfg_unified},  // SDM660 (X01BD)
+    {317, sensor_cfg_unified},  // SDM660
     {324, sensor_cfg_unified},  // SDM660 variant
     {326, sensor_cfg_unified},  // SDM660 variant
+    {345, sensor_cfg_unified},  // SDM636
 };
 
 ThermalConfig::ThermalConfig() : cmnInst() {

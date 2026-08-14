@@ -2,10 +2,6 @@
  * Copyright (c) 2020, The Linux Foundation. All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
- *
- * Migrated from HIDL 2.0 to AIDL V2.
- * Preserves all original logic: caps controller, uevent monitor, severity
- * estimation, threshold management, and callback notification.
  */
 
 #include <algorithm>
@@ -64,9 +60,8 @@ Thermal::Thermal()
 }
 
 /*
- * ════════════════════════════════════════════════════════════════
- * getTemperatures — return all sensor temperatures
- * ════════════════════════════════════════════════════════════════
+ * getTemperatures
+ * Function: return all sensor temperatures
  */
 ndk::ScopedAStatus Thermal::getTemperatures(
         std::vector<Temperature>* _aidl_return) {
@@ -90,9 +85,8 @@ ndk::ScopedAStatus Thermal::getTemperatures(
 }
 
 /*
- * ════════════════════════════════════════════════════════════════
- * getTemperaturesWithType — return temperatures filtered by type
- * ════════════════════════════════════════════════════════════════
+ * getTemperaturesWithType
+ * Function: return temperatures filtered by type
  */
 ndk::ScopedAStatus Thermal::getTemperaturesWithType(
         TemperatureType in_type,
@@ -116,9 +110,8 @@ ndk::ScopedAStatus Thermal::getTemperaturesWithType(
 }
 
 /*
- * ════════════════════════════════════════════════════════════════
- * getCoolingDevices — return all cooling device states
- * ════════════════════════════════════════════════════════════════
+ * getCoolingDevices
+ * Function: return all cooling device states
  */
 ndk::ScopedAStatus Thermal::getCoolingDevices(
         std::vector<CoolingDevice>* _aidl_return) {
@@ -141,9 +134,8 @@ ndk::ScopedAStatus Thermal::getCoolingDevices(
 }
 
 /*
- * ════════════════════════════════════════════════════════════════
- * getCoolingDevicesWithType — return cooling devices filtered by type
- * ════════════════════════════════════════════════════════════════
+ * getCoolingDevicesWithType
+ * Function: return cooling devices filtered by type
  */
 ndk::ScopedAStatus Thermal::getCoolingDevicesWithType(
         CoolingType in_type,
@@ -167,9 +159,8 @@ ndk::ScopedAStatus Thermal::getCoolingDevicesWithType(
 }
 
 /*
- * ════════════════════════════════════════════════════════════════
- * getTemperatureThresholds — return all sensor thresholds
- * ════════════════════════════════════════════════════════════════
+ * getTemperatureThresholds
+ * Function: return all sensor thresholds
  */
 ndk::ScopedAStatus Thermal::getTemperatureThresholds(
         std::vector<TemperatureThreshold>* _aidl_return) {
@@ -193,9 +184,8 @@ ndk::ScopedAStatus Thermal::getTemperatureThresholds(
 }
 
 /*
- * ════════════════════════════════════════════════════════════════
- * getTemperatureThresholdsWithType — return thresholds filtered by type
- * ════════════════════════════════════════════════════════════════
+ * getTemperatureThresholdsWithType
+ * Function: return thresholds filtered by type
  */
 ndk::ScopedAStatus Thermal::getTemperatureThresholdsWithType(
         TemperatureType in_type,
@@ -219,9 +209,8 @@ ndk::ScopedAStatus Thermal::getTemperatureThresholdsWithType(
 }
 
 /*
- * ════════════════════════════════════════════════════════════════
- * registerThermalChangedCallback — register callback for all types
- * ════════════════════════════════════════════════════════════════
+ * registerThermalChangedCallback
+ * Function: register callback for all types
  */
 ndk::ScopedAStatus Thermal::registerThermalChangedCallback(
         const std::shared_ptr<IThermalChangedCallback>& in_callback) {
@@ -246,9 +235,8 @@ ndk::ScopedAStatus Thermal::registerThermalChangedCallback(
 }
 
 /*
- * ════════════════════════════════════════════════════════════════
- * registerThermalChangedCallbackWithType — register for specific type
- * ════════════════════════════════════════════════════════════════
+ * registerThermalChangedCallbackWithType
+ * Function: register for specific type
  */
 ndk::ScopedAStatus Thermal::registerThermalChangedCallbackWithType(
         const std::shared_ptr<IThermalChangedCallback>& in_callback,
@@ -281,9 +269,8 @@ ndk::ScopedAStatus Thermal::registerThermalChangedCallbackWithType(
 }
 
 /*
- * ════════════════════════════════════════════════════════════════
  * unregisterThermalChangedCallback
- * ════════════════════════════════════════════════════════════════
+ * Function: unregister ThermalChanged call back
  */
 ndk::ScopedAStatus Thermal::unregisterThermalChangedCallback(
         const std::shared_ptr<IThermalChangedCallback>& in_callback) {
@@ -316,9 +303,8 @@ ndk::ScopedAStatus Thermal::unregisterThermalChangedCallback(
 }
 
 /*
- * ════════════════════════════════════════════════════════════════
- * registerCoolingDeviceChangedCallbackWithType — AIDL V2
- * ════════════════════════════════════════════════════════════════
+ * registerCoolingDeviceChangedCallbackWithType
+ * Function: register CoolingDeviceChanged call back with type
  */
 ndk::ScopedAStatus Thermal::registerCoolingDeviceChangedCallbackWithType(
         const std::shared_ptr<ICoolingDeviceChangedCallback>& in_callback,
@@ -345,9 +331,8 @@ ndk::ScopedAStatus Thermal::registerCoolingDeviceChangedCallbackWithType(
 }
 
 /*
- * ════════════════════════════════════════════════════════════════
- * unregisterCoolingDeviceChangedCallback — AIDL V2
- * ════════════════════════════════════════════════════════════════
+ * unregisterCoolingDeviceChangedCallback
+ * Function: unregister CoolingDeviceChanged call back
  */
 ndk::ScopedAStatus Thermal::unregisterCoolingDeviceChangedCallback(
         const std::shared_ptr<ICoolingDeviceChangedCallback>& in_callback) {
@@ -380,11 +365,12 @@ ndk::ScopedAStatus Thermal::unregisterCoolingDeviceChangedCallback(
 }
 
 /*
- * ════════════════════════════════════════════════════════════════
- * sendThrottlingChangeCB — internal, called from ThermalUtils::Notify
+ * sendThrottlingChangeCB
+ *
+ * Descriptions:
+ * internal, called from ThermalUtils::Notify
  * Dispatches throttling severity changes to all registered callbacks.
  * If a callback fails, it is automatically removed (same as HIDL).
- * ════════════════════════════════════════════════════════════════
  */
 void Thermal::sendThrottlingChangeCB(const Temperature &t) {
     std::lock_guard<std::mutex> _lock(thermal_cb_mutex);

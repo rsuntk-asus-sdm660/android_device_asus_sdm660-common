@@ -156,10 +156,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.use_color_management=false \
     ro.surface_flinger.protected_contents=true
 
-# Doze
-PRODUCT_PACKAGES += \
-    DeviceDoze
-
 # Dolby
 $(call inherit-product, hardware/dolby/dolby.mk)
 

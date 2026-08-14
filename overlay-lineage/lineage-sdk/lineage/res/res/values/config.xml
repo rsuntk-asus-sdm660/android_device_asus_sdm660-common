@@ -1,131 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    ╔══════════════════════════════════════════════════════════════╗
-    ║  LINEAGE SDK CONFIG — ASUS X00TD / X01BD                     ║
-    ║  Hardware features и расширенные функции                     ║
-    ╚══════════════════════════════════════════════════════════════╝
+     SPDX-FileCopyrightText: 2015 The CyanogenMod Project
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
 
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  PROXIMITY SENSOR                                        ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <!-- Проверка датчика приближения при пробуждении -->
+    <!-- Default value for proximity check on screen wake
+     NOTE ! - Enable for devices that have a fast response proximity sensor (ideally < 300ms)-->
     <bool name="config_proximityCheckOnWake">true</bool>
     <integer name="config_proximityCheckTimeout">100</integer>
     <bool name="config_proximityCheckOnWakeEnabledByDefault">true</bool>
 
-
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  DOUBLE TAP TO SLEEP (Статусбар)                         ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
+    <!-- Default values for status bar DT2S gesture -->
     <bool name="config_dt2sGestureAvailable">true</bool>
     <bool name="config_dt2sGestureEnabledByDefault">true</bool>
 
-
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  LIVEDISPLAY (Цветокалибровка)                           ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
+    <!-- Default values for LiveDisplay -->
     <bool name="config_enableLiveDisplay">true</bool>
-    
-    <!-- Температуры -->
     <integer name="config_dayColorTemperature">6500</integer>
     <integer name="config_nightColorTemperature">4800</integer>
-    <integer name="config_minColorTemperature">1000</integer>
-    <integer name="config_maxColorTemperature">10000</integer>
-    
-    <!-- Outdoor mode -->
     <integer name="config_outdoorAmbientLux">12000</integer>
     <integer name="config_outdoorAmbientLuxHysteresis">1500</integer>
-    
-    <!-- Улучшения дисплея -->
+
+    <!-- These values should map to the true min and max
+         that the backend is capable of adjusting to. This
+         is more important when using the ColorBalance mode,
+         as the discrete adjustment is interpolated between
+         this range (with config_dayColorTemperature at zero) -->
+    <integer name="config_minColorTemperature">1000</integer>
+    <integer name="config_maxColorTemperature">10000</integer>
+
     <bool name="config_defaultAutoContrast">true</bool>
     <bool name="config_defaultAutoOutdoorMode">true</bool>
     <bool name="config_defaultColorEnhancement">true</bool>
     <bool name="config_defaultCABC">true</bool>
     <bool name="config_defaultAntiFlicker">false</bool>
 
+    <!-- All the capabilities of the LEDs on this device, stored as a bit field.
+         This integer should equal the sum of the corresponding value for each
+         of the following capabilities present:
 
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  LED УВЕДОМЛЕНИЙ                                         ║
-         ╚══════════════════════════════════════════════════════════╝ -->
+         // Device has a color adjustable notification light.
+         LIGHTS_RGB_NOTIFICATION_LED = 1
 
-    <!-- LED capabilities (bitfield):
-         
-         1   = LIGHTS_RGB_NOTIFICATION_LED (RGB notifications)
-         2   = LIGHTS_RGB_BATTERY_LED (RGB battery)
-         8   = LIGHTS_PULSATING_LED (pulsing)
-         32  = LIGHTS_ADJUSTABLE_NOTIFICATION_LED_BRIGHTNESS (adjustable brightness)
-         64  = LIGHTS_BATTERY_LED (battery LED)
-         128 = LIGHTS_ADJUSTABLE_BATTERY_LED_BRIGHTNESS (adjustable battery brightness)
-         
-         RGB Notification + RGB Battery + Pulsating + Battery LED + Adjustable Brightness
-         = 1 + 2 + 8 + 32 + 64 + 128 = 235 -->
-    
+         // Device has a color adjustable battery light.
+         LIGHTS_RGB_BATTERY_LED = 2
+
+         LIGHTS_MULTIPLE_NOTIFICATION_LED = 4 (deprecated)
+
+         // The notification light has adjustable pulsing capability.
+         LIGHTS_PULSATING_LED = 8
+
+         // Device has a multi-segment battery light that is able to
+         // use the light brightness value to determine how many
+         // segments to show (in order to represent battery level).
+         LIGHTS_SEGMENTED_BATTERY_LED = 16
+
+         // The notification light supports HAL adjustable brightness
+         // via the alpha channel.
+         // Note: if a device notification light supports LIGHTS_RGB_NOTIFICATION_LED
+         // then HAL support is not necessary for brightness control.  In this case,
+         // brightness support will be provided by lineage-sdk through the scaling of
+         // RGB color values.
+         LIGHTS_ADJUSTABLE_NOTIFICATION_LED_BRIGHTNESS = 32
+
+         // Device has a battery light.
+         LIGHTS_BATTERY_LED = 64
+
+         // The battery light supports HAL adjustable brightness via
+         // the alpha channel.
+         // Note: if a device battery light supports LIGHTS_RGB_BATTERY_LED then HAL
+         // support is not necessary for brightness control.  In this case,
+         // brightness support will be provided by lineage-sdk through the scaling of
+         // RGB color values.
+         LIGHTS_ADJUSTABLE_BATTERY_LED_BRIGHTNESS = 128
+
+         For example, a device with notification and battery lights that supports
+         pulsating and RGB control would set this config to 75. -->    
     <integer name="config_deviceLightCapabilities">235</integer>
 
-
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  НАВИГАЦИЯ И КНОПКИ                                      ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <!-- Аппаратные кнопки на устройстве (битовое поле):
-         1 = Home
-         2 = Back  
-         4 = Menu
-         8 = Assistant
-         16 = App Switch
-         32 = Camera
-         64 = Volume Rocker
-         
-         X00TD/X01BD: только качелька громкости = 64 -->
+    <!-- Hardware keys present on the device, stored as a bit field.
+         This integer should equal the sum of the corresponding value for each
+         of the following keys present:
+             1 - Home
+             2 - Back
+             4 - Menu
+             8 - Assistant (search)
+            16 - App switch
+            32 - Camera
+            64 - Volume rocker
+         For example, a device with Home, Back and Menu keys would set this
+         config to 7. -->
     <integer name="config_deviceHardwareKeys">64</integer>
 
-    <!-- Какие кнопки могут будить устройство -->
+    <!-- Hardware keys present on the device with the ability to wake, stored as a bit field.
+         This integer should equal the sum of the corresponding value for each
+         of the following keys present:
+             1 - Home
+             2 - Back
+             4 - Menu
+             8 - Assistant (search)
+            16 - App switch
+            32 - Camera
+            64 - Volume rocker
+         For example, a device with Home, Back and Menu keys would set this
+         config to 7. -->
     <integer name="config_deviceHardwareWakeKeys">64</integer>
 
-    <!-- Действия экранных кнопок навигации -->
-    
-    <!-- Долгое нажатие Back: 0=ничего, 10=kill app -->
+    <!-- Control the behavior when the user long presses the back button.
+            0 - Nothing
+            1 - Menu key
+            2 - Recent apps view in SystemUI
+            3 - Launch assist intent
+            4 - Voice Search
+            5 - In-app Search
+            6 - Launch camera
+            7 - Sleep
+            8 - Last app
+            9 - Toggle split screen
+            10 - Kill foreground app
+         This needs to match the enums in
+         sdk/src/java/org/lineageos/internal/util/DeviceKeysConstants.java.
+    -->
     <integer name="config_longPressOnBackBehavior">0</integer>
-    
-    <!-- Двойное нажатие Back -->
-    <integer name="config_doubleTapOnBackBehavior">0</integer>
-    
-    <!-- Долгое нажатие Home: 3=Assistant -->
-    <integer name="config_longPressOnHomeBehavior">3</integer>
-    
-    <!-- Двойное нажатие Home: 8=Last app -->
-    <integer name="config_doubleTapOnHomeBehavior">8</integer>
-    
-    <!-- Долгое нажатие Menu (если есть): 2=Recent apps -->
-    <integer name="config_longPressOnMenuBehavior">2</integer>
-    <integer name="config_doubleTapOnMenuBehavior">0</integer>
-    
-    <!-- Долгое нажатие Recent: 9=Split screen -->
-    <integer name="config_longPressOnAppSwitchBehavior">9</integer>
-    
-    <!-- Двойное нажатие Recent: 8=Last app -->
-    <integer name="config_doubleTapOnAppSwitchBehavior">8</integer>
 
-    <!-- Timeout для kill app через долгое нажатие Back -->
+    <!-- Control the behavior when the user long presses the home button.
+            0 - Nothing
+            1 - Menu key
+            2 - Recent apps view in SystemUI
+            3 - Launch assist intent
+            4 - Voice Search
+            5 - In-app Search
+            6 - Launch camera
+            7 - Sleep
+            8 - Last app
+            9 - Toggle split screen
+            10 - Kill foreground app
+         This needs to match the enums in
+         sdk/src/java/org/lineageos/internal/util/DeviceKeysConstants.java.
+    -->
+    <integer name="config_longPressOnHomeBehavior">3</integer>
+
+    <!-- Control the behavior when the user double-taps the home button.
+            0 - Nothing
+            1 - Menu key
+            2 - Recent apps view in SystemUI
+            3 - Launch assist intent
+            4 - Voice Search
+            5 - In-app Search
+            6 - Launch camera
+            7 - Sleep
+            8 - Last app
+            9 - Toggle split screen
+            10 - Kill foreground app
+         This needs to match the enums in
+         sdk/src/java/org/lineageos/internal/util/DeviceKeysConstants.java.
+    -->
+    <integer name="config_doubleTapOnHomeBehavior">8</integer>
+
+    <!-- Control the behavior when the user long presses the menu button.
+            0 - Nothing
+            1 - Menu key
+            2 - Recent apps view in SystemUI
+            3 - Launch assist intent
+            4 - Voice Search
+            5 - In-app Search
+            6 - Launch camera
+            7 - Sleep
+            8 - Last app
+            9 - Toggle split screen
+            10 - Kill foreground app
+         This needs to match the enums in
+         sdk/src/java/org/lineageos/internal/util/DeviceKeysConstants.java.
+    -->
+    <integer name="config_longPressOnMenuBehavior">2</integer>
+    
+    <!-- Control the behavior when the user long presses the app switch button.
+            0 - Nothing
+            1 - Menu key
+            2 - Recent apps view in SystemUI
+            3 - Launch assist intent
+            4 - Voice Search
+            5 - In-app Search
+            6 - Launch camera
+            7 - Sleep
+            8 - Last app
+            9 - Toggle split screen
+            10 - Kill foreground app
+         This needs to match the enums in
+         sdk/src/java/org/lineageos/internal/util/DeviceKeysConstants.java.
+    -->
+    <integer name="config_longPressOnAppSwitchBehavior">9</integer>
+
+    <!-- Timeout in MS for how long you have to long-press the back key to
+         kill the foreground app. -->
     <integer name="config_backKillTimeout">1500</integer>
 
-    <!-- Подсветка кнопок (нет физических кнопок навигации) -->
+    <!-- Button backlight control. Possible values are:
+            0 - Not supported
+            1 - Supported, but only on/off mode
+            2 - Supported with variable brightness control
+    -->
     <integer name="config_deviceSupportsButtonBrightnessControl">0</integer>
     <dimen name="config_buttonBrightnessSettingDefaultFloat">0.0</dimen>
-    
+
+    <!-- Keyboard backlight control. Possible values are:
+            0 - Not supported
+            1 - Supported, but only on/off mode
+            2 - Supported with variable brightness control
+    -->    
     <integer name="config_deviceSupportsKeyboardBrightnessControl">0</integer>
     <dimen name="config_keyboardBrightnessSettingDefaultFloat">0.0</dimen>
 
-
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  ADVANCED REBOOT                                         ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
+    <!-- Defines the actions shown in advanced reboot submenu -->
     <string-array name="config_restartActionsList">
         <item>restart</item>
         <item>restart_recovery</item>
@@ -133,52 +221,61 @@
         <item>restart_systemui</item>
     </string-array>
 
-
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  ЗАРЯДКА                                                 ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <!-- Charging Control (PM660 поддерживает) -->
+    <!-- Whether charging control should be enabled by default -->
     <bool name="config_chargingControlEnabled">true</bool>
+
+    <!-- Default charging control mode.
+         This integer should be set to:
+
+         1 - auto - Use the alarm to calculate the time range when to activate charging control
+         2 - custom - Use time range when the device is usually charging for hours
+         3 - limit - Just limit charging -->
     <integer name="config_defaultChargingControlMode">1</integer>
+
+    <!-- Default charging limit. -->
     <integer name="config_defaultChargingControlLimit">95</integer>
+
+    <!-- Default time when charging control is activated.
+         Represented as seconds from midnight (e.g. 79200 == 10pm). -->
     <integer name="config_defaultChargingControlStartTime">79200</integer>
+
+    <!-- Default time when battery will be fully charged.
+         Represented as seconds from midnight (e.g. 21600 == 6am). -->
     <integer name="config_defaultChargingControlTargetTime">21600</integer>
+
+    <!-- Considering the fact that the system might have an incorrect estimation of the time to
+         full. Set a time margin to make the device fully charged before the target time arrives.
+
+         The unit is minutes and the default value is 30 minutes. If you find that it is not enough
+         to make the device to be fully charged at the target time, increase the value
+    -->
     <integer name="config_chargingControlTimeMargin">30</integer>
+
+    <!-- For a device that cannot bypass battery when charging stops (that is, the battery current
+         is 0mA when charging stops), the battery will gradually discharge. So we need to make it
+         recharge when the battery level is lower than a threshold. Set this so that the device
+         will be charged between (limit - val) and limit. -->
     <integer name="config_chargingControlBatteryRechargeMargin">5</integer>
 
-    <!-- Беспроводная зарядка (нет) -->
+    <!-- Whether the device supports wireless charging or not -->
     <bool name="config_deviceSupportsWirelessCharging">false</bool>
 
-
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  СКАНЕР ОТПЕЧАТКОВ (LINEAGE SDK)                         ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <!-- ═══════════ WAKE AND UNLOCK ═══════════ -->
-
-    <!-- Разбудить и разблокировать касанием сканера 
-         (критично для заднего сканера!) -->
+    <!-- Should we listen for fingerprints when the screen is off?  Devices
+         with a rear-mounted sensor want this, but certain devices have
+         the sensor embedded in the power key and listening all the time
+         causes a poor experience. -->
     <bool name="config_fingerprintWakeAndUnlock">true</bool>
 
-    <!-- ═══════════ ОЧИСТКА НЕИСПОЛЬЗУЕМЫХ ОТПЕЧАТКОВ ═══════════ -->
-
-    <!-- Удалять отпечатки при переключении пользователя 
-         или подключении к демону -->
+    <!-- Whether to cleanup fingerprints upon connection to the daemon and when
+         user switches -->
     <bool name="config_cleanupUnusedFingerprints">false</bool>
 
-    <!-- ═══════════ СОВМЕСТИМОСТЬ СО СТАРЫМИ HAL ═══════════ -->
-
-    <!-- Для некоторых старых vendor HAL нужно уведомлять 
-         об успешной отмене аутентификации -->
+    <!-- Whether to notify fingerprint client of successful cancelled authentication
+         (needed for some older vendor fingerprint HAL implementations) -->
     <bool name="config_fingerprintPostResetRunnableForAllClients">false</bool>
 
-
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  КАМЕРА                                                  ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <!-- Разрешённые приложения для aux камер (GCam и т.д.) -->
+    <!-- The list of package IDs that are allowed to use aux cameras.
+         NOTE: If this list is empty then all apps will be able to use aux cameras. -->
     <string-array name="config_cameraAuxPackageAllowList" translatable="false">
         <item>org.codeaurora.snapcam</item>
         <item>com.android.MGC</item>
@@ -201,15 +298,11 @@
         <item>us.zoom.videomeetings</item>
     </string-array> 
 
-
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  РАЗНОЕ                                                  ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <!-- Высокий aspect ratio (18:9) -->
+    <!-- Whether device has a screen with a higher aspect ratio -->
     <bool name="config_haveHigherAspectRatioScreen">true</bool>
 
-    <!-- Устаревшее шифрование (нет) -->
+    <!-- Indicate whether encryption causes significant performances loss.
+         This MUST NOT be set to true on devices produced in 2016 or later -->
     <bool name="config_trustLegacyEncryption">false</bool>
 
 </resources>

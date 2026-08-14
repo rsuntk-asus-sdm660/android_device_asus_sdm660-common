@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    ╔══════════════════════════════════════════════════════════════╗
-    ║  SETTINGS CONFIG — ASUS X00TD / X01BD                        ║
-    ║  Настройка приложения "Настройки"                            ║
-    ╚══════════════════════════════════════════════════════════════╝
+     SPDX-FileCopyrightText: 2015 The CyanogenMod Project
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  ЭКРАН                                                   ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <!-- Smooth Display (экран 60Hz) -->
+    <!-- Smooth Display -->
     <bool name="config_show_smooth_display">true</bool>
     
-    <!-- Включаем цветовую температуру -->
+    <!-- Default value for Color Temperature -->
     <bool name="config_enableColorTemperature">true</bool>
     
     <!-- Night Light suggestion -->
@@ -26,11 +21,6 @@
         <item>1</item> <!-- COLOR_MODE_BOOSTED -->
     </integer-array>
 
-    <!-- ╔══════════════════════════════════════════════════════════╗
-         ║  ЗВУК И ВИБРАЦИЯ                                         ║
-         ╚══════════════════════════════════════════════════════════╝ -->
-
-    <!-- Слайдер силы вибрации (2 уровня) -->
     <integer name="config_vibration_supported_intensity_levels">2</integer>
 
 </resources>

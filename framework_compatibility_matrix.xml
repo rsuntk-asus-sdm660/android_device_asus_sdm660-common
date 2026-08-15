@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <compatibility-matrix version="1.0" type="framework">
-
-    <!-- ========== AUDIO ========== -->
     <hal format="hidl" optional="true">
         <name>android.hardware.audio</name>
         <version>7.0-1</version>
@@ -26,8 +24,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== BLUETOOTH ========== -->
     <hal format="aidl" optional="true">
         <name>android.hardware.bluetooth.audio</name>
         <version>2</version>
@@ -44,8 +40,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== MEDIA ========== -->
     <hal format="aidl" optional="true">
         <name>android.hardware.cas</name>
         <interface>
@@ -103,9 +97,6 @@
             <instance>software</instance>
         </interface>
     </hal>
-    
-    <!-- ========== GRAPHICS ========== -->
-    
     <hal format="hidl" optional="true">
         <name>android.hardware.graphics.allocator</name>
         <interface>
@@ -121,8 +112,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- Memtrack -->
     <hal format="hidl" optional="true">
         <name>android.hardware.memtrack</name>
         <version>1.0</version>
@@ -131,10 +120,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== VENDOR DISPLAY ========== -->
-    
-    <!-- Display Config -->
     <hal format="hidl" optional="true">
         <name>vendor.display.config</name>
         <version>2.0</version>
@@ -143,8 +128,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- Display Color -->
     <hal format="hidl" optional="true">
         <name>vendor.display.color</name>
         <version>1.0</version>
@@ -153,8 +136,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- Display Postproc -->
     <hal format="hidl" optional="true">
         <name>vendor.display.postproc</name>
         <version>1.0</version>
@@ -163,8 +144,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== GNSS ========== -->
     <hal format="hidl" optional="true">
         <name>android.hardware.gnss</name>
         <version>1.0-1</version>
@@ -186,8 +165,6 @@
             <instance>gnss_vendor</instance>
         </interface>
     </hal>
-
-    <!-- ========== HEALTH ========== -->
     <hal format="aidl" optional="true">
         <name>android.hardware.health</name>
         <version>1</version>
@@ -204,8 +181,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== LIGHT ========== -->
     <hal format="hidl" optional="true">
         <name>android.hardware.light</name>
         <version>2.0</version>
@@ -222,8 +197,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== POWER ========== -->
     <hal format="aidl" optional="true">
         <name>android.hardware.power</name>
         <version>3</version>
@@ -240,8 +213,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== RADIO ========== -->
     <hal format="hidl" optional="true">
         <name>android.hardware.radio.config</name>
         <version>1.0-2</version>
@@ -264,8 +235,6 @@
             <instance>slot2</instance>
         </interface>
     </hal>
-
-    <!-- ========== USB ========== -->
     <hal format="hidl" optional="true">
         <name>android.hardware.usb</name>
         <version>1.0-3</version>
@@ -282,8 +251,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== VIBRATOR ========== -->
     <hal format="aidl" optional="true">
         <name>android.hardware.vibrator</name>
         <version>2</version>
@@ -292,8 +259,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== WIFI ========== -->
     <hal format="hidl" optional="true">
         <name>android.hardware.wifi</name>
         <version>1.0-6</version>
@@ -318,8 +283,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== ANT ========== -->
     <hal format="hidl" optional="true">
         <name>com.dsi.ant</name>
         <version>1.0</version>
@@ -328,8 +291,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== DPM ========== -->
     <hal format="hidl" optional="true">
         <name>com.qualcomm.qti.dpm.api</name>
         <version>1.0</version>
@@ -338,8 +299,6 @@
             <instance>dpmQmiService</instance>
         </interface>
     </hal>
-
-    <!-- ========== IMS ========== -->
     <hal format="hidl" optional="true">
         <name>com.qualcomm.qti.imscmservice</name>
         <version>2.0-2</version>
@@ -381,8 +340,6 @@
             <instance>imsrtpservice</instance>
         </interface>
     </hal>
-
-    <!-- ========== FINGERPRINT ========== -->
     <hal format="aidl" optional="true">
         <name>android.hardware.biometrics.fingerprint</name>
         <version>3</version>
@@ -407,8 +364,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== QTI DATA ========== -->
     <hal format="hidl" optional="true">
         <name>vendor.qti.data.factory</name>
         <version>2.0-5</version>
@@ -417,8 +372,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== QTI HARDWARE ========== -->
     <hal format="hidl" optional="true">
         <name>vendor.qti.hardware.alarm</name>
         <version>1.0</version>
@@ -553,8 +506,6 @@
             <instance>wifiStats</instance>
         </interface>
     </hal>
-
-    <!-- ========== QTI RADIO ========== -->
     <hal format="hidl" optional="true">
         <name>vendor.qti.hardware.radio.am</name>
         <version>1.0</version>
@@ -636,8 +587,6 @@
             <instance>uimRemoteServer1</instance>
         </interface>
     </hal>
-
-    <!-- ========== SENSORS ========== -->
     <hal format="hidl" optional="true">
         <name>android.hardware.sensors</name>
         <version>1.0</version>
@@ -646,8 +595,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== SECURITY ========== -->
     <hal format="hidl" optional="true">
         <name>android.hardware.keymaster</name>
         <version>3.0</version>
@@ -664,8 +611,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== TETHER OFFLOAD ========== -->
     <hal format="hidl" optional="true">
         <name>android.hardware.tetheroffload.control</name>
         <version>1.1</version>
@@ -707,8 +652,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== VR ========== -->
     <hal format="hidl" optional="true">
         <name>android.hardware.vr</name>
         <version>1.0</version>
@@ -717,8 +660,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== THERMAL ========== -->
     <hal format="hidl" optional="true">
         <name>android.hardware.thermal</name>
         <version>2.0</version>
@@ -727,8 +668,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== DOLBY ========== -->
     <hal format="hidl" optional="true">
         <name>vendor.dolby.hardware.dms</name>
         <version>2.0</version>
@@ -737,8 +676,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- ========== LINEAGE ========== -->
     <hal format="hidl" optional="true">
         <name>vendor.lineage.livedisplay</name>
         <version>2.0</version>
@@ -747,13 +684,11 @@
             <instance>default</instance>
         </interface>
     </hal>
-
     <hal format="aidl" optional="true">
           <name>vendor.qti.hardware.display.allocator</name>
           <version>1</version>
           <fqname>IQtiAllocator/default</fqname>
     </hal>
-
     <hal format="hidl" optional="true">
         <name>vendor.qti.hardware.display.allocator</name>
         <version>3.0</version>
@@ -763,7 +698,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    
     <hal format="hidl" optional="true">
         <name>vendor.qti.hardware.display.mapper</name>
         <version>3.0</version>
@@ -773,7 +707,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-            
     <hal format="hidl" optional="true">
         <name>android.hardware.graphics.mapper</name>
         <version>2.0-1</version>
@@ -784,7 +717,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    
     <hal format="hidl" optional="true">
         <name>vendor.lineage.trust</name>
         <version>1.0</version>
@@ -793,7 +725,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    
     <hal format="hidl" optional="true">
         <name>vendor.qti.hardware.display.allocator</name>
         <version>1.0</version>

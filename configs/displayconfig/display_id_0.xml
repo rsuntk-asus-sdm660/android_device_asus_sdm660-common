@@ -21,11 +21,6 @@
             <value>0.0</value>
             <nits>2.0</nits>
         </point>
-
-        <!--
-             COMMON PROFILE FOR X00TD / X01BD
-             100% slider (1.0) = 450 nits
-        -->
         <point>
             <value>1.0</value>
             <nits>450.0</nits>

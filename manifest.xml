@@ -1,6 +1,4 @@
 <manifest version="1.0" type="device" target-level="7">
-
-    <!-- AUDIO -->
     <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport>hwbinder</transport>
@@ -68,8 +66,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-
-    <!-- BLUETOOTH -->
     <hal format="hidl">
         <name>android.hardware.bluetooth</name>
         <transport>hwbinder</transport>
@@ -105,7 +101,6 @@
         <fqname>@1.2::ISap/slot1</fqname>
         <fqname>@1.2::ISap/slot2</fqname>
     </hal>
-    <!-- RADIO CONFIG -->
     <hal format="hidl">
        <name>android.hardware.radio.config</name>
        <transport>hwbinder</transport>
@@ -115,7 +110,6 @@
            <instance>default</instance>
        </interface>
     </hal>
-    <!-- RIL UIM REMOTE CLIENT -->
     <hal format="hidl">
         <name>vendor.qti.hardware.radio.uim_remote_client</name>
         <transport>hwbinder</transport>
@@ -126,7 +120,6 @@
             <instance>uimRemoteClient1</instance>
         </interface>
     </hal>
-    <!-- RIL UIM REMOTE SERVER -->
     <hal format="hidl">
         <name>vendor.qti.hardware.radio.uim_remote_server</name>
         <transport>hwbinder</transport>
@@ -137,7 +130,6 @@
             <instance>uimRemoteServer1</instance>
         </interface>
     </hal>
-    <!-- Data Link Latency -->
     <hal format="hidl">
         <name>vendor.qti.hardware.data.latency</name>
         <transport>hwbinder</transport>
@@ -147,7 +139,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <!-- RIL UIM LPA -->
     <hal format="hidl">
         <name>vendor.qti.hardware.radio.lpa</name>
         <transport>hwbinder</transport>
@@ -158,7 +149,6 @@
             <instance>UimLpa1</instance>
         </interface>
     </hal>
-    <!-- RIL UIM -->
     <hal format="hidl">
         <name>vendor.qti.hardware.radio.uim</name>
         <transport>hwbinder</transport>
@@ -168,8 +158,7 @@
             <instance>Uim0</instance>
             <instance>Uim1</instance>
         </interface>
-    </hal>
-   <!-- RIL AUDIO HAL -->
+   </hal>
    <hal format="hidl">
        <name>vendor.qti.hardware.radio.am</name>
         <transport>hwbinder</transport>
@@ -256,7 +245,6 @@
                <instance>oemhook1</instance>
            </interface>
     </hal>
-    <!-- Alarm HAL service -->
     <hal format="hidl">
         <name>vendor.qti.hardware.alarm</name>
         <transport>hwbinder</transport>
@@ -266,7 +254,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <!-- IMS UCE Service -->
     <hal format="hidl">
         <name>com.qualcomm.qti.uceservice</name>
         <transport>hwbinder</transport>
@@ -276,7 +263,6 @@
             <instance>com.qualcomm.qti.uceservice</instance>
         </interface>
     </hal>
-   <!-- IMS callinfo Service -->
    <hal format="hidl">
        <name>vendor.qti.ims.callinfo</name>
        <transport>hwbinder</transport>
@@ -286,7 +272,6 @@
          <instance>default</instance>
        </interface>
    </hal>
-    <!-- IMS CM Service -->
     <hal format="hidl">
         <name>com.qualcomm.qti.imscmservice</name>
         <transport>hwbinder</transport>
@@ -313,7 +298,6 @@
         <fqname>@2.2::IFactory/default</fqname>
         <fqname>@2.3::IFactory/default</fqname>
     </hal>
-    <!-- DSP Service -->
     <hal format="hidl">
         <name>vendor.qti.hardware.dsp</name>
         <transport>hwbinder</transport>
@@ -342,7 +326,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <!-- QSEECom HAL service -->
     <hal format="hidl">
         <name>vendor.qti.hardware.qseecom</name>
         <transport>hwbinder</transport>
@@ -352,7 +335,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <!-- QTEEConnector HAL service -->
     <hal format="hidl">
         <name>vendor.qti.hardware.qteeconnector</name>
         <transport>hwbinder</transport>
@@ -366,7 +348,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <!-- tui communicator service -->
     <hal format="hidl">
         <name>vendor.qti.hardware.tui_comm</name>
         <transport>hwbinder</transport>
@@ -376,7 +357,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <!-- Tether Offload -->
     <hal format="hidl">
         <name>android.hardware.tetheroffload.config</name>
         <transport>hwbinder</transport>
@@ -395,7 +375,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <!-- WifiStats HAL service -->
     <hal format="hidl">
         <name>vendor.qti.hardware.wifi.wifilearner</name>
         <transport>hwbinder</transport>
@@ -405,7 +384,6 @@
             <instance>wifiStats</instance>
         </interface>
     </hal>
-    <!-- cryptfshw HAL service -->
     <hal format="hidl">
         <name>vendor.qti.hardware.cryptfshw</name>
         <transport>hwbinder</transport>
@@ -415,7 +393,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <!-- BluetoothSar service-->
     <hal format="hidl">
         <name>vendor.qti.hardware.bluetooth_sar</name>
         <transport>hwbinder</transport>

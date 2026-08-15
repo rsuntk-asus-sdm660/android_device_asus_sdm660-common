@@ -1,7 +1,5 @@
 #!/vendor/bin/sh
 
-LOGTAG="post_boot_sdm660"
-
 write() { [ -e "$1" ] && echo "$2" > "$1"; }
 write_str() { [ -e "$1" ] && printf '%s' "$2" > "$1"; }
 
@@ -18,19 +16,6 @@ function sdm660_sched_schedutil_dcvs() {
     write /sys/devices/system/cpu/cpufreq/policy4/schedutil/down_rate_limit_us 0
     write /sys/devices/system/cpu/cpufreq/policy4/schedutil/iowait_boost_enable 0
     write /sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq 825600
-}
-
-function configure_storage_io() {
-    # Internal Storage
-    if [ -d /sys/block/mmcblk0 ]; then
-        write /sys/block/mmcblk0/queue/read_ahead_kb 128
-    fi
-
-    # SD Card (если есть)
-    if [ -d /sys/block/mmcblk1 ]; then
-        write_str /sys/block/mmcblk1/queue/scheduler "bfq"
-        write /sys/block/mmcblk1/queue/read_ahead_kb 128
-    fi
 }
 
 target=$(getprop ro.board.platform)
@@ -50,13 +35,10 @@ case "$target" in
             write /sys/devices/system/cpu/cpu4/core_ctl/is_big_cluster 1
         fi
 
-        # 3. Apply CPU & Scheduler settings
+        # Apply CPU profile
         sdm660_sched_schedutil_dcvs
 
-        # 4. Apply I/O settings
-        configure_storage_io
-
-        # 5. Bus DCVS (DDR Bandwidth)
+        # Apply DDR BW profile
         for device in /sys/devices/platform/soc; do
             for cpubw in $device/*cpu-cpu-ddr-bw/devfreq/*cpu-cpu-ddr-bw; do
                 if [ -d "$cpubw" ]; then
@@ -78,12 +60,9 @@ case "$target" in
             done
         done
 
-        # 6. CDSP
+        # Start the CDSP
         start vendor.cdsprpcd
     ;;
 esac
 
-# Сигнал о завершении выполнения скрипта
 setprop vendor.post_boot.parsed 1
-
-log -t "$LOGTAG" -p i "post_boot complete"

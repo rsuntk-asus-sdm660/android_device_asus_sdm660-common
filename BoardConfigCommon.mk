@@ -233,7 +233,7 @@ DEVICE_MATRIX_FILE := $(VENDOR_PATH)/compatibility_matrix.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
     $(VENDOR_PATH)/framework_compatibility_matrix.xml
 
-include hardware/dolby/BoardConfig.mk
+include hardware/asus/dolby/BoardConfig.mk
 
 # Wi-Fi
 BOARD_HAS_QCOM_WLAN    := true

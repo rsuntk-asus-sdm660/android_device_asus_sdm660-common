@@ -148,7 +148,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.protected_contents=true
 
 # Dolby
-$(call inherit-product, hardware/dolby/dolby.mk)
+$(call inherit-product, hardware/asus/dolby/dolby.mk)
 
 # DRM
 PRODUCT_PACKAGES += \

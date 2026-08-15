@@ -100,10 +100,7 @@ MALLOC_SVELTE_FOR_LIBC32 := true
 
 # Display
 TARGET_SCREEN_DENSITY              := 396
-TARGET_USES_GRALLOC1               := true
 TARGET_USES_GRALLOC4               := true
-TARGET_USES_HWC2                   := true
-TARGET_USES_ION                    := true
 TARGET_USES_QTI_MAPPER_2_0         := true
 TARGET_USES_QTI_MAPPER_EXTENSIONS_1_1 := true
 
@@ -153,6 +150,9 @@ $(call soong_config_set,lineage_health,charging_control_charging_path,/sys/class
 
 # LMKD
 TARGET_LMKD_STATS_LOG := false
+
+# Media
+TARGET_USES_ION := true
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144

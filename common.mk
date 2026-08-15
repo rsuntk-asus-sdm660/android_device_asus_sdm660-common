@@ -553,7 +553,7 @@ PRODUCT_PACKAGES += \
     libstdc++_vendor
 
 # Vendor init
-$(call soong_config_set,libinit,vendor_init_lib,//$(VENDOR_PATH):init_asus)
+$(call soong_config_set,libinit,vendor_init_lib,//$(LOCAL_PATH):init_asus)
 
 # Wifi
 PRODUCT_PACKAGES += \

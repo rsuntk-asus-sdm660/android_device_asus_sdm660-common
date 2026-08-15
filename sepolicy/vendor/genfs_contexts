@@ -29,6 +29,9 @@ genfscon sysfs /devices/virtual/wakeup/wakeup[0-101][0-101]/name u:object_r:sysf
 genfscon sysfs /devices/virtual/wakeup/wakeup[0-101][0-101]/prevent_suspend_time_ms u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/virtual/wakeup/wakeup[0-101][0-101]/total_time_ms u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/virtual/wakeup/wakeup[0-101][0-101]/wakeup_count u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/input/input2/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/18800000.qcom,icnss/wakeup u:object_r:sysfs_wakeup:s0
 
 # Scheduler parameters
 genfscon proc /sys/kernel/sched_boost           u:object_r:proc_sched:s0

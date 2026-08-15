@@ -120,9 +120,6 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := default
 # HWUI
 HWUI_COMPILE_FOR_PERF := true
 
-# Init
-$(call soong_config_set,libinit,vendor_init_lib,//$(VENDOR_PATH):libinit_sdm660)
-
 # Kernel
 BOARD_BOOT_HEADER_VERSION  := 1
 BOARD_KERNEL_BASE          := 0x00000000

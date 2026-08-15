@@ -552,6 +552,9 @@ $(call inherit-product, vendor/qcom/opensource/vibrator/vibrator-vendor-product.
 PRODUCT_PACKAGES += \
     libstdc++_vendor
 
+# Vendor init
+$(call soong_config_set,libinit,vendor_init_lib,//$(VENDOR_PATH):init_asus)
+
 # Wifi
 PRODUCT_PACKAGES += \
     android.hardware.wifi-service \

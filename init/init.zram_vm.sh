@@ -15,19 +15,15 @@ fi
 
 # VFS_CACHE_PRESSURE
 if [ $RAM_MB -ge 5000 ]; then
-    VFS_PRESSURE=80
     EXTRA_FREE=8192
 elif [ $RAM_MB -ge 3400 ]; then
-    VFS_PRESSURE=100
     EXTRA_FREE=6144
 else
-    VFS_PRESSURE=100
     EXTRA_FREE=4096
 fi
 
 echo "$SWAPPINESS" > /proc/sys/vm/swappiness
 echo 0 > /proc/sys/vm/page-cluster
-echo "$VFS_PRESSURE" > /proc/sys/vm/vfs_cache_pressure
 echo 0 > /proc/sys/vm/watermark_boost_factor
 echo 50 > /proc/sys/vm/watermark_scale_factor
 echo "$EXTRA_FREE" > /proc/sys/vm/extra_free_kbytes

@@ -28,9 +28,19 @@ ro.config.vc_call_vol_steps=14
 persist.bluetooth.a2dp_aac.vbr_supported=true
 ro.bluetooth.remote.autopair=true
 ro.bluetooth.request.master=true
+vendor.bluetooth.soc=cherokee
 
 # Charger
 ro.charger.enable_suspend=true
+
+# Display
+sdm.debug.disable_skip_validate=1
+
+# FM Radio
+#vendor.hw.fm.init=0
+
+# GPS
+persist.vendor.overlay.izat.optin=rro
 
 # SurfaceFlinger
 debug.sf.disable_client_composition_cache=1
@@ -62,13 +72,14 @@ persist.hwc.mdpcomp.enable=true
 ro.max.fling_velocity=20000
 ro.min.fling_velocity=160
 
-# GMS / Google
+# GMS
 ro.com.google.clientidbase.ms=android-asus-tpin
 ro.com.google.rlz_ap_whitelist=y0,y5,y6,y7,y9
 ro.com.google.rlzbrandcode=ASUP
 
-# IMS / Telephony
+# Telephony
 DEVICE_PROVISIONED=1
+persist.data.df.dev_name=rmnet_usb0
 persist.dbg.ims_volte_enable=1
 persist.dbg.volte_avail_ovr=1
 persist.dbg.vt_avail_ovr=1
@@ -84,7 +95,9 @@ ro.telephony.iwlan_operation_mode=legacy
 telephony.lteOnCdmaDevice=0
 
 # Media
+media.settings.xml=/vendor/etc/media_profiles_vendor.xml
 media.stagefright.thumbnail.prefer_hw_codecs=true
+vidc.enc.target_support_bframe=1
 
 # Network
 net.core.rmem_max=8388608
@@ -105,7 +118,7 @@ ro.nfc.port=I2C
 # NTP Server
 persist.backup.ntpServer="0.pool.ntp.org"
 
-# Performance (System level)
+# Performance
 ro.sys.fw.bg_apps_limit=48
 
 # RCS
@@ -114,7 +127,7 @@ persist.rcs.supported=1
 # SSR
 persist.vendor.ssr.restart_level=ALL_ENABLE
 
-# Storage / FUSE
+# FUSE
 persist.sys.fuse.passthrough.enable=true
 
 # Time

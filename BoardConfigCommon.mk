@@ -99,7 +99,7 @@ MALLOC_SVELTE           := true
 MALLOC_SVELTE_FOR_LIBC32 := true
 
 # Display
-TARGET_SCREEN_DENSITY              := 440
+TARGET_SCREEN_DENSITY              := 396
 TARGET_USES_GRALLOC1               := true
 TARGET_USES_GRALLOC4               := true
 TARGET_USES_HWC2                   := true

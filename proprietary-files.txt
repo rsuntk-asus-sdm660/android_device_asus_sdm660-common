@@ -69,7 +69,6 @@ system_ext/framework/com.quicinc.cne.constants-V2.0-java.jar
 system_ext/framework/com.quicinc.cne.constants-V2.1-java.jar
 system_ext/framework/dpmapi.jar
 system_ext/framework/qcrilhook.jar
-system_ext/framework/qti-telephony-common.jar
 system_ext/framework/remotesimlockmanagerlibrary.jar
 system_ext/framework/uimgbalibrary.jar
 system_ext/framework/uimgbamanagerlibrary.jar

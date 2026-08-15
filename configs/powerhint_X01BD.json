@@ -508,7 +508,7 @@
       "PowerHint": "LAUNCH",
       "Node": "GPUIdleTimer",
       "Duration": 3000,
-      "Value": "10000"
+      "Value": "2000"
     },
     {
       "PowerHint": "GAME",

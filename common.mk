@@ -132,19 +132,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/displayconfig/display_id_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_0.xml
 
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.surface_flinger.supports_background_blur=1
-
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.egl=adreno \
-    ro.hardware.vulkan=adreno \
-    ro.opengles.version=196610 \
-    debug.egl.hw=1 \
-    debug.sf.hw=1 \
-    debug.sf.latch_unsignaled=0 \
-    debug.sf.disable_backpressure=1 \
-    debug.hwui.renderer=opengl \
-    debug.renderengine.backend=skiaglthreaded \
     vendor.display.enable_default_color_mode=1 \
     vendor.display.disable_skip_validate=1 \
     vendor.gralloc.enable_fb_ubwc=1 \
@@ -210,6 +198,22 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gnss@2.0-base.policy \
     gnss@2.0-xtra-daemon.policy
+
+# Graphics
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.surface_flinger.supports_background_blur=1 \
+    debug.renderengine.blur_algorithm=kawase2
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.egl=adreno \
+    ro.hardware.vulkan=adreno \
+    ro.opengles.version=196610 \
+    debug.egl.hw=1 \
+    debug.sf.hw=1 \
+    debug.sf.latch_unsignaled=0 \
+    debug.sf.disable_backpressure=1 \
+    debug.hwui.renderer=opengl \
+    debug.renderengine.backend=skiaglthreaded \
 
 # GMS
 PRODUCT_COPY_FILES += \

@@ -90,11 +90,11 @@ on boot
     chmod 0444 /sys/devices/soc0/serial_number
 
     # CPUsets
-    write /dev/cpuset/background/cpus 0-3
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/foreground/cpus 0-3,6-7
+    write /dev/cpuset/background/cpus 0-1
     write /dev/cpuset/system-background/cpus 0-3
     write /dev/cpuset/restricted/cpus 0-3
-    write /dev/cpuset/foreground/cpus 0-7
-    write /dev/cpuset/top-app/cpus 0-7
 
     # Bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power

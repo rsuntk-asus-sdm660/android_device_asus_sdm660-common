@@ -277,12 +277,13 @@
       "ResetOnInit": true
     },
     {
-      "Name": "KernelBatterySaver",
-      "Path": "/sys/module/battery_saver/parameters/enabled",
+      "Name": "DT2W",
+      "Path": "/proc/tpd_gesture",
       "Values": [
-        "Y",
-        "N"
+        "0",
+        "1"
       ],
+      "DefaultIndex": 0,
       "ResetOnInit": true
     },
     {
@@ -776,10 +777,9 @@
       "Value": "100"
     },
     {
-      "PowerHint": "LOW_POWER",
-      "Node": "KernelBatterySaver",
-      "Duration": 0,
-      "Value": "Y"
+      "PowerMode": "DOUBLE_TAP_TO_WAKE",
+      "Value": "1",
+      "Node": "DT2W"
     }
   ]
 }

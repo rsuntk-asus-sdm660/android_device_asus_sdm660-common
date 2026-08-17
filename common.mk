@@ -545,10 +545,6 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_PACKAGES += \
     android.hardware.thermal-service.asus
 
-# Touch HAL
-PRODUCT_PACKAGES += \
-    vendor.lineage.touch-service.asus
-
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.3-service.basic \

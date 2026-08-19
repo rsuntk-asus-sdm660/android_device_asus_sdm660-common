@@ -492,9 +492,6 @@ on early-boot
     chown system system /mnt/vendor/persist/sensors/sensors_settings
     chmod 0664 /mnt/vendor/persist/sensors/sensors_settings
 
-on post-fs-data
-    mkdir /data/vendor/nfc 0770 nfc nfc
-
 on boot
     start vendor.rmt_storage
     setprop persist.camera.gyro.disable 0

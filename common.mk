@@ -16,6 +16,9 @@ $(call inherit-product, hardware/qcom-caf/common/common.mk)
 # Enable project quotas and casefolding for emulated storage without sdcardfs
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
+# Inherit signing key for signed build
+$(call inherit-product, vendor/rsuntk-priv/keys/keys.mk)
+
 # AAPT
 PRODUCT_AAPT_CONFIG      := normal
 PRODUCT_AAPT_PREF_CONFIG ?= xxhdpi

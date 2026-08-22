@@ -8,5 +8,8 @@ cc_library_static {
     defaults: ["android.hardware.power-ndk_shared"],
     vendor: true,
     srcs: ["PowerModeExtension.cpp"],
-    shared_libs: ["libbase"],
+    shared_libs: [
+        "libbase",
+        "liblog",
+    ],
 }

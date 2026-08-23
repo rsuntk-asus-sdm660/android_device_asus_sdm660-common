@@ -527,7 +527,7 @@ PRODUCT_SHIPPING_API_LEVEL := 27
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    hardware/lineage/power-libperfmgr \
+    hardware/lineage/interfaces/power-libperfmgr \
     hardware/google/interfaces \
     hardware/google/pixel/power-libperfmgr \
     hardware/qcom-caf/common/libqti-perfd-client \

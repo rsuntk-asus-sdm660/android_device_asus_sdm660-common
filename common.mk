@@ -19,6 +19,15 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 # Inherit signing key for signed build
 $(call inherit-product, vendor/rsuntk-priv/keys/keys.mk)
 
+# Setup GMS
+USE_GMS ?= false
+ifeq ($(USE_GMS),true)
+WITH_GMS := true
+TARGET_USES_PICO_GAPPS := true
+else
+WITH_GMS := false
+endif
+
 # AAPT
 PRODUCT_AAPT_CONFIG      := normal
 PRODUCT_AAPT_PREF_CONFIG ?= xxhdpi

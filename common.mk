@@ -165,6 +165,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.use_color_management=false \
     ro.surface_flinger.protected_contents=true
 
+# Displayservice
+$(call soong_config_set_bool,surfaceflinger,register_displayservice,true)
+
 # Dolby
 $(call inherit-product, hardware/asus/dolby/dolby.mk)
 

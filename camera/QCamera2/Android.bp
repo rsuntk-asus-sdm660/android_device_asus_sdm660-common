@@ -63,7 +63,7 @@ cc_library_shared {
     ],
 
     shared_libs: [
-        "android.frameworks.displayservice@1.0",
+        "lineage.frameworks.displayservice@1.0",
         "libbinder",
         "libbase",
         "libcamera_metadata",

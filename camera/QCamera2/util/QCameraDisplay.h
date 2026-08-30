@@ -30,11 +30,6 @@
 #ifndef __QCAMERADISPLAY_H__
 #define __QCAMERADISPLAY_H__
 
-#ifdef LIKELY
-#undef LIKELY
-#undef UNLIKELY
-#endif //LIKELY
-
 #include <utils/Timers.h>
 #include <gui/DisplayEventReceiver.h>
 

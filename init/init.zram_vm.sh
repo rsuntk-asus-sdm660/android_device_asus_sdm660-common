@@ -28,9 +28,4 @@ fi
 
 echo "$SWAPPINESS" > /proc/sys/vm/swappiness 2>/dev/null
 echo "$EXTRA_FREE" > /proc/sys/vm/extra_free_kbytes 2>/dev/null
-
-setprop vendor.zram.ready 1
-
-if [ -c /dev/kmsg ]; then
-    echo "$PREFIX Memory profile applied: swappiness: ${SWAPPINESS}, extra_free: ${EXTRA_FREE}kb" > /dev/kmsg
-fi
+echo "$PREFIX Memory profile applied: swappiness: ${SWAPPINESS}, extra_free: ${EXTRA_FREE}kb" > /dev/kmsg

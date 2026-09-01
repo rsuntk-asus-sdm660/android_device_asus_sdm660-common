@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 #include <aidl/android/hardware/power/BnPower.h>
-#include <android-base/properties.h>
 #include <android-base/file.h>
 #include <android-base/logging.h>
 
@@ -26,17 +25,8 @@ namespace impl {
 namespace pixel {
 
 constexpr char kTapToWakeNode[] = "/proc/tpd_gesture";
-constexpr char kTapToWakeProp[] = "persist.vendor.dt2w.enabled";
 
 using ::aidl::android::hardware::power::Mode;
-
-void initTapToWake() {
-    bool enabled = ::android::base::GetBoolProperty(kTapToWakeProp, false);
-
-    if (!::android::base::WriteStringToFile(enabled ? "1" : "0", kTapToWakeNode)) {
-        LOG(ERROR) << "Failed to write to " << kTapToWakeNode;
-    }
-}
 
 bool isDeviceSpecificModeSupported(Mode type, bool* _aidl_return) {
     if (type == Mode::DOUBLE_TAP_TO_WAKE) {
@@ -49,19 +39,9 @@ bool isDeviceSpecificModeSupported(Mode type, bool* _aidl_return) {
 bool setDeviceSpecificMode(Mode type, bool enabled) {
     if (type == Mode::DOUBLE_TAP_TO_WAKE) {
         ::android::base::WriteStringToFile(enabled ? "1" : "0", kTapToWakeNode);
-        ::android::base::SetProperty(kTapToWakeProp, enabled ? "1" : "0");
         return true;
     }
     return false;
-}
-
-namespace {
-    struct TapToWakeAutoInit {
-        TapToWakeAutoInit() {
-            initTapToWake();
-        }
-    };
-    static TapToWakeAutoInit gTapToWakeAutoInit;
 }
 
 }  // namespace pixel

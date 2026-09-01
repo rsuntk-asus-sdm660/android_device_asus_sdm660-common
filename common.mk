@@ -370,11 +370,7 @@ PRODUCT_PACKAGES += \
     android.hardware.power-service.lineage-libperfmgr \
     libqti-perfd-client
 
-$(call soong_config_set,power_libperfmgr,mode_extension_lib,//$(LOCAL_PATH):libperfmgr_asus-ext)
-
-# Powerhint
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/powerhint_$(TARGET_DEVICE).json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+$(call soong_config_set,power_libperfmgr,mode_extension_lib,//$(LOCAL_PATH):libperfmgr-ext-asus)
 
 # Public libraries
 PRODUCT_COPY_FILES += \
